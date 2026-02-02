@@ -10,7 +10,7 @@ namespace Game.Scripts.Utilities.Events
         
         private Dictionary<Type, int> _thisFrameEvents;
         
-        public EventBus()
+        private EventBus()
         {
             _events = new Dictionary<Type, List<Delegate>>();
             

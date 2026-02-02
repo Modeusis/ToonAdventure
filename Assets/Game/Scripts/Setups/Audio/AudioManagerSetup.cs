@@ -2,7 +2,7 @@ using System;
 using Game.Scripts.Core.Audio;
 using UnityEngine;
 
-namespace Game.Scripts.Setups
+namespace Game.Scripts.Setups.Audio
 {
     [CreateAssetMenu(fileName = "New audio service setup", menuName = "Setup/Audio service")]
     public class AudioServiceSetup : ScriptableObject

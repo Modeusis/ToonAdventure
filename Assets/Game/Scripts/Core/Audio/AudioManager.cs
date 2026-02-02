@@ -3,6 +3,7 @@ using System.Collections;
 using System.Linq;
 using DG.Tweening;
 using Game.Scripts.Setups;
+using Game.Scripts.Setups.Audio;
 using Game.Scripts.Utilities.Extensions;
 using Game.Scripts.Utilities.Pool;
 using UnityEngine;
