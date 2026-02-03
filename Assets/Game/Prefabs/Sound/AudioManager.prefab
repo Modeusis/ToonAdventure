@@ -45,13 +45,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 089f135321cad21489da0f17c66154f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Core.Audio.AudioManager
+  _sfxMixerGroup: {fileID: -5578314842929215756, guid: ddf81cf6b7fa64e4b941f3f6bf131867, type: 2}
+  _musicMixerGroup: {fileID: 8322723999511517326, guid: ddf81cf6b7fa64e4b941f3f6bf131867, type: 2}
+  _sfxTargetProperty: SfxVolume
+  _musicTargetProperty: MusicVolume
   _sfxPlayerPrefab: {fileID: 8235268355382441282, guid: d05a6315d213c9b4189965912381bf97, type: 3}
   _playersContainer: {fileID: 2706510896956728508}
   _minPoolSize: 5
   _maxPoolSize: 20
   _musicPlayer: {fileID: 4148574781734393324}
-  _isMusicPlayingOnStart: 0
-  _backgroundMusicOnStart: 0
+  _isMusicPlayingOnStart: 1
+  _backgroundMusicOnStart: 1
   _setup: {fileID: 11400000, guid: ab8a63f3e3ee54c469ef7b4bc5e6fd58, type: 2}
 --- !u!1001 &7726161343237749088
 PrefabInstance:

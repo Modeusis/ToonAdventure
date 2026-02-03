@@ -12,7 +12,6 @@ namespace Game.Scripts.Setups.Audio
         [SerializeField, Range(0f, 1f)] private float _volumeMusic = 0.5f; 
         
         [SerializeField, Space] private Vector2 _sfxPitchRange = new Vector2(0.95f, 1.05f);
-        
         [Tooltip("X value = FadeIn duration, Y value = FadeOut duration, Z value = StayIn position")]
         [SerializeField] private Vector3 _fadeInOutRange = new Vector3(0.3f, 0.3f, 0.2f);
         
@@ -22,7 +21,6 @@ namespace Game.Scripts.Setups.Audio
         
         public float VolumeSfx => _volumeSfx;
         public float VolumeMusic => _volumeMusic;
-        
         public float MusicFadeInDuration => _fadeInOutRange.x;
         public float MusicFadeOutDuration => _fadeInOutRange.y;
         public float FadeStayIn => _fadeInOutRange.z;

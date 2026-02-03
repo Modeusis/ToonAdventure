@@ -2,7 +2,10 @@ namespace Game.Scripts.Core.Audio
 {
     public enum MusicType
     {
-        BackgroundMusic,
-        WinMusic
+        None = 0,
+        Menu,
+        Tutorial,
+        Bedroom,
+        Kitchen
     }
 }

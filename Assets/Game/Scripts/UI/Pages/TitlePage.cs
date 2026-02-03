@@ -1,5 +1,6 @@
 using System;
 using Game.Scripts.Core;
+using Game.Scripts.Core.Level;
 using Game.Scripts.UI.Controls;
 using UnityEngine;
 
@@ -15,6 +16,13 @@ namespace Game.Scripts.UI.Pages
         public override void Initialize()
         {
             _settingsButton.OnClick.AddListener(() => ToPage(PageType.Settings));
+            
+            G.Save.OnLevelChanged.AddListener(HandleLevelChange);
+        }
+
+        private void HandleLevelChange(LevelType levelType)
+        {
+            _continueButton?.SetActiveButton(levelType != 0);
         }
     }
 }
