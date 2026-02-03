@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using Game.Scripts.Core.Audio;
+using Game.Scripts.Core.Save;
 using Game.Scripts.UI.Root;
 using Game.Scripts.Utilities.Constants;
 using Game.Scripts.Utilities.Events;
@@ -8,7 +9,6 @@ using UnityEngine;
 
 namespace Game.Scripts.Core
 {
-    [DefaultExecutionOrder(-1000)]
     public class G : MonoBehaviour
     {
         private static G _instance;
@@ -17,13 +17,14 @@ namespace Game.Scripts.Core
         public static AddressableLoader Loader => _instance?._loader;
         public static AudioManager Audio => _instance?._audioManager;
         public static UiRoot UI => _instance?._uiRoot;
-        
+        public static SaveManager Save => _instance?._saveManager;
         public static bool IsReady => _instance != null && _instance._isInitialized;
 
         private EventBus _eventBus;
         private AddressableLoader _loader;
         private AudioManager _audioManager;
         private UiRoot _uiRoot;
+        private SaveManager _saveManager;
         
         private bool _isInitialized;
 
@@ -45,7 +46,8 @@ namespace Game.Scripts.Core
         {
             _eventBus = new EventBus();
             _loader = new AddressableLoader();
-
+            _saveManager = new SaveManager();
+            
             var audioTask = _loader.InstantiateAsync<AudioManager>(Addresses.AUDIO_SERVICE, instanceName: "[Audio]");
             var uiTask = _loader.InstantiateAsync<UiRoot>(Addresses.UI_ROOT, instanceName: "[UI]");
             
@@ -58,6 +60,7 @@ namespace Game.Scripts.Core
             }
 
             _audioManager = loadedAudio;
+            _audioManager.Initialize();
             DontDestroyOnLoad(_audioManager.gameObject);
             
             _uiRoot = loadedUi;
@@ -65,6 +68,8 @@ namespace Game.Scripts.Core
             DontDestroyOnLoad(_uiRoot.gameObject);
             
             _isInitialized = true;
+            
+            _saveManager.InitialLoad();
             
             _eventBus.Publish(new OnGameReadyEvent());
         }

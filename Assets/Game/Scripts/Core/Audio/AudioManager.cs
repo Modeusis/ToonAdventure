@@ -1,16 +1,26 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using Game.Scripts.Setups.Audio;
+using Game.Scripts.Utilities.Events;
 using Game.Scripts.Utilities.Extensions;
 using Game.Scripts.Utilities.Pool;
 using UnityEngine;
+using UnityEngine.Audio;
 
 namespace Game.Scripts.Core.Audio
 {
     public class AudioManager : MonoBehaviour
     {
+        [Header("Mixer groups")]
+        [SerializeField, Space] private AudioMixerGroup _sfxMixerGroup;
+        [SerializeField] private AudioMixerGroup _musicMixerGroup;
+        
+        [SerializeField, Space] private string _sfxTargetProperty = "SfxVolume";
+        [SerializeField] private string _musicTargetProperty = "MusicVolume";
+        
         [Header("SFX Player Pool")]
         [SerializeField, Space] private AudioPlayer _sfxPlayerPrefab;
         [SerializeField] private Transform _playersContainer;
@@ -21,17 +31,19 @@ namespace Game.Scripts.Core.Audio
         [SerializeField, Space] private AudioSource _musicPlayer;
         
         [SerializeField, Space] private bool _isMusicPlayingOnStart;
-        [SerializeField] private MusicType _backgroundMusicOnStart = MusicType.BackgroundMusic;
+        [SerializeField] private MusicType _backgroundMusicOnStart = MusicType.Menu;
         
         [SerializeField, Space] private AudioServiceSetup _setup;
 
         private bool _isMusicCurrentlyPlaying;
         private Tween _musicFade;
         
-        private Coroutine _musicFadeCoroutine;
+        private Coroutine _musicPlaylistCoroutine;
         private WaitForSeconds _musicStayInWaiter;
         
         private AbstractPool<AudioPlayer> _sfxPlayerPool;
+        
+        private Dictionary<MusicType, AudioRandomContainer> _musicContainers;
         
         public void Awake()
         {
@@ -40,14 +52,54 @@ namespace Game.Scripts.Core.Audio
             _musicStayInWaiter = new WaitForSeconds(_setup.FadeStayIn);
         }
 
-        public void Start()
+        public void Initialize()
         {
             InitializePool();
 
+            G.Save.OnMusicVolumeChanged.AddListener(SetMusicVolume);
+            G.Save.OnSfxVolumeChanged.AddListener(SetSfxVolume);
+            
+            _musicContainers = new Dictionary<MusicType, AudioRandomContainer>();
+            foreach (var property in _setup.Music)
+            {
+                _musicContainers[property.Type] = new AudioRandomContainer(property.Clips);
+            }
+            
             if (!_isMusicPlayingOnStart || _isMusicCurrentlyPlaying)
                 return;
             
-            PlayMusic(_backgroundMusicOnStart);
+            if (G.IsReady)
+            {
+                PlayMusic(_backgroundMusicOnStart);
+                return;
+            }
+            
+            G.EventBus.Subscribe<OnGameReadyEvent>(_ =>
+            {
+                PlayMusic(_backgroundMusicOnStart);
+            });
+        }
+        
+        public void SetMusicVolume(float value)
+        {
+            SetMixerVolume(_musicMixerGroup.audioMixer, _musicTargetProperty, value);
+        }
+
+        public void SetSfxVolume(float value)
+        {
+            SetMixerVolume(_sfxMixerGroup.audioMixer, _sfxTargetProperty, value);
+        }
+
+        private void SetMixerVolume(AudioMixer mixer, string parameterName, float volume)
+        {
+            var dbVolume = Mathf.Log10(Mathf.Clamp(volume, 0.0001f, 1f)) * 20f;
+            
+            if (volume <= 0.001f)
+            {
+                dbVolume = -80f;
+            }
+            
+            mixer.SetFloat(parameterName, dbVolume);
         }
         
         public void PlaySfx(SoundType soundType)
@@ -71,30 +123,19 @@ namespace Game.Scripts.Core.Audio
 
         public void PlayMusic(MusicType musicType)
         {
-            var musicProperty = _setup.Music.FirstOrDefault(music => music.Type == musicType);
-
-            if (musicProperty == null)
+            if (!_musicContainers.ContainsKey(musicType))
             {
-                Debug.LogWarning($"[SimpleAudioService.PlayMusic] Property with music type {musicType} not found");
-                return;
-            }
-
-            var clips = musicProperty.Clips;
-            if (clips.Length <= 0)
-            {
-                Debug.LogWarning($"[SimpleAudioService.PlayMusic] No clips found in setup for {musicType}");
+                Debug.LogWarning($"[AudioManager] No music container found for type {musicType}");
                 return;
             }
             
-            var musicClip = clips.Length > 1 ? clips.GetRandom() : clips[0];
-
-            if (_musicFadeCoroutine != null)
+            if (_musicPlaylistCoroutine != null)
             {
-                StopCoroutine(_musicFadeCoroutine);
-                _musicFadeCoroutine = null;
+                StopCoroutine(_musicPlaylistCoroutine);
+                _musicPlaylistCoroutine = null;
             }
             
-            _musicFadeCoroutine = StartCoroutine(PlayMusicSequence(musicClip));
+            _musicPlaylistCoroutine = StartCoroutine(MusicPlaylistRoutine(musicType));
         }
 
         private void InitializePool()
@@ -105,31 +146,52 @@ namespace Game.Scripts.Core.Audio
             _sfxPlayerPool = new AbstractPool<AudioPlayer>(_sfxPlayerPrefab, _playersContainer, true, _minPoolSize, _maxPoolSize);
         }
         
-        private IEnumerator PlayMusicSequence(AudioClip musicClip)
+        private IEnumerator MusicPlaylistRoutine(MusicType musicType)
         {
-            float targetVolume = _setup.VolumeMusic;
-
-            if (_isMusicCurrentlyPlaying)
+            if (_isMusicCurrentlyPlaying && _musicPlayer.isPlaying)
             {
-                FadeMusic(0f, _setup.MusicFadeOutDuration, onComplete: () =>
-                {
-                    _musicPlayer.Stop();
-                    _isMusicCurrentlyPlaying = false;
-                });
-                yield return _musicFade;
+                bool fadeOutComplete = false;
+                FadeMusic(0f, _setup.MusicFadeOutDuration, onComplete: () => fadeOutComplete = true);
+                yield return new WaitUntil(() => fadeOutComplete);
+                _musicPlayer.Stop();
             }
             
-            _musicPlayer.volume = 0f;
-            _musicPlayer.loop = true;
-            _musicPlayer.clip = musicClip;
-
-            yield return _musicStayInWaiter;
+            _isMusicCurrentlyPlaying = true;
+            var container = _musicContainers[musicType];
             
-            _musicPlayer.Play();
-            FadeMusic(targetVolume, _setup.MusicFadeInDuration, onStart: () =>
+            while (_isMusicCurrentlyPlaying)
             {
-                _isMusicCurrentlyPlaying = true;
-            });
+                AudioClip nextClip = container.GetNextClip();
+                
+                if (nextClip == null)
+                {
+                    Debug.LogWarning($"[AudioManager] No clips in container for {musicType}");
+                    yield break;
+                }
+
+                _musicPlayer.clip = nextClip;
+                _musicPlayer.volume = 0f;
+                _musicPlayer.loop = false;
+                _musicPlayer.Play();
+                
+                FadeMusic(_setup.VolumeMusic, _setup.MusicFadeInDuration);
+                
+                var waitDuration = nextClip.length - _setup.MusicFadeOutDuration;
+                
+                if (waitDuration > 0)
+                {
+                    yield return new WaitForSeconds(waitDuration);
+                }
+                else
+                {
+                    yield return new WaitForSeconds(nextClip.length);
+                }
+                
+                var fadeOutFinished = false;
+                FadeMusic(0f, _setup.MusicFadeOutDuration, onComplete: () => fadeOutFinished = true);
+                
+                yield return new WaitUntil(() => fadeOutFinished);
+            }
         }
 
         private void FadeMusic(float targetVolume, float duration, Action onStart = null, Action onComplete = null)
