@@ -1,4 +1,4 @@
-using Game.Scripts.UI.Buttons;
+using Game.Scripts.UI.Controls;
 using Game.Scripts.UI.Pages;
 using UnityEngine;
 using UnityEngine.InputSystem;

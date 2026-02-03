@@ -4,13 +4,15 @@ using UnityEngine;
 
 namespace Game.Scripts.Utilities.Events
 {
+    public struct OnGameReadyEvent { }
+    
     public class EventBus : IDisposable
     {
         private Dictionary<Type, List<Delegate>> _events;
         
         private Dictionary<Type, int> _thisFrameEvents;
         
-        private EventBus()
+        public EventBus()
         {
             _events = new Dictionary<Type, List<Delegate>>();
             

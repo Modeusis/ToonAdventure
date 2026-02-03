@@ -1,19 +1,29 @@
+using Game.Scripts.Core;
 using UnityEngine;
 
 namespace Game.Scripts.UI.Pages
 {
     public abstract class Page : MonoBehaviour
     {
-        [field: SerializeField] public PageType Type { get; private set;}
+        [field: SerializeField, Space] public PageType Type { get; private set;}
+
+        public abstract void Initialize();
         
-        public void Hide()
+        public virtual void Hide()
         {
             gameObject.SetActive(false);
         }
 
-        public void Show()
+        public virtual void Show()
         {
             gameObject.SetActive(true);
+        }
+        
+        protected virtual void ToPage(PageType newPageType)
+        {
+            Debug.Log($"ToPage: {newPageType}");
+            
+            G.EventBus.Publish(newPageType);
         }
     }
 }

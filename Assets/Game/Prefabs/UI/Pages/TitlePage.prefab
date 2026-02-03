@@ -51,6 +51,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.UI.Pages.TitlePage
   <Type>k__BackingField: 0
+  _continueButton: {fileID: 2162786568706581559}
+  _newGameButton: {fileID: 8055790359377066287}
+  _settingsButton: {fileID: 4066559069989390640}
+  _leaveButton: {fileID: 3721755249478609551}
 --- !u!1 &6626741283732305736
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,8 +188,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u041F\u0440\u0438\u043A\u043B\u044E\u0447\u0435\u043D\u0438\u044F \u043B\u0435\u043A\u043B\u0435\u0440\u0430"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 65368dcc831bedf448361c17bf3b390a, type: 2}
-  m_sharedMaterial: {fileID: -7623272382402756027, guid: 65368dcc831bedf448361c17bf3b390a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4784f31a96d98e44fbd5b7f3f26d0132, type: 2}
+  m_sharedMaterial: {fileID: 7646166329475134078, guid: 4784f31a96d98e44fbd5b7f3f26d0132, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -209,7 +213,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 92.8
+  m_fontSize: 140.35
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -382,6 +386,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89cdb863c631f9e4d86f52fbb6e197a0, type: 3}
+--- !u!114 &2162786568706581559 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1837146646977364142, guid: 89cdb863c631f9e4d86f52fbb6e197a0, type: 3}
+  m_PrefabInstance: {fileID: 539615880055563417}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc6ff84b588c4e9280bb0406d74f4f37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.UI.Buttons.MenuButton
 --- !u!224 &3944508005614410255 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3585055422086381206, guid: 89cdb863c631f9e4d86f52fbb6e197a0, type: 3}
@@ -517,6 +532,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3585055422086381206, guid: 89cdb863c631f9e4d86f52fbb6e197a0, type: 3}
   m_PrefabInstance: {fileID: 2382838277871667614}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4066559069989390640 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1837146646977364142, guid: 89cdb863c631f9e4d86f52fbb6e197a0, type: 3}
+  m_PrefabInstance: {fileID: 2382838277871667614}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc6ff84b588c4e9280bb0406d74f4f37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.UI.Buttons.MenuButton
 --- !u!1001 &3087375367690578465
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -647,6 +673,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3585055422086381206, guid: 89cdb863c631f9e4d86f52fbb6e197a0, type: 3}
   m_PrefabInstance: {fileID: 3087375367690578465}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3721755249478609551 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1837146646977364142, guid: 89cdb863c631f9e4d86f52fbb6e197a0, type: 3}
+  m_PrefabInstance: {fileID: 3087375367690578465}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc6ff84b588c4e9280bb0406d74f4f37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.UI.Buttons.MenuButton
 --- !u!1001 &8553797505145207169
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -777,3 +814,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3585055422086381206, guid: 89cdb863c631f9e4d86f52fbb6e197a0, type: 3}
   m_PrefabInstance: {fileID: 8553797505145207169}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8055790359377066287 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1837146646977364142, guid: 89cdb863c631f9e4d86f52fbb6e197a0, type: 3}
+  m_PrefabInstance: {fileID: 8553797505145207169}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc6ff84b588c4e9280bb0406d74f4f37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.UI.Buttons.MenuButton
