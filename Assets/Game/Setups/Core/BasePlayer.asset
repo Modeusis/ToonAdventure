@@ -13,3 +13,73 @@ MonoBehaviour:
   m_Name: BasePlayer
   m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Setups.Core.PlayerSetup
   <MovementSpeed>k__BackingField: 5
+  <RotationSpeed>k__BackingField: 720
+  <Gravity>k__BackingField: 9.8
+  <AccelerationTime>k__BackingField: 0.4
+  <AccelerationCurve>k__BackingField:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.49504772
+      value: 1.0789349
+      inSlope: 0.08125712
+      outSlope: 0.08125712
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.98468274
+      value: 1.0884942
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  <DecelerationTime>k__BackingField: 0.5
+  <DecelerationCurve>k__BackingField:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.49504772
+      value: 1.0789349
+      inSlope: 0.08125712
+      outSlope: 0.08125712
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.98468274
+      value: 1.0884942
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

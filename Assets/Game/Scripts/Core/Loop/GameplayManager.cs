@@ -38,9 +38,9 @@ namespace Game.Scripts.Core.Loop
         
         private void OnLevelLoaded(OnLevelLoadedEvent eventData)
         {
-            if (_player != null)
+            if (_player)
             {
-                Destroy(_player);
+                Destroy(_player.gameObject);
                 _player = null;
             }
             
@@ -52,11 +52,16 @@ namespace Game.Scripts.Core.Loop
         private void InitializeLevel(Level level)
         {
             var spawnPoint = level.StartPoint;
-
-            var playerObject = Instantiate(_playerPrefab, spawnPoint.position, spawnPoint.rotation);
             
+            var playerObject = Instantiate(_playerPrefab, spawnPoint.position, spawnPoint.rotation);
+                
             _player = playerObject.GetComponent<Player>();
             _player.Initialize();
+
+            if (level.StartCamera)
+            {
+                level.StartCamera.Follow = _player.transform;
+            }
             
             G.EventBus.Publish(new OnPlayerStateChangeRequest { NewState = PlayerState.Active });
             G.Save.CurrentLevelId = level.Type;

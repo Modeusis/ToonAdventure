@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Game.Scripts.Core.Audio;
 using Game.Scripts.Setups.Levels;
@@ -7,7 +8,7 @@ namespace Game.Scripts.Core.Levels
 {
     public struct OnLevelLoadedEvent 
     {
-        public Levels.Level LoadedLevel;
+        public Level LoadedLevel;
     }
     
     public class LevelManager : MonoBehaviour
@@ -15,9 +16,9 @@ namespace Game.Scripts.Core.Levels
         [SerializeField, Space] private LevelSetup _levels;
         [SerializeField, Space] private Transform _levelRoot;
         
-        private Dictionary<LevelType, Levels.Level> _mappedLevels;
+        private Dictionary<LevelType, Level> _mappedLevels;
 
-        private Levels.Level _currentLevel;
+        private Level _currentLevel;
         
         private bool _isInitialized;
         
@@ -63,6 +64,14 @@ namespace Game.Scripts.Core.Levels
             }
             
             G.EventBus.Publish(new OnLevelLoadedEvent { LoadedLevel = _currentLevel });
+        }
+
+        private void OnDestroy()
+        {
+            if (!G.IsReady)
+                return;
+            
+            G.EventBus.Unsubscribe<LevelType>(LoadLevel);
         }
     }
 }

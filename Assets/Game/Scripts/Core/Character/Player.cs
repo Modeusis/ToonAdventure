@@ -40,9 +40,9 @@ namespace Game.Scripts.Core.Character
         private void OnDestroy()
         {
             if (G.IsReady)
-            {
-                G.EventBus.Unsubscribe<OnPlayerStateChangeRequest>(OnStateChangeRequested);
-            }
+                return;
+            
+            G.EventBus.Unsubscribe<OnPlayerStateChangeRequest>(OnStateChangeRequested);
         }
 
         private void Update()

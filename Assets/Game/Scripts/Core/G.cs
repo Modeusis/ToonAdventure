@@ -79,10 +79,12 @@ namespace Game.Scripts.Core
                 Debug.LogError("[G] Failed to load game manager setup via Addressables");
                 return;
             }
+
+            await _loader.LoadSceneAsync(Addresses.BOOT_SCENE_KEY);
+            await _loader.LoadSceneAsync(Addresses.MAIN_MENU_SCENE_KEY);
             
             _input = new BaseInput();
             _input.Enable();
-            
             
             _saveManager = new SaveManager();
             _sceneLoader = new SceneLoader(_setup.LoadDelay);
