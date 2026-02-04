@@ -1,10 +1,9 @@
-namespace Game.Scripts.Core.Player
+namespace Game.Scripts.Core.Character
 {
     public enum PlayerState
     {
         Disabled,
         Active,
-        Dialogue,
-        Victory,
+        Dialogue
     }
 }

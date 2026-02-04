@@ -361,6 +361,8 @@ GameObject:
   - component: {fileID: 3339375118755960850}
   - component: {fileID: 1031174901897810762}
   - component: {fileID: 3499922163986947106}
+  - component: {fileID: 2349298719917319277}
+  - component: {fileID: 2850045268090866442}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -432,6 +434,33 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2349298719917319277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2940128687426814254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2adc1dcc7d7475fabc8bc6b90611c0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Core.Character.Player
+  <AnimationController>k__BackingField: {fileID: 2850045268090866442}
+  <Setup>k__BackingField: {fileID: 11400000, guid: e4537903b9879014cad3287fac9ab859, type: 2}
+--- !u!114 &2850045268090866442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2940128687426814254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9761425ece474b70912d4c71142b9010, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Core.PlayerAnimationController
+  _animator: {fileID: 3499922163986947106}
 --- !u!1 &3280864377551481394
 GameObject:
   m_ObjectHideFlags: 0

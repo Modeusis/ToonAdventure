@@ -1,5 +1,7 @@
 using Cysharp.Threading.Tasks;
+using Game.Scripts.Core.Character;
 using Game.Scripts.Core.Levels;
+using Game.Scripts.Utilities.Events;
 using UnityEngine;
 
 namespace Game.Scripts.Core.Loop
@@ -9,7 +11,7 @@ namespace Game.Scripts.Core.Loop
         [SerializeField, Space] private LevelManager _levelManager;
         [SerializeField, Space] private GameObject _playerPrefab;
         
-        private GameObject _player;
+        private Player _player;
         
         private void Start()
         {
@@ -50,9 +52,13 @@ namespace Game.Scripts.Core.Loop
         private void InitializeLevel(Level level)
         {
             var spawnPoint = level.StartPoint;
-            
-            _player = Instantiate(_playerPrefab, spawnPoint.position, spawnPoint.rotation);
 
+            var playerObject = Instantiate(_playerPrefab, spawnPoint.position, spawnPoint.rotation);
+            
+            _player = playerObject.GetComponent<Player>();
+            _player.Initialize();
+            
+            G.EventBus.Publish(new OnPlayerStateChangeRequest { NewState = PlayerState.Active });
             G.Save.CurrentLevelId = level.Type;
         }
     }
