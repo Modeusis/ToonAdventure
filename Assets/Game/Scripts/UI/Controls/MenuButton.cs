@@ -1,5 +1,7 @@
 using System;
 using DG.Tweening;
+using Game.Scripts.Core;
+using Game.Scripts.Core.Audio;
 using Game.Scripts.Setups.Animations;
 using TMPro;
 using UnityEngine;
@@ -51,6 +53,11 @@ namespace Game.Scripts.UI.Controls
             _clickTween = transform
                 .DOScale(_clickProperty.Target, _clickProperty.Duration)
                 .SetEase(_clickProperty.Curve);
+
+            if (G.IsReady)
+            {
+                G.Audio.PlaySfx(SoundType.UiClick);
+            }
             
             OnClick?.Invoke();
         }

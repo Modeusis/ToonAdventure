@@ -132,9 +132,13 @@ namespace Game.Scripts.Utilities.Load
         {
             if (_scenesHandles.TryGetValue(referenceKey, out var handle))
             {
-                Debug.Log($"[Addressable] Scene {referenceKey} already loaded");
+                if (handle.IsValid())
+                {
+                    Debug.Log($"[Addressable] Scene {referenceKey} already loaded");
+                    return await handle;
+                }
                 
-                return await handle;
+                _scenesHandles.Remove(referenceKey);
             }
             
             try

@@ -14,17 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
   m_GroupName: Default Local Group
   m_GUID: fa18ad460f0bbcb4d9f246d0dd8d8dee
-  m_SerializeEntries:
-  - m_GUID: 7eeae54918969a446b25280147bf069d
-    m_Address: Assets/Game/Prefabs/UI/Root/UiRoot.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d65050c76a9009d4dac7d26aaba7eafb
-    m_Address: Assets/Game/Prefabs/Sound/AudioManager.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: e4357a243d2e72d4cb67fbf3c935b706, type: 2}
   m_SchemaSet:
