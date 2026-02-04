@@ -1,4 +1,4 @@
-namespace Game.Scripts.Core.Level
+namespace Game.Scripts.Core.Levels
 {
     public enum LevelType
     {

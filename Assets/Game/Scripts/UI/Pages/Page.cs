@@ -1,11 +1,14 @@
 using Game.Scripts.Core;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Game.Scripts.UI.Pages
 {
     public abstract class Page : MonoBehaviour
     {
         [field: SerializeField, Space] public PageType Type { get; private set;}
+
+        public UnityEvent OnClosed { get; } = new UnityEvent();
 
         public abstract void Initialize();
         

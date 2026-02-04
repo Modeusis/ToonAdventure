@@ -16,7 +16,7 @@ namespace Game.Scripts.UI.Root
             Screens.Initialize();
             PopUp.Initialize();
             
-            Loading.HideLoadingScreen();
+            Loading.Hide();
         }
     }
 }

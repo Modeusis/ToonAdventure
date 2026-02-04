@@ -1,6 +1,7 @@
 using Game.Scripts.Core;
 using Game.Scripts.UI.Controls;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Game.Scripts.UI.Pages
 {
@@ -11,7 +12,7 @@ namespace Game.Scripts.UI.Pages
         [SerializeField] private MenuSlider _sfxSlider;
         
         [Header("Buttons")]
-        [SerializeField] private MenuButton _toMainButton;
+        [SerializeField] private MenuButton _backButton;
         [SerializeField] private MenuButton _saveButton;
 
         private float _savedSfxVolume;
@@ -19,12 +20,11 @@ namespace Game.Scripts.UI.Pages
         
         public override void Initialize()
         {
-            _toMainButton.OnClick.AddListener(() =>
+            OnClosed.AddListener(SetDefaults);
+            
+            _backButton.OnClick.AddListener(() =>
             {
-                G.Audio.SetMusicVolume(_savedMusicVolume);
-                G.Audio.SetSfxVolume(_savedSfxVolume);
-                
-                ToPage(PageType.Main);
+                G.UI.Screens.Menu.ToPreviousPage();
             });
             
             _saveButton.OnClick.AddListener(() =>
@@ -51,11 +51,17 @@ namespace Game.Scripts.UI.Pages
             
             base.Show();
         }
-
+        
         private void UpdateBaselines()
         {
             _savedSfxVolume = G.Save.SfxVolume;
             _savedMusicVolume = G.Save.MusicVolume;
+        }
+
+        private void SetDefaults()
+        {
+            G.Audio.SetMusicVolume(_savedMusicVolume);
+            G.Audio.SetSfxVolume(_savedSfxVolume);
         }
         
         private void HandleMusicSliderChanged(float value)

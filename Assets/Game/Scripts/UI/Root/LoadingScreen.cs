@@ -32,23 +32,23 @@ namespace Game.Scripts.UI.Root
             }
         }
         
-        public void HideLoadingScreen()
+        public void Hide()
         {
             CancelTextChange();
             gameObject.SetActive(false);
         }
         
-        public void ShowLoadingScreen(string loadingText = null)
+        public void Show(string loadingText = null)
         {
             gameObject.SetActive(true);
             
             if (string.IsNullOrEmpty(loadingText))
                 return;
             
-            ChangeLoadingScreenText(loadingText).Forget();
+            ChangeText(loadingText).Forget();
         }
         
-        private async UniTask ChangeLoadingScreenText(string text)
+        private async UniTask ChangeText(string text)
         {
             if (_loadingTextField.text == text)
             {

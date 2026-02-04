@@ -10,11 +10,16 @@ namespace Game.Scripts.UI.Menu
 {
     public class MenuManager : MonoBehaviour
     {
-        [SerializeField] private List<EnumItem<PageType, Page>> _menuPages;
+        [SerializeField, Space] private GameObject _mainMenuBackground;
+        
+        [SerializeField, Space] private List<EnumItem<PageType, Page>> _menuPages;
+        
         [SerializeField, Space] private PageType _startPageType = PageType.Main;
+        [SerializeField] private PageType _overlayMenuPageType = PageType.Overlay;
         
         private readonly Dictionary<PageType, Page> _mappedPages = new Dictionary<PageType, Page>();
         
+        private Page _previousPage;
         private Page _currentPage;
 
         private bool _isInitialized;
@@ -25,7 +30,7 @@ namespace Game.Scripts.UI.Menu
             {
                 if (_mappedPages.ContainsKey(page.Key))
                 {
-                    Debug.LogWarning("[MenuRoot.Awake] Error while trying to map dictionary, menu is not initialized.");
+                    Debug.LogWarning("[MenuManager.Initialize] Error while trying to map dictionary, menu is not initialized.");
                     return;
                 }
                 
@@ -37,7 +42,7 @@ namespace Game.Scripts.UI.Menu
 
             if (!_mappedPages.TryGetValue(_startPageType, out _currentPage))
             {
-                Debug.LogWarning("No start page in Dictionary.");
+                Debug.LogWarning("[MenuManager.Initialize] No start page in Dictionary.");
                 return;
             }
             
@@ -46,6 +51,65 @@ namespace Game.Scripts.UI.Menu
             HandlePageTypeChange(_startPageType);
             
             G.EventBus.Subscribe<PageType>(HandlePageTypeChange);
+        }
+
+        public void Toggle()
+        {
+            if (!_currentPage)
+            {
+                OpenOverlay();
+                return;
+            }
+            
+            Close();
+        }
+        
+        public void Open()
+        {
+            Close();
+            
+            HandlePageTypeChange(_startPageType);
+        }
+        
+        public void OpenOverlay()
+        {
+            Close();
+            
+            HandlePageTypeChange(_overlayMenuPageType);
+        }
+        
+        public void Close()
+        {
+            if (!_currentPage)
+                return;
+            
+            _currentPage.Hide();
+            _currentPage.OnClosed.Invoke();
+            
+            _currentPage = null;
+            _previousPage = null;
+        }
+
+        public void ToPreviousPage()
+        {
+            if (!_previousPage)
+            {
+                Debug.Log("[MenuManager.ToPreviousPage] No cached previous page.");
+                return;
+            }
+            
+            HandlePageTypeChange(_previousPage.Type);
+            _previousPage = null;
+        }
+
+        public void ShowBackground()
+        {
+            _mainMenuBackground.SetActive(true);
+        }
+        
+        public void HideBackground()
+        {
+            _mainMenuBackground.SetActive(false);
         }
         
         private void HandlePageTypeChange(PageType newPageType)
@@ -58,8 +122,14 @@ namespace Game.Scripts.UI.Menu
                 Debug.LogWarning($"[MenuManager.HandlePageTypeChange] Detect not mapped page type: {newPageType}");
                 return;
             }
-            
-            _currentPage?.Hide();
+
+            if (_currentPage)
+            {
+                _currentPage.Hide();
+                _currentPage.OnClosed.Invoke();
+                
+                _previousPage = _currentPage;
+            }
             
             _currentPage = newPage;
             _currentPage.Show();

@@ -1,5 +1,5 @@
 using System;
-using Game.Scripts.Core.Level;
+using Game.Scripts.Core.Levels;
 
 namespace Game.Scripts.Data
 {
