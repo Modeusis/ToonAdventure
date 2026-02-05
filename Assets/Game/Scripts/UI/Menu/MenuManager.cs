@@ -50,6 +50,12 @@ namespace Game.Scripts.UI.Menu
             
             HandlePageTypeChange(_startPageType);
             
+            if (G.IsTestMode)
+            {
+                HideBackground();
+                Close();
+            }
+            
             G.EventBus.Subscribe<PageType>(HandlePageTypeChange);
         }
 

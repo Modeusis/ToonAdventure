@@ -1,6 +1,7 @@
 using System;
 using Cysharp.Threading.Tasks;
 using Game.Scripts.Core.Audio;
+using Game.Scripts.Core.Cameras;
 using Game.Scripts.Core.Save;
 using Game.Scripts.Core.Scenes;
 using Game.Scripts.Setups.Core;
@@ -25,7 +26,9 @@ namespace Game.Scripts.Core
         public static AudioManager Audio => _instance?._audioManager;
         public static UiRoot UI => _instance?._uiRoot;
         public static SaveManager Save => _instance?._saveManager;
+        public static CameraManager Camera => _instance?._cameraManager;
         public static bool IsReady => _instance != null && _instance._isInitialized;
+        public static bool IsTestMode => _instance != null && !_instance._isStandardStart;
         
         private EventBus _eventBus;
         private BaseInput _input;
@@ -34,9 +37,11 @@ namespace Game.Scripts.Core
         private AudioManager _audioManager;
         private UiRoot _uiRoot;
         private SaveManager _saveManager;
+        private CameraManager _cameraManager;
         
         private GameManagerSetup _setup;
-        
+
+        private bool _isStandardStart = true;
         private bool _isInitialized;
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
@@ -57,32 +62,33 @@ namespace Game.Scripts.Core
         
         private async UniTask RunGameAsync()
         {
-#if UNITY_EDITOR
-            var currentSceneName = SceneManager.GetActiveScene().name;
-            
-            bool isAllowedScene = currentSceneName == SceneNames.BOOT
-                                  || currentSceneName == SceneNames.MAIN_MENU
-                                  || currentSceneName == SceneNames.GAMEPLAY;
-            
-            if (!isAllowedScene)
-                return;
-#endif
-            
-            await LoadAndRunGame();
-        }
-
-        private async UniTask LoadAndRunGame()
-        {
             _setup = await _loader.LoadAsync<GameManagerSetup>(Addresses.G_SETUP_KEY);
             if (!_setup)
             {
                 Debug.LogError("[G] Failed to load game manager setup via Addressables");
                 return;
             }
-
-            await _loader.LoadSceneAsync(Addresses.BOOT_SCENE_KEY);
-            await _loader.LoadSceneAsync(Addresses.MAIN_MENU_SCENE_KEY);
             
+#if UNITY_EDITOR
+            var currentSceneName = SceneManager.GetActiveScene().name;
+            
+            var isLoadingScene = currentSceneName == SceneNames.BOOT
+                                  || currentSceneName == SceneNames.MAIN_MENU
+                                  || currentSceneName == SceneNames.GAMEPLAY;
+
+            _isStandardStart = isLoadingScene;
+#endif
+            if (_isStandardStart)
+            {
+                await _loader.LoadSceneAsync(Addresses.BOOT_SCENE_KEY);
+                await _loader.LoadSceneAsync(Addresses.MAIN_MENU_SCENE_KEY);
+            }
+            
+            await LoadAndRunGame();
+        }
+
+        private async UniTask LoadAndRunGame()
+        {
             _input = new BaseInput();
             _input.Enable();
             
@@ -100,6 +106,8 @@ namespace Game.Scripts.Core
                 return;
             }
 
+            _cameraManager = new CameraManager(_setup.CameraSettings);
+            
             _audioManager = loadedAudio;
             _audioManager.Initialize();
             Object.DontDestroyOnLoad(_audioManager.gameObject);

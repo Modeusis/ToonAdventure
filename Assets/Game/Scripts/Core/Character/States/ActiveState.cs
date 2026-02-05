@@ -5,23 +5,31 @@ namespace Game.Scripts.Core.Character.States
     public class ActiveState : PlayerBaseState
     {
         private float _currentSpeed;
+        private float _verticalVelocity;
+        
         private Vector3 _lastMoveDirection;
         
         public ActiveState(Player player) : base(player, PlayerState.Active) { }
 
         public override void Enter()
         {
-            _currentSpeed = 0f;
-            _lastMoveDirection = _player.transform.forward;
+            ResetKinematics();
         }
 
         public override void Update()
         {
-            HandleMovement();
+            CalculateHorizontalMovement(out var hVelocity);
+            HandleGravity();
+            
+            var finalVelocity = hVelocity;
+            finalVelocity.y = _verticalVelocity;
+            
+            _characterController.Move(finalVelocity * Time.deltaTime);
+            
             HandleInput();
         }
 
-        private void HandleMovement()
+        private void CalculateHorizontalMovement(out Vector3 horizontalVelocity)
         {
             var input = G.Input.Game.Move.ReadValue<Vector2>();
             var inputDirection = new Vector3(input.x, 0, input.y);
@@ -41,44 +49,58 @@ namespace Game.Scripts.Core.Character.States
             var step = rate * curveMultiplier * Time.deltaTime;
             
             _currentSpeed = Mathf.MoveTowards(_currentSpeed, targetSpeed, step);
+
             if (inputDirection.sqrMagnitude > 0.01f)
             {
                 _lastMoveDirection = inputDirection;
+                
+                var targetRotation = Quaternion.LookRotation(inputDirection);
+                _player.transform.rotation = Quaternion.RotateTowards(
+                    _player.transform.rotation, 
+                    targetRotation, 
+                    _setup.RotationSpeed * Time.deltaTime
+                );
             }
-            
-            var velocity = _currentSpeed * _lastMoveDirection;
-            
-            if (!_characterController.isGrounded)
-            {
-                velocity.y = -_setup.Gravity * Time.deltaTime;
-            }
-            
-            _characterController.Move(velocity * Time.deltaTime);
             
             _animator.SetSpeed(_currentSpeed / _setup.MovementSpeed);
-
-            if (inputDirection == Vector3.zero)
-                return;
             
-            var targetRotation = Quaternion.LookRotation(inputDirection);
-            _player.transform.rotation = Quaternion.RotateTowards(
-                _player.transform.rotation, 
-                targetRotation, 
-                _setup.RotationSpeed * Time.deltaTime
-            );
+            horizontalVelocity = _currentSpeed * _lastMoveDirection;
         }
 
+        private void HandleGravity()
+        {
+            if (_characterController.isGrounded)
+            {
+                if (_verticalVelocity < 0)
+                {
+                    _verticalVelocity = -2f;
+                }
+            }
+            else
+            {
+                _verticalVelocity -= _setup.Gravity * Time.deltaTime;
+            }
+        }
+        
         private void HandleInput()
         {
             if (G.Input.Game.Interact.WasPressedThisFrame())
             {
-                // Interact logic
+                
             }
 
             if (G.Input.Game.Back.WasPressedThisFrame())
             {
                 G.UI.Screens.Menu.Toggle();
             }
+        }
+
+        private void ResetKinematics()
+        {
+            _currentSpeed = 0f;
+            _verticalVelocity = 0f;
+            
+            _lastMoveDirection = _player.transform.forward;
         }
     }
 }

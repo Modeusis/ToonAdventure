@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using Game.Scripts.Core.Character.States;
 using Game.Scripts.Setups.Core;
 using Game.Scripts.Utilities.Events;
@@ -12,18 +13,34 @@ namespace Game.Scripts.Core.Character
     {
         [field: SerializeField, Space] public PlayerAnimationController AnimationController { get; private set; }
         [field: SerializeField, Space] public PlayerSetup Setup { get; private set; }
+
+        [SerializeField, Space] private PlayerState _startState;
         
         public CharacterController CharacterController { get; private set; }
 
         private FSM<PlayerState> _fsm;
         private PlayerState _targetState;
 
-        private bool _isInitialized; 
+        private bool _isInitialized;
+
+#if UNITY_EDITOR
+        public async void Start()
+        {
+            await UniTask.WaitUntil(() => G.IsReady);
+            
+            if (!G.IsTestMode)
+                return;
+
+            Initialize();
+        }
+#endif
         
         public void Initialize()
         {
             if (_isInitialized)
                 return;
+            
+            Debug.Log("[Player.Initialize] Call");
             
             CharacterController ??= GetComponent<CharacterController>();
             
@@ -35,6 +52,8 @@ namespace Game.Scripts.Core.Character
             G.EventBus.Subscribe<OnPlayerStateChangeRequest>(OnStateChangeRequested);
             
             _isInitialized = true;
+            
+            Debug.Log("[Player.Initialize] Initialized");
         }
 
         private void OnDestroy()
@@ -64,7 +83,7 @@ namespace Game.Scripts.Core.Character
                 { PlayerState.Dialogue, new DialogueState(this) }
             };
 
-            _targetState = PlayerState.Disabled;
+            _targetState = _startState;
 
             var transitions = new List<Transition<PlayerState>>
             {

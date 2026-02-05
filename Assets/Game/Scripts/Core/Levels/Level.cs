@@ -11,7 +11,6 @@ namespace Game.Scripts.Core.Levels
         [field: SerializeField, Space] public MusicType MusicType { get; private set; }
         
         [field: SerializeField, Space] public Transform StartPoint { get; private set; }
-        [field: SerializeField] public CinemachineCamera StartCamera { get; private set; }
         
         public virtual void Load()
         {
