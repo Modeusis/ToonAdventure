@@ -27,20 +27,18 @@ MonoBehaviour:
   _musicProperties:
   - _audioType: 1
     _audioClips:
-    - {fileID: 8300000, guid: 150f0f685194ce8408dba6d5e28a5e7d, type: 3}
+    - {fileID: 8300000, guid: ada2fedb2a72f7549be1abaa7f1a3a4c, type: 3}
     - {fileID: 8300000, guid: 0994f35bb7f8c304e8b12a8c7ed930ba, type: 3}
+    - {fileID: 8300000, guid: 150f0f685194ce8408dba6d5e28a5e7d, type: 3}
     - {fileID: 8300000, guid: 34c4a9d621739014ea14ee388011bb44, type: 3}
   - _audioType: 2
     _audioClips:
     - {fileID: 8300000, guid: 0b49f6febd0b8f84d8e52c1a97efe4ee, type: 3}
     - {fileID: 8300000, guid: 0457b0d8ca1469f4c904a5dd7d5cc35a, type: 3}
+    - {fileID: 8300000, guid: 5136dd6081e3e6941a1afd83fbcb0b9f, type: 3}
   - _audioType: 3
     _audioClips:
     - {fileID: 8300000, guid: 9d6740e061bb10646bab4bc21ebcd9b3, type: 3}
     - {fileID: 8300000, guid: 58809a540b15ade47b8269e60690e30d, type: 3}
     - {fileID: 8300000, guid: b824d757a2a41374ea1972a766530731, type: 3}
-  - _audioType: 4
-    _audioClips:
-    - {fileID: 8300000, guid: 5136dd6081e3e6941a1afd83fbcb0b9f, type: 3}
     - {fileID: 8300000, guid: f891143ceb7a78c4e93634d91da7734c, type: 3}
-    - {fileID: 8300000, guid: ada2fedb2a72f7549be1abaa7f1a3a4c, type: 3}

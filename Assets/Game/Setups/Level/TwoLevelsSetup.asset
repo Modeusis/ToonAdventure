@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df06b5663eba4f6a80ef1a8410e56ce0, type: 3}
+  m_Name: TwoLevelsSetup
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Setups.Levels.LevelSetup
+  _items:
+  - <Key>k__BackingField: 0
+    <Value>k__BackingField: {fileID: 8984496692288037405, guid: fb6d26298a271a54f853d77b0257f0ec, type: 3}
+  - <Key>k__BackingField: 1
+    <Value>k__BackingField: {fileID: 5982677573170017435, guid: 90d823e2aca53aa4bbca63e4f0f8fe44, type: 3}

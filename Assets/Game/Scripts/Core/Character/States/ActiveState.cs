@@ -14,6 +14,8 @@ namespace Game.Scripts.Core.Character.States
         public override void Enter()
         {
             ResetKinematics();
+            
+            _cameraController.enabled = true;
         }
 
         public override void Update()
@@ -29,10 +31,16 @@ namespace Game.Scripts.Core.Character.States
             HandleInput();
         }
 
+        public override void Exit()
+        {
+            _cameraController.enabled = false;
+        }
+
         private void CalculateHorizontalMovement(out Vector3 horizontalVelocity)
         {
             var input = G.Input.Game.Move.ReadValue<Vector2>();
-            var inputDirection = new Vector3(input.x, 0, input.y);
+
+            MapInputToCamera(input,out var inputDirection);
             
             if (inputDirection.magnitude > 1f) inputDirection.Normalize();
 
@@ -86,7 +94,7 @@ namespace Game.Scripts.Core.Character.States
         {
             if (G.Input.Game.Interact.WasPressedThisFrame())
             {
-                
+
             }
 
             if (G.Input.Game.Back.WasPressedThisFrame())
@@ -95,6 +103,21 @@ namespace Game.Scripts.Core.Character.States
             }
         }
 
+        private void MapInputToCamera(Vector3 input, out Vector3 mappedInput)
+        {
+
+            var cameraTransform = _cameraController.transform;
+            var cameraForward = cameraTransform.forward;
+            var cameraRight = cameraTransform.right;
+
+            cameraForward.y = 0;
+            cameraRight.y = 0;
+            cameraForward.Normalize();
+            cameraRight.Normalize();
+
+            mappedInput = cameraForward * input.y + cameraRight * input.x;
+        }
+        
         private void ResetKinematics()
         {
             _currentSpeed = 0f;

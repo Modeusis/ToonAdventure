@@ -4,6 +4,7 @@ using Game.Scripts.Core.Character.States;
 using Game.Scripts.Setups.Core;
 using Game.Scripts.Utilities.Events;
 using Game.Scripts.Utilities.StateMachine;
+using Unity.Cinemachine;
 using UnityEngine;
 
 namespace Game.Scripts.Core.Character
@@ -12,15 +13,18 @@ namespace Game.Scripts.Core.Character
     public class Player : MonoBehaviour
     {
         [field: SerializeField, Space] public PlayerAnimationController AnimationController { get; private set; }
+        [field: SerializeField] public CinemachineInputAxisController CameraInputController { get; private set; }
         [field: SerializeField, Space] public PlayerSetup Setup { get; private set; }
-
+        
         [SerializeField, Space] private PlayerState _startState;
         
         public CharacterController CharacterController { get; private set; }
 
         private FSM<PlayerState> _fsm;
+        
+        private PlayerState _stateBeforePause;
         private PlayerState _targetState;
-
+        
         private bool _isInitialized;
 
 #if UNITY_EDITOR
@@ -49,6 +53,7 @@ namespace Game.Scripts.Core.Character
             if (!G.IsReady)
                 return;
             
+            G.EventBus.Subscribe<OnGamePausedEvent>(OnGamePaused);
             G.EventBus.Subscribe<OnPlayerStateChangeRequest>(OnStateChangeRequested);
             
             _isInitialized = true;
@@ -61,6 +66,7 @@ namespace Game.Scripts.Core.Character
             if (G.IsReady)
                 return;
             
+            G.EventBus.Unsubscribe<OnGamePausedEvent>(OnGamePaused);
             G.EventBus.Unsubscribe<OnPlayerStateChangeRequest>(OnStateChangeRequested);
         }
 
@@ -98,6 +104,20 @@ namespace Game.Scripts.Core.Character
         private void OnStateChangeRequested(OnPlayerStateChangeRequest eventData)
         {
             _targetState = eventData.NewState;
+        }
+        
+        private void OnGamePaused(OnGamePausedEvent eventData)
+        {
+            if (eventData.IsPaused)
+            {
+                _stateBeforePause = _targetState; 
+                
+                G.EventBus.Publish(new OnPlayerStateChangeRequest { NewState = PlayerState.Disabled });
+            }
+            else
+            {
+                G.EventBus.Publish(new OnPlayerStateChangeRequest { NewState = _stateBeforePause });
+            }
         }
     }
 }

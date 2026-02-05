@@ -1,5 +1,6 @@
 using Game.Scripts.Setups.Core;
 using Game.Scripts.Utilities.StateMachine;
+using Unity.Cinemachine;
 using UnityEngine;
 
 namespace Game.Scripts.Core.Character.States
@@ -8,6 +9,7 @@ namespace Game.Scripts.Core.Character.States
     {
         protected readonly Player _player;
         protected readonly PlayerAnimationController _animator;
+        protected readonly CinemachineInputAxisController _cameraController;
         protected readonly CharacterController _characterController;
         protected readonly PlayerSetup _setup;
 
@@ -17,6 +19,7 @@ namespace Game.Scripts.Core.Character.States
             StateType = stateType;
             _animator = player.AnimationController;
             _characterController = player.CharacterController;
+            _cameraController = player.CameraInputController;
             _setup = player.Setup;
         }
 

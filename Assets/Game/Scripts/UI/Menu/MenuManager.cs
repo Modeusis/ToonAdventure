@@ -82,6 +82,7 @@ namespace Game.Scripts.UI.Menu
             Close();
             
             HandlePageTypeChange(_overlayMenuPageType);
+            G.EventBus.Publish(new OnGamePausedEvent { IsPaused = true });
         }
         
         public void Close()
@@ -94,6 +95,8 @@ namespace Game.Scripts.UI.Menu
             
             _currentPage = null;
             _previousPage = null;
+            
+            G.EventBus.Publish(new OnGamePausedEvent { IsPaused = false });
         }
 
         public void ToPreviousPage()

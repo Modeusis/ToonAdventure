@@ -11,4 +11,10 @@ namespace Game.Scripts.Utilities.Events
             NewState = newState;
         }
     }
+    
+    public struct OnGamePausedEvent
+    {
+        public bool IsPaused;
+
+    }
 }
