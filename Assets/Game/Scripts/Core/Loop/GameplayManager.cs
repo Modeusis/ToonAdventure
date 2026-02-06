@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using Game.Scripts.Core.Character;
 using Game.Scripts.Core.Levels;
+using Game.Scripts.UI.Screens.Dialog;
 using Game.Scripts.Utilities.Events;
 using Unity.Cinemachine;
 using UnityEngine;
@@ -10,6 +11,7 @@ namespace Game.Scripts.Core.Loop
     public class GameplayManager : MonoBehaviour
     {
         [SerializeField, Space] private LevelManager _levelManager;
+        [SerializeField] private DialogueManager _dialogueManager;
         [SerializeField] private CinemachineBrain _brain;
         
         [SerializeField, Space] private GameObject _playerPrefab;
@@ -19,8 +21,10 @@ namespace Game.Scripts.Core.Loop
         private void Start()
         {
             _levelManager.Initialize();
+            _dialogueManager.Initialize();
+            
             G.EventBus.Subscribe<OnLevelLoadedEvent>(OnLevelLoaded);
-
+            
             StartGameplay().Forget();
         }
 
@@ -58,7 +62,8 @@ namespace Game.Scripts.Core.Loop
             var spawnPoint = level.StartPoint;
             
             var playerObject = Instantiate(_playerPrefab, spawnPoint.position, spawnPoint.rotation);
-                
+            playerObject.name = "[Player]";    
+            
             _player = playerObject.GetComponent<Player>();
             _player.Initialize();
             

@@ -53,8 +53,9 @@ namespace Game.Scripts.Core.Character
             if (!G.IsReady)
                 return;
             
+            G.EventBus.Subscribe<OnDialogueStateChangedEvent>(OnDialogueStateChanged);
             G.EventBus.Subscribe<OnGamePausedEvent>(OnGamePaused);
-            G.EventBus.Subscribe<OnPlayerStateChangeRequest>(OnStateChangeRequested);
+            G.EventBus.Subscribe<OnPlayerStateChangeRequest>(OnPauseStateChangeRequested);
             G.EventBus.Subscribe<OnInteractionZoneEnterEvent>(OnInteractionZoneEnter);
             G.EventBus.Subscribe<OnInteractionZoneExitEvent>(OnInteractionZoneExit);
             
@@ -66,8 +67,9 @@ namespace Game.Scripts.Core.Character
             if (G.IsReady)
                 return;
             
+            G.EventBus.Unsubscribe<OnDialogueStateChangedEvent>(OnDialogueStateChanged);
             G.EventBus.Unsubscribe<OnGamePausedEvent>(OnGamePaused);
-            G.EventBus.Unsubscribe<OnPlayerStateChangeRequest>(OnStateChangeRequested);
+            G.EventBus.Unsubscribe<OnPlayerStateChangeRequest>(OnPauseStateChangeRequested);
             G.EventBus.Unsubscribe<OnInteractionZoneEnterEvent>(OnInteractionZoneEnter);
             G.EventBus.Unsubscribe<OnInteractionZoneExitEvent>(OnInteractionZoneExit);
         }
@@ -118,13 +120,25 @@ namespace Game.Scripts.Core.Character
 
         private void OnInteractionZoneExit(OnInteractionZoneExitEvent eventData)
         {
-            if (_currentInteractable == eventData.Interactable)
-            {
-                _currentInteractable = null;
-            }
+            if (_currentInteractable != eventData.Interactable)
+                return;
+            
+            _currentInteractable = null;
         }
 
-        private void OnStateChangeRequested(OnPlayerStateChangeRequest eventData)
+        private void OnDialogueStateChanged(OnDialogueStateChangedEvent eventData)
+        {
+            if (eventData.IsActive)
+            {
+                G.EventBus.Publish(new OnPlayerStateChangeRequest { NewState = PlayerState.Dialogue });
+            }
+            else
+            {
+                G.EventBus.Publish(new OnPlayerStateChangeRequest { NewState = PlayerState.Active });
+            }
+        }
+        
+        private void OnPauseStateChangeRequested(OnPlayerStateChangeRequest eventData)
         {
             _targetState = eventData.NewState;
         }

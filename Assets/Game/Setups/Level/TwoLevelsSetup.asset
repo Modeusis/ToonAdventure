@@ -14,6 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Setups.Levels.LevelSetup
   _items:
   - <Key>k__BackingField: 0
-    <Value>k__BackingField: {fileID: 8984496692288037405, guid: fb6d26298a271a54f853d77b0257f0ec, type: 3}
+    <Value>k__BackingField:
+      <LoadTag>k__BackingField: "\u043F\u0440\u0438\u0445\u043E\u0436\u0443\u044E
+        \u043B\u0435\u043A\u043B\u0435\u0440\u0430..."
+      <Prefab>k__BackingField: {fileID: 8984496692288037405, guid: fb6d26298a271a54f853d77b0257f0ec, type: 3}
   - <Key>k__BackingField: 1
-    <Value>k__BackingField: {fileID: 5982677573170017435, guid: 90d823e2aca53aa4bbca63e4f0f8fe44, type: 3}
+    <Value>k__BackingField:
+      <LoadTag>k__BackingField: "\u0443\u0447\u0430\u0441\u0442\u043E\u043A \u0443
+        \u0434\u043E\u043C\u0430"
+      <Prefab>k__BackingField: {fileID: 5982677573170017435, guid: 90d823e2aca53aa4bbca63e4f0f8fe44, type: 3}
+  <LevelLoadDelay>k__BackingField: 1

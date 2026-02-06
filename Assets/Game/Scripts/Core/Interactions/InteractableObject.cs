@@ -8,8 +8,6 @@ namespace Game.Scripts.Core.Interactions
     [RequireComponent(typeof(Collider))]
     public class InteractableObject : MonoBehaviour, IInteractable
     {
-        [SerializeField, Space] private string _interactableTag = "InteractableDefault";
-        
         [SerializeField, Space] private bool _isOneShot;
 
         [field: SerializeField, Space] public UnityEvent OnInteractionZoneEnter { get; private set; } = new UnityEvent();
@@ -24,8 +22,6 @@ namespace Game.Scripts.Core.Interactions
 
             if (!other.TryGetComponent<Player>(out _))
                 return;
-            
-            Debug.Log($"{_interactableTag} - interaction zone enter");
             
             OnInteractionZoneEnter?.Invoke();
                 
@@ -45,8 +41,6 @@ namespace Game.Scripts.Core.Interactions
             
             OnInteractionZoneExit?.Invoke();
             
-            Debug.Log($"{_interactableTag} - interaction zone exit");
-            
             G.EventBus.Publish(new OnInteractionZoneExitEvent
             {
                 Interactable = this
@@ -56,8 +50,6 @@ namespace Game.Scripts.Core.Interactions
         public void Interact()
         {
             if (_wasInteracted && _isOneShot) return;
-            
-            Debug.Log($"{_interactableTag} - interaction proceed");
             
             OnInteractionProceed?.Invoke();
             
@@ -71,8 +63,6 @@ namespace Game.Scripts.Core.Interactions
         private void DisableInteraction()
         {
             OnInteractionZoneExit?.Invoke();
-            
-            Debug.Log($"{_interactableTag} - interaction disabled");
             
             G.EventBus.Publish(new OnInteractionZoneExitEvent
             {

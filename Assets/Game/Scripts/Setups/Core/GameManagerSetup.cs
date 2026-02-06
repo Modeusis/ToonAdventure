@@ -1,10 +1,11 @@
 using System;
 using Game.Scripts.Core.Cameras.Cursors;
+using Game.Scripts.Core.Character.States;
 using UnityEngine;
 
 namespace Game.Scripts.Setups.Core
 {
-    [CreateAssetMenu(fileName = "New game manager setup", menuName = "Setup/G")]
+    [CreateAssetMenu(fileName = "New game manager setup", menuName = "Setup/Core/Game")]
     public class GameManagerSetup : ScriptableObject
     {
         [Header("Scene loading parameters")]
