@@ -75,6 +75,7 @@ namespace Game.Scripts.UI.Menu
             Close();
             
             HandlePageTypeChange(_startPageType);
+            G.Cursor.UnlockCursor();
         }
         
         public void OpenOverlay()
@@ -82,7 +83,9 @@ namespace Game.Scripts.UI.Menu
             Close();
             
             HandlePageTypeChange(_overlayMenuPageType);
+            
             G.EventBus.Publish(new OnGamePausedEvent { IsPaused = true });
+            G.Cursor.UnlockCursor();
         }
         
         public void Close()
@@ -97,6 +100,7 @@ namespace Game.Scripts.UI.Menu
             _previousPage = null;
             
             G.EventBus.Publish(new OnGamePausedEvent { IsPaused = false });
+            G.Cursor.LockCursor();
         }
 
         public void ToPreviousPage()

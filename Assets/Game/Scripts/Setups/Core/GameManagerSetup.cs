@@ -1,4 +1,5 @@
 using System;
+using Game.Scripts.Core.Cameras.Cursors;
 using UnityEngine;
 
 namespace Game.Scripts.Setups.Core
@@ -9,8 +10,11 @@ namespace Game.Scripts.Setups.Core
         [Header("Scene loading parameters")]
         [field: SerializeField, Space] public float LoadDelay { get; private set; }
         
-        [Header("Managers")]
+        [Header("Camera")]
         [field: SerializeField] public CameraManagerSettings CameraSettings { get; private set; }
+        
+        [Header("Cursor")]
+        [field: SerializeField] public CursorState StartCursorState { get; private set; } = CursorState.Active;
     }
 
     [Serializable]

@@ -44,6 +44,8 @@ namespace Game.Scripts.Core.Scenes
             
             G.Audio.PlayMusic(MusicType.Menu);
             G.UI.Loading.Hide();
+
+            G.Cursor.UnlockCursor();
         }
     }
 }

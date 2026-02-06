@@ -2,6 +2,7 @@ using System;
 using Cysharp.Threading.Tasks;
 using Game.Scripts.Core.Audio;
 using Game.Scripts.Core.Cameras;
+using Game.Scripts.Core.Cameras.Cursors;
 using Game.Scripts.Core.Save;
 using Game.Scripts.Core.Scenes;
 using Game.Scripts.Setups.Core;
@@ -27,6 +28,8 @@ namespace Game.Scripts.Core
         public static UiRoot UI => _instance?._uiRoot;
         public static SaveManager Save => _instance?._saveManager;
         public static CameraManager Camera => _instance?._cameraManager;
+        public static CursorManager Cursor => _instance?._cursorManager;
+        
         public static bool IsReady => _instance != null && _instance._isInitialized;
         public static bool IsTestMode => _instance != null && !_instance._isStandardStart;
         
@@ -38,6 +41,7 @@ namespace Game.Scripts.Core
         private UiRoot _uiRoot;
         private SaveManager _saveManager;
         private CameraManager _cameraManager;
+        private CursorManager _cursorManager;
         
         private GameManagerSetup _setup;
 
@@ -94,6 +98,7 @@ namespace Game.Scripts.Core
             
             _saveManager = new SaveManager();
             _sceneLoader = new SceneLoader(_setup.LoadDelay);
+            _cursorManager = new CursorManager(_setup.StartCursorState);
             
             var audioTask = _loader.InstantiateAsync<AudioManager>(Addresses.AUDIO_MANAGER_KEY, instanceName: "[Audio]");
             var uiTask = _loader.InstantiateAsync<UiRoot>(Addresses.UI_ROOT_KEY, instanceName: "[UI]");

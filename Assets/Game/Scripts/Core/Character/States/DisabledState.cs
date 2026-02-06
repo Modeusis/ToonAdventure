@@ -11,10 +11,7 @@ namespace Game.Scripts.Core.Character.States
 
         public override void Update()
         {
-            if (G.Input.Game.Back.WasPressedThisFrame())
-            {
-                
-            }
+            
         }
     }
 }
