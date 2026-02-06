@@ -94,7 +94,7 @@ namespace Game.Scripts.Core.Character.States
         {
             if (G.Input.Game.Interact.WasPressedThisFrame())
             {
-
+                _player.TryInteract();
             }
 
             if (G.Input.Game.Back.WasPressedThisFrame())

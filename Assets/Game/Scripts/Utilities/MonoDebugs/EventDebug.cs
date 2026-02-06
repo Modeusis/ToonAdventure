@@ -1,38 +1,22 @@
-using Game.Scripts.UI.Controls;
-using Game.Scripts.UI.Pages;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Game.Scripts.Utilities.MonoDebugs
 {
     public class EventDebug : MonoBehaviour
     {
-        [SerializeField] private MenuButton _buttonToDisable;
-
-        [SerializeField] private InputActionReference _referenceA;
-        [SerializeField] private InputActionReference _referenceB;
-        
-        public void HelloConsole()
+        public void MethodA(string text)
         {
-            Debug.Log("Hello Console");
+            Debug.Log($"[EventDebug.MethodA] - {text}");
         }
         
-        public void PageTypeDebug(PageType pageType)
+        public void MethodB(string text)
         {
-            Debug.Log($"Page type call - {pageType}");
+            Debug.Log($"[EventDebug.MethodB] - {text}");
         }
-
-        private void Update()
+        
+        public void MethodC(string text)
         {
-            if (_referenceA.action.WasPerformedThisFrame())
-            {
-                _buttonToDisable?.SetActiveButton(false);
-            }
-
-            if (_referenceB.action.WasPerformedThisFrame())
-            {
-                _buttonToDisable?.SetActiveButton(true);
-            }
+            Debug.Log($"[EventDebug.MethodC] - {text}");
         }
     }
 }

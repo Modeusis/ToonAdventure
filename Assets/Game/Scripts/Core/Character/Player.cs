@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Game.Scripts.Core.Character.States;
+using Game.Scripts.Core.Interactions;
 using Game.Scripts.Setups.Core;
 using Game.Scripts.Utilities.Events;
 using Game.Scripts.Utilities.StateMachine;
@@ -21,6 +22,7 @@ namespace Game.Scripts.Core.Character
         public CharacterController CharacterController { get; private set; }
 
         private FSM<PlayerState> _fsm;
+        private IInteractable _currentInteractable;
         
         private PlayerState _stateBeforePause;
         private PlayerState _targetState;
@@ -44,8 +46,6 @@ namespace Game.Scripts.Core.Character
             if (_isInitialized)
                 return;
             
-            Debug.Log("[Player.Initialize] Call");
-            
             CharacterController ??= GetComponent<CharacterController>();
             
             InitializeFSM();
@@ -55,10 +55,10 @@ namespace Game.Scripts.Core.Character
             
             G.EventBus.Subscribe<OnGamePausedEvent>(OnGamePaused);
             G.EventBus.Subscribe<OnPlayerStateChangeRequest>(OnStateChangeRequested);
+            G.EventBus.Subscribe<OnInteractionZoneEnterEvent>(OnInteractionZoneEnter);
+            G.EventBus.Subscribe<OnInteractionZoneExitEvent>(OnInteractionZoneExit);
             
             _isInitialized = true;
-            
-            Debug.Log("[Player.Initialize] Initialized");
         }
 
         private void OnDestroy()
@@ -68,6 +68,8 @@ namespace Game.Scripts.Core.Character
             
             G.EventBus.Unsubscribe<OnGamePausedEvent>(OnGamePaused);
             G.EventBus.Unsubscribe<OnPlayerStateChangeRequest>(OnStateChangeRequested);
+            G.EventBus.Unsubscribe<OnInteractionZoneEnterEvent>(OnInteractionZoneEnter);
+            G.EventBus.Unsubscribe<OnInteractionZoneExitEvent>(OnInteractionZoneExit);
         }
 
         private void Update()
@@ -80,6 +82,14 @@ namespace Game.Scripts.Core.Character
             _fsm?.LateUpdate();
         }
 
+        public void TryInteract()
+        {
+            if (_currentInteractable == null)
+                return;
+            
+            _currentInteractable.Interact();
+        }
+        
         private void InitializeFSM()
         {
             var states = new Dictionary<PlayerState, State<PlayerState>>
@@ -99,6 +109,19 @@ namespace Game.Scripts.Core.Character
             };
 
             _fsm = new FSM<PlayerState>(states, transitions, _targetState);
+        }
+
+        private void OnInteractionZoneEnter(OnInteractionZoneEnterEvent eventData)
+        {
+            _currentInteractable = eventData.Interactable;
+        }
+
+        private void OnInteractionZoneExit(OnInteractionZoneExitEvent eventData)
+        {
+            if (_currentInteractable == eventData.Interactable)
+            {
+                _currentInteractable = null;
+            }
         }
 
         private void OnStateChangeRequested(OnPlayerStateChangeRequest eventData)
