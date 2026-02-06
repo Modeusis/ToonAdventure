@@ -221,6 +221,15 @@ public partial class @BaseInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ActionC"",
+                    ""type"": ""Button"",
+                    ""id"": ""3a4a7000-0303-4d0d-91b8-5876f548860d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -245,6 +254,17 @@ public partial class @BaseInput: IInputActionCollection2, IDisposable
                     ""action"": ""ActionB"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5e3525ed-6b4d-4053-820f-33636dcba59f"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ActionC"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -260,6 +280,7 @@ public partial class @BaseInput: IInputActionCollection2, IDisposable
         m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
         m_Debug_ActionA = m_Debug.FindAction("ActionA", throwIfNotFound: true);
         m_Debug_ActionB = m_Debug.FindAction("ActionB", throwIfNotFound: true);
+        m_Debug_ActionC = m_Debug.FindAction("ActionC", throwIfNotFound: true);
     }
 
     ~@BaseInput()
@@ -461,6 +482,7 @@ public partial class @BaseInput: IInputActionCollection2, IDisposable
     private List<IDebugActions> m_DebugActionsCallbackInterfaces = new List<IDebugActions>();
     private readonly InputAction m_Debug_ActionA;
     private readonly InputAction m_Debug_ActionB;
+    private readonly InputAction m_Debug_ActionC;
     /// <summary>
     /// Provides access to input actions defined in input action map "Debug".
     /// </summary>
@@ -480,6 +502,10 @@ public partial class @BaseInput: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Debug/ActionB".
         /// </summary>
         public InputAction @ActionB => m_Wrapper.m_Debug_ActionB;
+        /// <summary>
+        /// Provides access to the underlying input action "Debug/ActionC".
+        /// </summary>
+        public InputAction @ActionC => m_Wrapper.m_Debug_ActionC;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -512,6 +538,9 @@ public partial class @BaseInput: IInputActionCollection2, IDisposable
             @ActionB.started += instance.OnActionB;
             @ActionB.performed += instance.OnActionB;
             @ActionB.canceled += instance.OnActionB;
+            @ActionC.started += instance.OnActionC;
+            @ActionC.performed += instance.OnActionC;
+            @ActionC.canceled += instance.OnActionC;
         }
 
         /// <summary>
@@ -529,6 +558,9 @@ public partial class @BaseInput: IInputActionCollection2, IDisposable
             @ActionB.started -= instance.OnActionB;
             @ActionB.performed -= instance.OnActionB;
             @ActionB.canceled -= instance.OnActionB;
+            @ActionC.started -= instance.OnActionC;
+            @ActionC.performed -= instance.OnActionC;
+            @ActionC.canceled -= instance.OnActionC;
         }
 
         /// <summary>
@@ -612,5 +644,12 @@ public partial class @BaseInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnActionB(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "ActionC" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnActionC(InputAction.CallbackContext context);
     }
 }

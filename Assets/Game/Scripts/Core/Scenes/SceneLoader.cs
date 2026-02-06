@@ -1,6 +1,7 @@
 using System;
 using Cysharp.Threading.Tasks;
 using Game.Scripts.Core.Audio;
+using Game.Scripts.Core.Loop;
 using Game.Scripts.Utilities.Constants;
 
 namespace Game.Scripts.Core.Scenes
@@ -24,8 +25,9 @@ namespace Game.Scripts.Core.Scenes
             await UniTask.Delay(TimeSpan.FromSeconds(_loadDelay));
             
             await G.Loader.LoadSceneAsync(Addresses.BOOT_SCENE_KEY);
-            
-            G.Loader.LoadSceneAsync(Addresses.GAMEPLAY_SCENE_KEY).Forget();
+            await G.Loader.LoadSceneAsync(Addresses.GAMEPLAY_SCENE_KEY);
+
+            await G.Loader.InstantiateAsync<GameplayManager>(Addresses.GAMEPLAY_MANAGER_KEY);
         }
         
         public async UniTask LoadMain()
@@ -42,6 +44,8 @@ namespace Game.Scripts.Core.Scenes
             
             G.Audio.PlayMusic(MusicType.Menu);
             G.UI.Loading.Hide();
+
+            G.Cursor.UnlockCursor();
         }
     }
 }

@@ -1,4 +1,4 @@
-using Game.Scripts.UI.Menu;
+using Game.Scripts.UI.Screens.Menu;
 using Game.Scripts.Utilities.Events;
 using UnityEngine;
 

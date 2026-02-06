@@ -1,5 +1,8 @@
 using Cysharp.Threading.Tasks;
+using Game.Scripts.Core.Character;
 using Game.Scripts.Core.Levels;
+using Game.Scripts.Utilities.Events;
+using Unity.Cinemachine;
 using UnityEngine;
 
 namespace Game.Scripts.Core.Loop
@@ -7,9 +10,11 @@ namespace Game.Scripts.Core.Loop
     public class GameplayManager : MonoBehaviour
     {
         [SerializeField, Space] private LevelManager _levelManager;
+        [SerializeField] private CinemachineBrain _brain;
+        
         [SerializeField, Space] private GameObject _playerPrefab;
         
-        private GameObject _player;
+        private Player _player;
         
         private void Start()
         {
@@ -31,14 +36,15 @@ namespace Game.Scripts.Core.Loop
         {
             await UniTask.Yield();
             
+            G.Camera.SetBrain(_brain);
             G.EventBus.Publish(G.Save.CurrentLevelId);
         }
         
         private void OnLevelLoaded(OnLevelLoadedEvent eventData)
         {
-            if (_player != null)
+            if (_player)
             {
-                Destroy(_player);
+                Destroy(_player.gameObject);
                 _player = null;
             }
             
@@ -51,8 +57,12 @@ namespace Game.Scripts.Core.Loop
         {
             var spawnPoint = level.StartPoint;
             
-            _player = Instantiate(_playerPrefab, spawnPoint.position, spawnPoint.rotation);
-
+            var playerObject = Instantiate(_playerPrefab, spawnPoint.position, spawnPoint.rotation);
+                
+            _player = playerObject.GetComponent<Player>();
+            _player.Initialize();
+            
+            G.EventBus.Publish(new OnPlayerStateChangeRequest { NewState = PlayerState.Active });
             G.Save.CurrentLevelId = level.Type;
         }
     }

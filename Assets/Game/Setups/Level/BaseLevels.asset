@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Setups.Levels.LevelSetup
   _items:
   - <Key>k__BackingField: 0
-    <Value>k__BackingField: {fileID: 4770162418390337617, guid: fb6d26298a271a54f853d77b0257f0ec, type: 3}
+    <Value>k__BackingField: {fileID: 8984496692288037405, guid: fb6d26298a271a54f853d77b0257f0ec, type: 3}
   - <Key>k__BackingField: 1
     <Value>k__BackingField: {fileID: 6474611734621064971, guid: 10382865c7491e742b1561340d98bd89, type: 3}
   - <Key>k__BackingField: 2

@@ -5,7 +5,6 @@ namespace Game.Scripts.Core.Audio
         None = 0,
         Menu,
         Tutorial,
-        Bedroom,
-        Kitchen
+        Level1,
     }
 }

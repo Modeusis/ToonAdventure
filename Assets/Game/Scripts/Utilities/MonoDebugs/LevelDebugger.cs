@@ -14,12 +14,12 @@ namespace Game.Scripts.Utilities.MonoDebugs
         {
             if (_referenceA.action.WasPerformedThisFrame())
             {
-                G.EventBus.Publish(LevelType.Level1);
+                G.EventBus.Publish(LevelType.Tutorial);
             }
 
             if (_referenceB.action.WasPerformedThisFrame())
             {
-                G.EventBus.Publish(LevelType.Level2);
+                G.EventBus.Publish(LevelType.Level1);
             }
         }
     }
