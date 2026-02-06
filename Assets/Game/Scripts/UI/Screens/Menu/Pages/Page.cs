@@ -2,7 +2,7 @@ using Game.Scripts.Core;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Game.Scripts.UI.Pages
+namespace Game.Scripts.UI.Screens.Menu.Pages
 {
     public abstract class Page : MonoBehaviour
     {

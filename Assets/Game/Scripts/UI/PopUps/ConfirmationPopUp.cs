@@ -1,5 +1,7 @@
 using System;
+using Game.Scripts.Core;
 using Game.Scripts.UI.Controls;
+using Game.Scripts.Utilities.Events;
 using TMPro;
 using UnityEngine;
 
@@ -19,7 +21,7 @@ namespace Game.Scripts.UI.PopUps
         private Action _onConfirmAction;
         private Action _onCloseAction;
 
-        private void Awake()
+        public void Initialize()
         {
             _confirmButton.OnClick.AddListener(OnConfirmClicked);
             _closeButton.OnClick.AddListener(OnCloseClicked);
@@ -43,6 +45,8 @@ namespace Game.Scripts.UI.PopUps
             if (_closeLabel) _closeLabel.text = closeText;
 
             gameObject.SetActive(true);
+            
+            G.EventBus.Publish(new OnPopUpRaycastBlockerEvent { IsBlocking = true });
         }
 
         private void OnConfirmClicked()
@@ -63,6 +67,8 @@ namespace Game.Scripts.UI.PopUps
             
             _onConfirmAction = null;
             _onCloseAction = null;
+            
+            G.EventBus.Publish(new OnPopUpRaycastBlockerEvent { IsBlocking = false });
         }
     }
 }

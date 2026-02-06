@@ -1,16 +1,17 @@
 using System.Collections.Generic;
 using Game.Scripts.Core;
 using Game.Scripts.Setups;
-using Game.Scripts.UI.Pages;
+using Game.Scripts.UI.Screens.Menu.Pages;
+using Game.Scripts.Utilities.Effects;
 using Game.Scripts.Utilities.Events;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace Game.Scripts.UI.Menu
+namespace Game.Scripts.UI.Screens.Menu
 {
     public class MenuManager : MonoBehaviour
     {
         [SerializeField, Space] private GameObject _mainMenuBackground;
+        [SerializeField] private CanvasGroupFader _menuFader;
         
         [SerializeField, Space] private List<EnumItem<PageType, Page>> _menuPages;
         
@@ -75,6 +76,9 @@ namespace Game.Scripts.UI.Menu
             Close();
             
             HandlePageTypeChange(_startPageType);
+            
+            _menuFader.FadeIn();
+            
             G.Cursor.UnlockCursor();
         }
         
@@ -83,6 +87,8 @@ namespace Game.Scripts.UI.Menu
             Close();
             
             HandlePageTypeChange(_overlayMenuPageType);
+            
+            _menuFader.FadeIn();
             
             G.EventBus.Publish(new OnGamePausedEvent { IsPaused = true });
             G.Cursor.UnlockCursor();
@@ -98,6 +104,8 @@ namespace Game.Scripts.UI.Menu
             
             _currentPage = null;
             _previousPage = null;
+            
+            _menuFader.CutOut();
             
             G.EventBus.Publish(new OnGamePausedEvent { IsPaused = false });
             G.Cursor.LockCursor();

@@ -1,5 +1,5 @@
 using Game.Scripts.UI.Controls;
-using Game.Scripts.UI.Pages;
+using Game.Scripts.UI.Screens.Menu.Pages;
 using UnityEngine;
 using UnityEngine.InputSystem;
 

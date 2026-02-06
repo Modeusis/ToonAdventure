@@ -1,12 +1,10 @@
-using System;
 using Cysharp.Threading.Tasks;
 using Game.Scripts.Core;
 using Game.Scripts.Core.Levels;
 using Game.Scripts.UI.Controls;
-using Game.Scripts.Utilities.Constants;
 using UnityEngine;
 
-namespace Game.Scripts.UI.Pages
+namespace Game.Scripts.UI.Screens.Menu.Pages
 {
     public class TitlePage : Page
     {
@@ -22,7 +20,7 @@ namespace Game.Scripts.UI.Pages
             _continueButton.OnClick.AddListener(LoadGameplay);
             _newGameButton.OnClick.AddListener(LoadNewGame);
             
-            _leaveButton.OnClick.AddListener(ExitGame);
+            _leaveButton.OnClick.AddListener(ShowConfirmExit);
             
             G.Save.OnLevelChanged.AddListener(HandleLevelChange);
         }
@@ -44,6 +42,11 @@ namespace Game.Scripts.UI.Pages
             G.Scenes.LoadGameplay().Forget();
         }
 
+        private void ShowConfirmExit()
+        {
+            G.UI.PopUp.Confirmation.Show("Вы точно хотите выйти?", ExitGame);
+        }
+        
         private void ExitGame()
         {
             Application.Quit();

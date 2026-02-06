@@ -1,4 +1,4 @@
-namespace Game.Scripts.UI.Pages
+namespace Game.Scripts.UI.Screens.Menu.Pages
 {
     public enum PageType
     {

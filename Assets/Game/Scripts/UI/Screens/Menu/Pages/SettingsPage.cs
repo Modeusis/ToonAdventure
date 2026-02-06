@@ -1,9 +1,8 @@
 using Game.Scripts.Core;
 using Game.Scripts.UI.Controls;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace Game.Scripts.UI.Pages
+namespace Game.Scripts.UI.Screens.Menu.Pages
 {
     public class SettingsPage : Page
     {

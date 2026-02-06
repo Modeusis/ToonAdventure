@@ -1,5 +1,4 @@
 using Game.Scripts.Core;
-using Game.Scripts.UI.Menu;
 using Game.Scripts.Utilities.Events;
 using UnityEngine;
 
