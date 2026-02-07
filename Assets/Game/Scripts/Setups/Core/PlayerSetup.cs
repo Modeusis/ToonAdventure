@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Game.Scripts.Setups.Core
 {
-    [CreateAssetMenu(fileName = "New player setup", menuName = "Setup/Player")]
+    [CreateAssetMenu(fileName = "New player setup", menuName = "Setup/Core/Player")]
     public class PlayerSetup : ScriptableObject
     {
         [field: Header("Movement Settings")]

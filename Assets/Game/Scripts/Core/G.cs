@@ -7,6 +7,7 @@ using Game.Scripts.Core.Save;
 using Game.Scripts.Core.Scenes;
 using Game.Scripts.Setups.Core;
 using Game.Scripts.UI.Root;
+using Game.Scripts.UI.Screens.Dialog;
 using Game.Scripts.Utilities.Constants;
 using Game.Scripts.Utilities.Events;
 using Game.Scripts.Utilities.Load;
@@ -33,9 +34,10 @@ namespace Game.Scripts.Core
         public static bool IsReady => _instance != null && _instance._isInitialized;
         public static bool IsTestMode => _instance != null && !_instance._isStandardStart;
         
-        private EventBus _eventBus;
+        private readonly EventBus _eventBus;
+        private readonly AddressableLoader _loader;
+        
         private BaseInput _input;
-        private AddressableLoader _loader;
         private SceneLoader _sceneLoader;
         private AudioManager _audioManager;
         private UiRoot _uiRoot;

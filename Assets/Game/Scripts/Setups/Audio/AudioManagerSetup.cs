@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game.Scripts.Setups.Audio
 {
-    [CreateAssetMenu(fileName = "New audio service setup", menuName = "Setup/Audio service")]
+    [CreateAssetMenu(fileName = "New audio service setup", menuName = "Setup/Audio")]
     public class AudioServiceSetup : ScriptableObject
     {
         [Header("Sound settings")]

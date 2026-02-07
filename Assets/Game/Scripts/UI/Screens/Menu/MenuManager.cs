@@ -79,7 +79,7 @@ namespace Game.Scripts.UI.Screens.Menu
             
             _menuFader.FadeIn();
             
-            G.Cursor.UnlockCursor();
+            G.Cursor.Unlock();
         }
         
         public void OpenOverlay()
@@ -91,7 +91,7 @@ namespace Game.Scripts.UI.Screens.Menu
             _menuFader.FadeIn();
             
             G.EventBus.Publish(new OnGamePausedEvent { IsPaused = true });
-            G.Cursor.UnlockCursor();
+            G.Cursor.Unlock();
         }
         
         public void Close()
@@ -108,7 +108,7 @@ namespace Game.Scripts.UI.Screens.Menu
             _menuFader.CutOut();
             
             G.EventBus.Publish(new OnGamePausedEvent { IsPaused = false });
-            G.Cursor.LockCursor();
+            G.Cursor.Lock();
         }
 
         public void ToPreviousPage()

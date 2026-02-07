@@ -8,6 +8,7 @@ namespace Game.Scripts.Utilities.Constants
         public const string AUDIO_MANAGER_KEY = "AudioManager";
 
         public const string GAMEPLAY_MANAGER_KEY = "GameplayManager";
+        public const string DIALOGUE_VIEW_KEY = "DialogView";
         
         public const string BOOT_SCENE_KEY = "Boot";
         public const string MAIN_MENU_SCENE_KEY = "MainMenu";

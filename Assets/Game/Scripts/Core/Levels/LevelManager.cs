@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using Game.Scripts.Core.Audio;
 using Game.Scripts.Setups.Levels;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Game.Scripts.Core.Levels
 {
@@ -13,10 +15,10 @@ namespace Game.Scripts.Core.Levels
     
     public class LevelManager : MonoBehaviour
     {
-        [SerializeField, Space] private LevelSetup _levels;
+        [SerializeField, Space] private LevelSetup _setup;
         [SerializeField, Space] private Transform _levelRoot;
         
-        private Dictionary<LevelType, Level> _mappedLevels;
+        private Dictionary<LevelType, LevelInfo> _mappedLevels;
 
         private Level _currentLevel;
         
@@ -24,7 +26,7 @@ namespace Game.Scripts.Core.Levels
         
         public void Initialize()
         {
-            if (!_levels.TryMapDictionary(out _mappedLevels))
+            if (!_setup.TryMapDictionary(out _mappedLevels))
             {
                 Debug.LogWarning("[MenuRoot.Awake] Error while trying to map dictionary, levels are not initialized.");
                 return;
@@ -32,15 +34,20 @@ namespace Game.Scripts.Core.Levels
 
             _isInitialized = true;
             
-            G.EventBus.Subscribe<LevelType>(LoadLevel);
+            G.EventBus.Subscribe<LevelType>(StartLoadingLevel);
         }
 
-        private void LoadLevel(LevelType levelType)
+        private void StartLoadingLevel(LevelType levelType)
+        {
+            LoadLevel(levelType).Forget();
+        }
+        
+        private async UniTask LoadLevel(LevelType levelType)
         {
             if (!_isInitialized)
                 return;
             
-            if (!_mappedLevels.TryGetValue(levelType, out var newLevelPrefab))
+            if (!_mappedLevels.TryGetValue(levelType, out var levelInfo))
             {
                 Debug.LogWarning($"[LevelManager.Load] Level {levelType} is not mapped.");
                 return;
@@ -48,15 +55,21 @@ namespace Game.Scripts.Core.Levels
 
             if (_currentLevel != null)
             {
+                G.UI.Loading.Show("Выгружаем уровень...");
+
+                await UniTask.WaitForSeconds(_setup.LevelLoadDelay);
+                
                 _currentLevel.Unload();
                 Destroy(_currentLevel.gameObject);
                 _currentLevel = null;
             }
             
-            _currentLevel = Instantiate(newLevelPrefab, transform);
-            _currentLevel.Load();
+            G.UI.Loading.Show($"Загружаем {levelInfo.LoadTag}");
             
-            Debug.Log($"[LevelManager.LoadLevel] Level {levelType} loaded.");
+            await UniTask.WaitForSeconds(_setup.LevelLoadDelay);
+            
+            _currentLevel = Instantiate(levelInfo.Prefab, transform);
+            _currentLevel.Load();
 
             if (_currentLevel.MusicType != MusicType.None)
             {
@@ -71,7 +84,7 @@ namespace Game.Scripts.Core.Levels
             if (!G.IsReady)
                 return;
             
-            G.EventBus.Unsubscribe<LevelType>(LoadLevel);
+            G.EventBus.Unsubscribe<LevelType>(StartLoadingLevel);
         }
     }
 }
