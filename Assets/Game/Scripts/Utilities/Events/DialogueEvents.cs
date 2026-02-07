@@ -14,8 +14,5 @@ namespace Game.Scripts.Utilities.Events
         public string StartPath;
     }
     
-    public struct ContinueDialogueRequestEvent
-    {
-        public TextAsset InkAsset;
-    }
+    public struct ContinueDialogueRequestEvent { }
 }

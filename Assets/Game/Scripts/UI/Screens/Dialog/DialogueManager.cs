@@ -47,12 +47,21 @@ namespace Game.Scripts.UI.Screens.Dialog
             var screenTransform = G.UI.Screens.transform;
 
             _view = Instantiate(_viewPrefab, screenTransform);
-            _view.transform.position = Vector3.zero;
             _view.name = "Dialogue";
+            
+            var rect = _view.GetComponent<RectTransform>();
+            if (rect)
+            {
+                rect.anchoredPosition = Vector2.zero;
+                rect.offsetMin = Vector2.zero; 
+                rect.offsetMax = Vector2.zero;
+                rect.localScale = Vector3.one;
+            }
             
             _view.SetVisible(false);
             
             G.EventBus.Subscribe<StartDialogueRequestEvent>(OnStartDialogueRequested);
+            G.EventBus.Subscribe<ContinueDialogueRequestEvent>(OnContinueDialogueRequested);
             
             IsInitialized = true;
         }
@@ -63,6 +72,9 @@ namespace Game.Scripts.UI.Screens.Dialog
                 return;
             
             G.EventBus.Unsubscribe<StartDialogueRequestEvent>(OnStartDialogueRequested);
+            G.EventBus.Unsubscribe<ContinueDialogueRequestEvent>(OnContinueDialogueRequested);
+            
+            Destroy(_view.gameObject);
         }
 
         private void OnStartDialogueRequested(StartDialogueRequestEvent request)
@@ -140,9 +152,9 @@ namespace Game.Scripts.UI.Screens.Dialog
                 text = _currentStory.Continue();
             }
 
-            ParseTags(_currentStory.currentTags, out string name, out Sprite portrait);
+            ParseTags(_currentStory.currentTags, out var tagName, out Sprite portrait);
             
-            _view.SetContent(name, text, portrait);
+            _view.SetContent(tagName, text, portrait);
             _view.ClearChoices();
 
             if (_currentStory.currentChoices.Count > 0)
@@ -164,33 +176,38 @@ namespace Game.Scripts.UI.Screens.Dialog
             RefreshView();
         }
 
-        private void ParseTags(List<string> tags, out string name, out Sprite portrait)
+        private void ParseTags(List<string> tags, out string displayName, out Sprite portrait)
         {
-            name = "???";
+            displayName = "???";
             portrait = null;
-            string characterId = "";
-
-            foreach (var tag in tags)
+            var characterId = "";
+            
+            foreach (var characterTag in tags)
             {
-                var parts = tag.Split(':');
+                var parts = characterTag.Split(':');
                 if (parts.Length != 2) continue;
                 
                 var key = parts[0].Trim();
                 var value = parts[1].Trim();
 
-                if (key == SPEAKER_TAG) characterId = value;
-            }
-
-            if (!string.IsNullOrEmpty(characterId) && _database != null)
-            {
-                if (_database.TryGetCharacter(characterId, out var data))
+                if (key == SPEAKER_TAG) 
                 {
-                    name = data.DisplayName;
+                    characterId = value;
+                    break;
+                }
+            }
+            
+            if (!string.IsNullOrEmpty(characterId) && _characterDatabase != null)
+            {
+                if (_characterDatabase.TryGetCharacter(characterId, out var data))
+                {
+                    displayName = data.DisplayName;
                     portrait = data.DefaultPortrait;
                 }
                 else
                 {
-                    name = characterId; 
+                    displayName = characterId; 
+                    Debug.LogWarning($"[DialogueManager] Character ID '{characterId}' not found in Database.");
                 }
             }
         }

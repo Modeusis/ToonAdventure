@@ -1,3 +1,5 @@
+using Game.Scripts.Utilities.Events;
+
 namespace Game.Scripts.Core.Character.States
 {
     public class DialogueState : PlayerBaseState
@@ -13,12 +15,12 @@ namespace Game.Scripts.Core.Character.States
         {
             if (G.Input.Game.Interact.WasPressedThisFrame())
             {
-                
+                G.EventBus.Publish(new ContinueDialogueRequestEvent());
             }
 
             if (G.Input.Game.Back.WasPressedThisFrame())
             {
-                
+                G.UI.Screens.Menu.Toggle();
             }
         }
     }

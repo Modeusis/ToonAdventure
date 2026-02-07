@@ -41,6 +41,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Screens
+    uniqueID: 1552826891
+    locked: 0
+  - name: PopUps
+    uniqueID: 476357061
+    locked: 0
+  - name: Loading
+    uniqueID: 1979573325
+    locked: 0
   m_RenderingLayers:
   - Default
   - Light Layer 1
