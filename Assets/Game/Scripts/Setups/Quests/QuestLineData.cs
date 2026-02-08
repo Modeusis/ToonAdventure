@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Game.Scripts.Setups.Quests
@@ -8,14 +9,9 @@ namespace Game.Scripts.Setups.Quests
     {
         [SerializeField] private List<QuestData> _quests;
 
-        public QuestData GetQuestByIndex(int index)
+        public QuestData GetQuestById(string questId)
         {
-            if (index >= 0 && index < _quests.Count)
-                return _quests[index];
-            
-            return null;
+            return _quests.FirstOrDefault(quest => quest.Id == questId);
         }
-        
-        public int GetTotalQuests() => _quests.Count;
     }
 }

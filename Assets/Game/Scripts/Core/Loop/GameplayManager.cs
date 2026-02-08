@@ -70,6 +70,9 @@ namespace Game.Scripts.Core.Loop
             _player = playerObject.GetComponent<Player>();
             _player.Initialize();
             
+            
+            _questManager.StartQuest(level.QuestId);
+            
             G.EventBus.Publish(new OnPlayerStateChangeRequest { NewState = PlayerState.Active });
             G.Save.CurrentLevelId = level.Type;
         }

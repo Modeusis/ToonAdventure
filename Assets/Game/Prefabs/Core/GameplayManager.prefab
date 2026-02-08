@@ -32,6 +32,7 @@ Transform:
   m_Children:
   - {fileID: 7998393234474363910}
   - {fileID: 5591600345941672211}
+  - {fileID: 3979057556687432831}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7404166224345905021
@@ -48,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Core.Loop.GameplayEntrypoint
   _levelManager: {fileID: 1861014122049457189}
   _dialogueManager: {fileID: 5688940910665627566}
+  _questManager: {fileID: 9162566250234150878}
   _brain: {fileID: 0}
   _playerPrefab: {fileID: 2940128687426814254, guid: 8cb38c8e0aeb586459867aeac90b632a, type: 3}
 --- !u!1001 &895127792193195275
@@ -127,6 +129,79 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4279a434b7e642a7b79f4f39a81cd926, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.UI.Screens.Dialog.DialogueManager
+--- !u!1001 &3681074754100828641
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6460461632650881473}
+    m_Modifications:
+    - target: {fileID: 301105899356206494, guid: 43b04762771f42c4a98e9d14c8f5f978, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 301105899356206494, guid: 43b04762771f42c4a98e9d14c8f5f978, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 301105899356206494, guid: 43b04762771f42c4a98e9d14c8f5f978, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 301105899356206494, guid: 43b04762771f42c4a98e9d14c8f5f978, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 301105899356206494, guid: 43b04762771f42c4a98e9d14c8f5f978, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 301105899356206494, guid: 43b04762771f42c4a98e9d14c8f5f978, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 301105899356206494, guid: 43b04762771f42c4a98e9d14c8f5f978, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 301105899356206494, guid: 43b04762771f42c4a98e9d14c8f5f978, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 301105899356206494, guid: 43b04762771f42c4a98e9d14c8f5f978, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 301105899356206494, guid: 43b04762771f42c4a98e9d14c8f5f978, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9215144127650207883, guid: 43b04762771f42c4a98e9d14c8f5f978, type: 3}
+      propertyPath: m_Name
+      value: QuestManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 43b04762771f42c4a98e9d14c8f5f978, type: 3}
+--- !u!4 &3979057556687432831 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 301105899356206494, guid: 43b04762771f42c4a98e9d14c8f5f978, type: 3}
+  m_PrefabInstance: {fileID: 3681074754100828641}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &9162566250234150878 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5490508662053463615, guid: 43b04762771f42c4a98e9d14c8f5f978, type: 3}
+  m_PrefabInstance: {fileID: 3681074754100828641}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf973753f5d49a0a6c62c37a35498d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Core.Loop.QuestManager
 --- !u!1001 &8025429227678379400
 PrefabInstance:
   m_ObjectHideFlags: 0

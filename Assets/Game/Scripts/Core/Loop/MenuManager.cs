@@ -48,6 +48,7 @@ namespace Game.Scripts.Core.Loop
             
             _isInitialized = true;
             
+            ShowBackground();
             HandlePageTypeChange(_startPageType);
             
             if (G.IsTestMode)

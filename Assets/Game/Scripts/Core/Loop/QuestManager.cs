@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using Game.Scripts.Setups.Quests;
+using Game.Scripts.UI.Screens.Quest;
 using Game.Scripts.Utilities.Events;
 using UnityEngine;
 
@@ -7,10 +8,12 @@ namespace Game.Scripts.Core.Loop
 {
     public class QuestManager : MonoBehaviour
     {
-        [SerializeField] private QuestLineData _questLineData;
+        [SerializeField, Space] private QuestLineData _questLineData;
+        [SerializeField, Space] private QuestView _questViewPrefab;
         
-        private int _currentQuestIndex = 0;
         private QuestData _activeQuest;
+        private QuestView _view;
+        
         private bool _isInitialized;
 
 #if UNITY_EDITOR
@@ -26,37 +29,54 @@ namespace Game.Scripts.Core.Loop
 
         public void Initialize()
         {
-            if (_isInitialized) return;
+            if (_isInitialized) 
+                return;
 
+            var screensTransform = G.UI.Screens.transform;
+            _view = Instantiate(_questViewPrefab, screensTransform);
+            
             G.EventBus.Subscribe<OnQuestProgressEvent>(OnQuestProgress);
             
-            StartQuest(_currentQuestIndex);
-            
             _isInitialized = true;
-            Debug.Log("[QuestManager.Initialize] Initialized");
         }
 
         private void OnDestroy()
         {
-            if (!G.IsReady) return;
+            if (!G.IsReady) 
+                return;
+            
+            if (_activeQuest)
+            {
+                Destroy(_activeQuest);
+            }
+            
+            Destroy(_view);
             
             G.EventBus.Unsubscribe<OnQuestProgressEvent>(OnQuestProgress);
         }
 
-        private void StartQuest(int index)
+        public void StartQuest(string questId)
         {
-            var quest = _questLineData.GetQuestByIndex(index);
+            if (_activeQuest)
+            {
+                Destroy(_activeQuest);
+                _activeQuest = null;
+            }
+            
+            var quest = _questLineData.GetQuestById(questId);
             if (!quest)
             {
                 Debug.Log("[QuestManager.StartQuest] No more quests.");
+                _view.Hide();
                 return;
             }
 
             _activeQuest = Instantiate(quest); 
             _activeQuest.ResetProgress();
-            _currentQuestIndex = index;
             
-            Debug.Log($"[QuestManager.StartQuest] Started Quest: {_activeQuest.Title}");
+            _view.Show(_activeQuest);
+            
+            Debug.Log($"[QuestManager.StartQuest] Started quest: {_activeQuest.Title}");
         }
 
         private void OnQuestProgress(OnQuestProgressEvent eventData)
@@ -80,16 +100,21 @@ namespace Game.Scripts.Core.Loop
                 {
                     step.CurrentAmount = step.RequiredAmount;
                     step.IsCompleted = true;
+                    
                     G.EventBus.Publish(new OnQuestStepCompletedEvent { StepDescription = step.Description });
+                    
+                    Debug.Log($"[QuestManager.StartQuest] Completed quest step: {step.Description}");
                 }
                     
                 questUpdated = true;
             }
 
-            if (questUpdated)
-            {
-                CheckQuestCompletion();
-            }
+            if (!questUpdated) 
+                return;
+            
+            _view.Refresh(_activeQuest);
+            
+            CheckQuestCompletion();
         }
 
         private void CheckQuestCompletion()
@@ -112,7 +137,7 @@ namespace Game.Scripts.Core.Loop
 
         private void CompleteCurrentQuest()
         {
-            Debug.Log($"[QuestManager.CompleteCurrentQuest] Completed Quest: {_activeQuest.Title}");
+            Debug.Log($"[QuestManager.CompleteCurrentQuest] Completed quest: {_activeQuest.Title}");
             
             G.EventBus.Publish(new OnQuestCompletedEvent { QuestId = _activeQuest.Id });
 
@@ -120,8 +145,6 @@ namespace Game.Scripts.Core.Loop
             {
                 action.Execute();
             }
-
-            StartQuest(_currentQuestIndex + 1);
         }
     }
 }
