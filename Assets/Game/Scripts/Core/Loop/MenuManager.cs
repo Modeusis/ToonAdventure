@@ -1,12 +1,11 @@
 using System.Collections.Generic;
-using Game.Scripts.Core;
 using Game.Scripts.Setups;
 using Game.Scripts.UI.Screens.Menu.Pages;
 using Game.Scripts.Utilities.Effects;
 using Game.Scripts.Utilities.Events;
 using UnityEngine;
 
-namespace Game.Scripts.UI.Screens.Menu
+namespace Game.Scripts.Core.Loop
 {
     public class MenuManager : MonoBehaviour
     {

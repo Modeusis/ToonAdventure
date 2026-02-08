@@ -1,14 +1,13 @@
 using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using Game.Scripts.Core;
 using Game.Scripts.Setups.Core;
-using Game.Scripts.Utilities.Constants;
+using Game.Scripts.UI.Screens.Dialog;
 using Game.Scripts.Utilities.Events;
 using Ink.Runtime;
 using UnityEngine;
 
-namespace Game.Scripts.UI.Screens.Dialog
+namespace Game.Scripts.Core.Loop
 {
     public class DialogueManager : MonoBehaviour
     {

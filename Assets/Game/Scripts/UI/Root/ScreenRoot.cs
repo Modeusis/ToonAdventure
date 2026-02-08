@@ -1,3 +1,4 @@
+using Game.Scripts.Core.Loop;
 using Game.Scripts.UI.Screens.Dialog;
 using Game.Scripts.UI.Screens.Menu;
 using Game.Scripts.Utilities.Events;

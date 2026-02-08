@@ -12,6 +12,8 @@ namespace Game.Scripts.Core.Loop
     {
         [SerializeField, Space] private LevelManager _levelManager;
         [SerializeField] private DialogueManager _dialogueManager;
+        [SerializeField] private QuestManager _questManager;
+        
         [SerializeField] private CinemachineBrain _brain;
         
         [SerializeField, Space] private GameObject _playerPrefab;
@@ -22,6 +24,7 @@ namespace Game.Scripts.Core.Loop
         {
             _levelManager.Initialize();
             _dialogueManager.Initialize();
+            _questManager.Initialize();
             
             G.EventBus.Subscribe<OnLevelLoadedEvent>(OnLevelLoaded);
             
