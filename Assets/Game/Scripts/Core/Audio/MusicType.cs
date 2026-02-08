@@ -6,5 +6,6 @@ namespace Game.Scripts.Core.Audio
         Menu,
         Tutorial,
         Level1,
+        Level2,
     }
 }

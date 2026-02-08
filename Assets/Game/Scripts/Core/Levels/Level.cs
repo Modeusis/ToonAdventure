@@ -11,6 +11,9 @@ namespace Game.Scripts.Core.Levels
         
         [field: SerializeField, Space] public Transform StartPoint { get; private set; }
         
+        [Tooltip("Id квеста который запускается при запуске уровня, Id уровня в QuestLineData")]
+        [field: SerializeField, Space] public string QuestId { get; private set; }
+        
         public virtual void Load()
         {
             gameObject.SetActive(true);

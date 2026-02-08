@@ -1700,6 +1700,7 @@ MonoBehaviour:
   <Type>k__BackingField: 1
   <MusicType>k__BackingField: 3
   <StartPoint>k__BackingField: {fileID: 851303675646054135}
+  <QuestId>k__BackingField: quest_yard
 --- !u!1 &4616633197109473049
 GameObject:
   m_ObjectHideFlags: 0
@@ -2589,7 +2590,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2af1fda0eeb24ecb8141e9cefe411f73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Core.Interactions.InteractableObject
-  _interactableTag: Carrot
   _isOneShot: 1
   <OnInteractionZoneEnter>k__BackingField:
     m_PersistentCalls:

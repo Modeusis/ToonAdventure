@@ -4721,6 +4721,7 @@ MonoBehaviour:
   <Type>k__BackingField: 0
   <MusicType>k__BackingField: 2
   <StartPoint>k__BackingField: {fileID: 7051371876493285296}
+  <QuestId>k__BackingField: quest_tutorial
 --- !u!1 &7438114289473254241
 GameObject:
   m_ObjectHideFlags: 0

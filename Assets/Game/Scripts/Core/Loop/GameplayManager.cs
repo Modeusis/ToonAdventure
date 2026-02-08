@@ -12,6 +12,8 @@ namespace Game.Scripts.Core.Loop
     {
         [SerializeField, Space] private LevelManager _levelManager;
         [SerializeField] private DialogueManager _dialogueManager;
+        [SerializeField] private QuestManager _questManager;
+        
         [SerializeField] private CinemachineBrain _brain;
         
         [SerializeField, Space] private GameObject _playerPrefab;
@@ -22,6 +24,7 @@ namespace Game.Scripts.Core.Loop
         {
             _levelManager.Initialize();
             _dialogueManager.Initialize();
+            _questManager.Initialize();
             
             G.EventBus.Subscribe<OnLevelLoadedEvent>(OnLevelLoaded);
             
@@ -66,6 +69,9 @@ namespace Game.Scripts.Core.Loop
             
             _player = playerObject.GetComponent<Player>();
             _player.Initialize();
+            
+            
+            _questManager.StartQuest(level.QuestId);
             
             G.EventBus.Publish(new OnPlayerStateChangeRequest { NewState = PlayerState.Active });
             G.Save.CurrentLevelId = level.Type;
