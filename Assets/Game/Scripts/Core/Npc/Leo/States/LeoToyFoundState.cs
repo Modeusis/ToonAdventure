@@ -8,10 +8,9 @@ namespace Game.Scripts.Core.Npc.Leo.States
 
         public override void Enter()
         {
-            if (_context.ToyPoint != null)
-            {
-                _navigator.MoveTo(_context.ToyPoint);
-            }
+            _navigator.MoveTo(_context.ToyPoint);
+            
+            _interactable.OnInteractionProceed.AddListener(OnInteract);
         }
 
         protected override void OnInteract()
@@ -20,6 +19,8 @@ namespace Game.Scripts.Core.Npc.Leo.States
             
             dialogue.OnDialogueFinish.AddListener(OnDialogueComplete);
             dialogue.StartDialogue();
+            
+            _interactable.OnInteractionProceed.RemoveListener(OnInteract);
         }
         
         private void OnDialogueComplete()

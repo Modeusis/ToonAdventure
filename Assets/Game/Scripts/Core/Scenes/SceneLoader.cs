@@ -36,6 +36,8 @@ namespace Game.Scripts.Core.Scenes
         {
             G.UI.Loading.Show("Загружаем меню...");
             
+            G.UI.Screens.HUD.Hide();
+            
             G.UI.Screens.Menu.ShowBackground();
             G.UI.Screens.Menu.Open();
             

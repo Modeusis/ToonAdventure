@@ -400,6 +400,7 @@ GameObject:
   - component: {fileID: 6010920702269116520}
   - component: {fileID: 4521988705699937646}
   - component: {fileID: 8815295445770632754}
+  - component: {fileID: 5260346562952188163}
   - component: {fileID: 5822020656021530023}
   - component: {fileID: 1663510424878342059}
   - component: {fileID: 4094312411869357364}
@@ -472,6 +473,33 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5568216, y: 1.2229161, z: 1.5891349}
   m_Center: {x: 0.017249465, y: 0.6315956, z: 0.26272237}
+--- !u!54 &5260346562952188163
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2181413385718755840}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!114 &5822020656021530023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -487,8 +515,6 @@ MonoBehaviour:
   _navigator: {fileID: 4094312411869357364}
   _animator: {fileID: 1445747743352202183}
   _interactable: {fileID: 5686328919690298157}
-  _balconyPoint: {fileID: 0}
-  _toyPoint: {fileID: 0}
   _greetingDialogue:
     _inkFile: {fileID: 4900000, guid: 0503da430b1963d4680ab69d6dd63df5, type: 3}
     _startPath: level1_leo_greatings

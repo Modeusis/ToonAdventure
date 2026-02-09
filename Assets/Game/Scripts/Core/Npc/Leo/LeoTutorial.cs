@@ -67,6 +67,11 @@ namespace Game.Scripts.Core.NPC.Leo
             _fsm?.LateUpdate();
         }
 
+        private void OnDestroy()
+        {
+            G.EventBus.Unsubscribe<LeoState>(HandleStateChangeRequest);
+        }
+        
         public void SetState(LeoState newState)
         {
             _targetState = newState;
@@ -93,6 +98,13 @@ namespace Game.Scripts.Core.NPC.Leo
             };
 
             _fsm = new FSM<LeoState>(states, transitions, _targetState);
+            
+            G.EventBus.Subscribe<LeoState>(HandleStateChangeRequest);
+        }
+
+        private void HandleStateChangeRequest(LeoState newState)
+        {
+            SetState(newState);
         }
     }
 }

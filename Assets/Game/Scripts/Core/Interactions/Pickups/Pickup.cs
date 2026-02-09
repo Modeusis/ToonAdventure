@@ -15,12 +15,16 @@ namespace Game.Scripts.Core.Interactions.Pickups
         
         [SerializeField, Space] private Vector3AnimationProperty _hideScaleProperty;
 
+        private Collider _collider;
+        
         private Tween _hideTween;
         private bool _isPickedUp;
         
         private void Awake()
         {
             _interactionZone.OnInteractionProceed.AddListener(PickupObject);
+            
+            _collider = GetComponent<Collider>();
         }
 
         private void OnDestroy()
@@ -34,6 +38,11 @@ namespace Game.Scripts.Core.Interactions.Pickups
                 return;
             
             G.Audio.PlaySfx(SoundType.ItemPickUp);
+
+            if (_collider)
+            {
+                _collider.enabled = false;
+            }
             
             _hideTween?.Kill();
             _hideTween = null;

@@ -40,6 +40,8 @@ namespace Game.Scripts.UI.Helpers
 
         private void Show()
         {
+            gameObject.SetActive(true);
+            
             _fader.IsBlockRaycast = true;
             _fader.FadeIn();
         }

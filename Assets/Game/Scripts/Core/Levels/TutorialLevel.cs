@@ -70,6 +70,7 @@ namespace Game.Scripts.Core.Levels
         private void FinishTutorial()
         {
             G.EventBus.Publish(new OnQuestProgressEvent { Amount = 1, TargetId = _findToyStepName});
+            G.EventBus.Publish(LeoState.ToyFound);
             _nextLevelTrigger.Unlock();
         }
 

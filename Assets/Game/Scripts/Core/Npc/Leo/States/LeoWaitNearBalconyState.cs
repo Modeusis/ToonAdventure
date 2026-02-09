@@ -1,4 +1,5 @@
 using Game.Scripts.Core.NPC.Leo;
+using UnityEngine;
 
 namespace Game.Scripts.Core.Npc.Leo.States
 {
@@ -8,28 +9,32 @@ namespace Game.Scripts.Core.Npc.Leo.States
 
         public override void Enter()
         {
-            _navigator.MoveTo(_context.BalconyPoint);
-        }
-
-        public override void Update()
-        {
-            base.Update();
-            
-            if (!_navigator.IsMoving)
-            {
-                _navigator.SetLookTarget(_context.BalconyPoint); 
-            }
+            _navigator.MoveTo(_context.BalconyPoint.position, OnReachedBalcony);
         }
 
         protected override void OnInteract()
         {
             if (_navigator.IsMoving)
+            {
+                Debug.Log("Trying to interact with moving leo");
                 return;
+            }
 
             var dialogue = _context.BalconyDialogue;
             
             dialogue.OnDialogueFinish.AddListener(OnDialogueComplete);
             dialogue.StartDialogue();
+        }
+
+        public override void Exit()
+        {
+            _interactable.OnInteractionProceed.RemoveListener(OnInteract);
+        }
+
+        private void OnReachedBalcony()
+        {
+            _navigator.SetLookTarget(_context.BalconyPoint);
+            _interactable.OnInteractionProceed.AddListener(OnInteract);
         }
 
         private void OnDialogueComplete()

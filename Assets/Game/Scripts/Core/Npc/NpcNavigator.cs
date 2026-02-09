@@ -17,11 +17,15 @@ namespace Game.Scripts.Core.NPC
         private Action _onMovementComplete;
         
         private float _currentSpeed;
-        private bool _isStopped;
+        private bool _isStopped = true;
         
         public float MaxSpeed => _setup.MovementSpeed;
         public Vector3 Velocity => _agent.velocity;
-        public bool IsMoving => _agent.velocity.sqrMagnitude > 0.1f;
+        
+        public bool IsMoving => !_isStopped; 
+
+        public float RemainingDistance => _agent.pathPending ? float.PositiveInfinity : _agent.remainingDistance;
+        public float StoppingDistance => _setup.StoppingDistance;
 
         private void Awake()
         {
@@ -36,16 +40,18 @@ namespace Game.Scripts.Core.NPC
 
         private void Update()
         {
-            
-            
+            if (_followTarget != null && !_isStopped)
+            {
+                _agent.SetDestination(_followTarget.position);
+            }
+
             HandleMovement();
             HandleRotation();
+            
+            CheckIfDestinationReached();
         }
 
-        public void MoveTo(Transform target)
-        {
-            MoveTo(target.position, null);
-        }
+        public void MoveTo(Transform target) => MoveTo(target.position, null);
 
         public void MoveTo(Vector3 targetPosition, Action onComplete = null)
         {
@@ -78,6 +84,7 @@ namespace Game.Scripts.Core.NPC
             if (_agent.isOnNavMesh)
             {
                 _agent.ResetPath();
+                _agent.velocity = Vector3.zero;
             }
         }
 
@@ -88,47 +95,61 @@ namespace Game.Scripts.Core.NPC
 
         private void HandleMovement()
         {
-            if (_followTarget && !_isStopped)
+            bool shouldMove = !_isStopped;
+
+            if (shouldMove && !_agent.pathPending)
             {
-                _agent.SetDestination(_followTarget.position);
+                if (_agent.remainingDistance <= _setup.StoppingDistance)
+                {
+                    shouldMove = false;
+                }
             }
-
-            var shouldMove = !_isStopped && _agent.hasPath && _agent.remainingDistance > _agent.stoppingDistance;
-            var targetSpeed = shouldMove ? _setup.MovementSpeed : 0f;
-
-            var duration = shouldMove ? _setup.AccelerationTime : _setup.DecelerationTime;
-            var curve = shouldMove ? _setup.AccelerationCurve : _setup.DecelerationCurve;
-
-            var speedProgress = Mathf.Clamp01(_currentSpeed / _setup.MovementSpeed);
-            var curveMultiplier = curve.Evaluate(speedProgress);
             
-            var rate = _setup.MovementSpeed / Mathf.Max(duration, 0.001f);
-            var step = rate * curveMultiplier * Time.deltaTime;
+            var targetSpeed = shouldMove ? _setup.MovementSpeed : 0f;
+            var isAccelerating = targetSpeed > _currentSpeed;
+
+            var duration = isAccelerating ? _setup.AccelerationTime : _setup.DecelerationTime;
+            var curve = isAccelerating ? _setup.AccelerationCurve : _setup.DecelerationCurve;
+
+            var maxSpeed = _setup.MovementSpeed > 0 ? _setup.MovementSpeed : 1f;
+            var speedProgress = Mathf.Clamp01(_currentSpeed / maxSpeed);
+            
+            if (!isAccelerating) speedProgress = 1f - speedProgress;
+
+            var curveValue = curve.Evaluate(speedProgress);
+            
+            var rate = maxSpeed / Mathf.Max(duration, 0.01f);
+            
+            var step = rate * (curveValue + 0.1f) * Time.deltaTime;
 
             _currentSpeed = Mathf.MoveTowards(_currentSpeed, targetSpeed, step);
             _agent.speed = _currentSpeed;
+
+            if (shouldMove || !(_currentSpeed < 0.05f) || _agent.pathPending)
+                return;
+            
+            _isStopped = true;
+            _agent.isStopped = true;
         }
         
         private void CheckIfDestinationReached()
         {
-            if (_isStopped || !_agent.hasPath) return;
+            if (_isStopped || !_agent.hasPath || _agent.pathPending) return;
             
-            if (_agent.pathPending) return;
-            
-            if (!(_agent.remainingDistance <= _agent.stoppingDistance))
-                return;
-
-            if (_onMovementComplete == null)
-                return;
-            
-            var callback = _onMovementComplete;
-            _onMovementComplete = null;
-            callback.Invoke();
+            if (_agent.remainingDistance <= _agent.stoppingDistance)
+            {
+                if (_onMovementComplete != null)
+                {
+                    var callback = _onMovementComplete;
+                    _onMovementComplete = null;
+                    callback.Invoke();
+                }
+            }
         }
 
         private void HandleRotation()
         {
-            if (_agent.velocity.sqrMagnitude > 0.1f)
+            if (_agent.velocity.sqrMagnitude > 0.5f)
                 return;
 
             if (!_lookTarget)

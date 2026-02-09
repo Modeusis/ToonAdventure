@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Game.Scripts.Core.Audio;
 using Game.Scripts.Setups.Animations;
 using UnityEngine;
 
@@ -56,18 +57,21 @@ namespace Game.Scripts.Core.Interactions
             float targetAngle;
             float duration;
             AnimationCurve curve;
+            SoundType doorSound;
 
             if (_isOpen)
             {
                 targetAngle = _rotationCloseAnimation.Target;
                 duration = _rotationCloseAnimation.Duration;
                 curve = _rotationCloseAnimation.Curve;
+                doorSound = SoundType.DoorClose;
             }
             else
             {
                 targetAngle = CalculateOpenAngle();
                 duration = _rotationOpenAnimation.Duration;
                 curve = _rotationOpenAnimation.Curve;
+                doorSound = SoundType.DoorOpen;
             }
             
             _openTween = _targetTransform
@@ -77,6 +81,8 @@ namespace Game.Scripts.Core.Interactions
                 {
                     _collider.enabled = true;
                 });
+            
+            G.Audio.PlaySfx(doorSound);
             
             _isOpen = !_isOpen;
         }

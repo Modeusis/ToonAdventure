@@ -1,4 +1,6 @@
 using System.Linq;
+using Game.Scripts.Core;
+using Game.Scripts.Core.Audio;
 using Game.Scripts.Setups.Quests;
 using TMPro;
 using UnityEngine;
@@ -31,10 +33,12 @@ namespace Game.Scripts.UI.Screens.Quest
             if (currentStep != null)
             {
                 _currentObjectiveText.text = $"- {currentStep.Description}";
+                G.Audio.PlaySfx(SoundType.TaskComplete);
             }
             else
             {
                 _currentObjectiveText.text = "- Задание выполнено";
+                G.Audio.PlaySfx(SoundType.LevelComplete);
             }
         }
 

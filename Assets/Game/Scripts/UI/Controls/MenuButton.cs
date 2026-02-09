@@ -54,10 +54,7 @@ namespace Game.Scripts.UI.Controls
                 .DOScale(_clickProperty.Target, _clickProperty.Duration)
                 .SetEase(_clickProperty.Curve);
 
-            if (G.IsReady)
-            {
-                G.Audio.PlaySfx(SoundType.UiClick);
-            }
+            G.Audio.PlaySfx(SoundType.UiClick);
             
             OnClick?.Invoke();
         }

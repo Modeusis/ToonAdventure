@@ -4,17 +4,10 @@ namespace Game.Scripts.Core.Audio
     {
         //UI
         UiClick = 0,
-        UiHover = 1,
-        UiBack = 2,
-        UiConfirm = 3,
-        PageChange = 4,
-        
-        PopUpOpen,
-        PopUpClose,
         
         //Task
-        TaskComplete,
-        LevelComplete,
+        TaskComplete = 35,
+        LevelComplete = 36,
         
         //PickUp
         ItemPickUp,
