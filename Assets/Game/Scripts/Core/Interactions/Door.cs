@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace Game.Scripts.Core.Interactions
 {
-    [RequireComponent(typeof(Collider))]
     public class Door : MonoBehaviour
     {
         [SerializeField, Space] private Transform _doorTransform;
@@ -16,38 +15,63 @@ namespace Game.Scripts.Core.Interactions
         
         private Collider _collider;
         
+        private Transform _targetTransform;
+        private Transform _lastInteractor;
+        
         private Tween _openTween;
         private bool _isOpen;
 
+        private void Awake()
+        {
+            _collider = _doorTransform.GetComponent<Collider>();
+            _targetTransform = _doorTransform != null ? _doorTransform : transform;
+        }
+        
         private void Start()
         {
-            _collider = GetComponent<Collider>();
-            
             if (_isOpenOnStart)
             {
-                transform.Rotate(Vector3.up, _rotationOpenAnimation.Target);
+                _targetTransform.localRotation = Quaternion.Euler(0, _rotationOpenAnimation.Target, 0);
                 _isOpen = true;
                 
                 return;
             }
             
-            transform.Rotate(Vector3.up, _rotationCloseAnimation.Target);
+            _targetTransform.localRotation = Quaternion.Euler(0, _rotationCloseAnimation.Target, 0);
             _isOpen = false;
         }
 
+        public void SetInteractor(Transform interactor)
+        {
+            _lastInteractor = interactor;
+        }
+        
         public void Toggle()
         {
             _openTween?.Kill();
             _openTween = null;
 
             _collider.enabled = false;
+
+            float targetAngle;
+            float duration;
+            AnimationCurve curve;
+
+            if (_isOpen)
+            {
+                targetAngle = _rotationCloseAnimation.Target;
+                duration = _rotationCloseAnimation.Duration;
+                curve = _rotationCloseAnimation.Curve;
+            }
+            else
+            {
+                targetAngle = CalculateOpenAngle();
+                duration = _rotationOpenAnimation.Duration;
+                curve = _rotationOpenAnimation.Curve;
+            }
             
-            var rotation = Vector3.up * (_isOpen ? _rotationCloseAnimation.Target : _rotationOpenAnimation.Target);
-            var duration = _isOpen ? _rotationCloseAnimation.Duration : _rotationOpenAnimation.Duration;
-            var curve = _isOpen ? _rotationCloseAnimation.Curve : _rotationOpenAnimation.Curve;
-            
-            _openTween = transform
-                .DOLocalRotate(rotation, duration)
+            _openTween = _targetTransform
+                .DOLocalRotate(Vector3.up * targetAngle, duration)
                 .SetEase(curve)
                 .OnComplete(() =>
                 {
@@ -55,6 +79,19 @@ namespace Game.Scripts.Core.Interactions
                 });
             
             _isOpen = !_isOpen;
+        }
+
+        private float CalculateOpenAngle()
+        {
+            var baseAngle = Mathf.Abs(_rotationOpenAnimation.Target);
+
+            if (_lastInteractor == null)
+                return baseAngle;
+
+            var directionToInteractor = _lastInteractor.position - _targetTransform.position;
+            var dot = Vector3.Dot(_targetTransform.forward, directionToInteractor);
+            
+            return dot > 0 ? -baseAngle : baseAngle;
         }
     }
 }

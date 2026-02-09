@@ -44,5 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4279a434b7e642a7b79f4f39a81cd926, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.UI.Screens.Dialog.DialogueManager
-  _characterDatabase: {fileID: 0}
+  _characterDatabase: {fileID: 11400000, guid: 3e64b26ab7daaea4fa8ef7c84b7bc6d3, type: 2}
   _viewPrefab: {fileID: 7939125221240767655, guid: e1a32f1c5e794f0418b99712aed0dec9, type: 3}

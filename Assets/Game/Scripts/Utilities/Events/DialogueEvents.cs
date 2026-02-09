@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Game.Scripts.Utilities.Events
 {
@@ -12,6 +14,7 @@ namespace Game.Scripts.Utilities.Events
     {
         public TextAsset InkAsset;
         public string StartPath;
+        public UnityEvent OnFinished;
     }
     
     public struct ContinueDialogueRequestEvent { }

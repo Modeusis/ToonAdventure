@@ -6,8 +6,9 @@ using Game.Scripts.UI.Screens.Dialog;
 using Game.Scripts.Utilities.Events;
 using Ink.Runtime;
 using UnityEngine;
+using UnityEngine.Events;
 
-namespace Game.Scripts.Core.Loop
+namespace Game.Scripts.Core.Loop.Dialogues
 {
     public class DialogueManager : MonoBehaviour
     {
@@ -21,6 +22,7 @@ namespace Game.Scripts.Core.Loop
         private DialogueCharacterDatabase _database;
         
         private Story _currentStory;
+        private UnityEvent _currentCallback;
 
         public bool IsInitialized { get; private set; }
 
@@ -70,8 +72,16 @@ namespace Game.Scripts.Core.Loop
             if (!G.IsReady)
                 return;
             
+            _currentStory = null;
+            
+            _currentCallback?.RemoveAllListeners();
+            _currentCallback = null;
+            
             G.EventBus.Unsubscribe<StartDialogueRequestEvent>(OnStartDialogueRequested);
             G.EventBus.Unsubscribe<ContinueDialogueRequestEvent>(OnContinueDialogueRequested);
+            
+            if (!_view)
+                return;
             
             Destroy(_view.gameObject);
         }
@@ -81,7 +91,7 @@ namespace Game.Scripts.Core.Loop
             if (!request.InkAsset)
                 return;
             
-            StartDialogue(request.InkAsset, request.StartPath);
+            StartDialogue(request.InkAsset, request.StartPath, request.OnFinished);
         }
 
         private void OnContinueDialogueRequested(ContinueDialogueRequestEvent request)
@@ -92,7 +102,7 @@ namespace Game.Scripts.Core.Loop
             Continue();
         }
         
-        private void StartDialogue(TextAsset inkAsset, string startPath = "")
+        private void StartDialogue(TextAsset inkAsset, string startPath = "", UnityEvent onFinish = null)
         {
             if (inkAsset == null)
             {
@@ -101,6 +111,7 @@ namespace Game.Scripts.Core.Loop
             }
 
             _currentStory = new Story(inkAsset.text);
+            _currentCallback = onFinish;
             
             if (!string.IsNullOrEmpty(startPath))
             {
@@ -128,6 +139,10 @@ namespace Game.Scripts.Core.Loop
             _view.ClearChoices();
             
             G.EventBus.Publish(new OnDialogueStateChangedEvent{ IsActive = false });
+            
+            var callback = _currentCallback;
+            _currentCallback = null;
+            callback.Invoke();
         }
 
         private void Continue()
@@ -209,11 +224,6 @@ namespace Game.Scripts.Core.Loop
                     Debug.LogWarning($"[DialogueManager] Character ID '{characterId}' not found in Database.");
                 }
             }
-        }
-
-        public void Dispose()
-        {
-            _currentStory = null;
         }
     }
 }

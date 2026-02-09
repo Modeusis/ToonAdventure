@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9540a8866eba4e2b83686fa8c708b633, type: 3}
+  m_Name: FadeTootlipDynamic
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Setups.Animations.FloatAnimationProperty
+  <Duration>k__BackingField: 0.4
+  <Target>k__BackingField: 1
+  <Curve>k__BackingField:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.25052953
+      value: 0.5972369
+      inSlope: 1.2466885
+      outSlope: 1.2466885
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.6117102
+      value: 0.8903927
+      inSlope: 0.4568771
+      outSlope: 0.4568771
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.46236253
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0.0043290313
+      outSlope: 0.0043290313
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.27499998
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

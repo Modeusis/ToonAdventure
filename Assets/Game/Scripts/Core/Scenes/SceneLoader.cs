@@ -27,6 +27,8 @@ namespace Game.Scripts.Core.Scenes
             await G.Loader.LoadSceneAsync(Addresses.BOOT_SCENE_KEY);
             await G.Loader.LoadSceneAsync(Addresses.GAMEPLAY_SCENE_KEY);
 
+            G.UI.Screens.HUD.StaticTooltip.FadeIn();
+            
             await G.Loader.InstantiateAsync<GameplayManager>(Addresses.GAMEPLAY_MANAGER_KEY);
         }
         

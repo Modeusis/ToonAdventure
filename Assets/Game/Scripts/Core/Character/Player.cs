@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using Game.Scripts.Core.Audio.SfxPlayers;
 using Game.Scripts.Core.Character.States;
 using Game.Scripts.Core.Interactions;
 using Game.Scripts.Setups.Core;
@@ -14,6 +15,7 @@ namespace Game.Scripts.Core.Character
     public class Player : MonoBehaviour
     {
         [field: SerializeField, Space] public PlayerAnimationController AnimationController { get; private set; }
+        [field: SerializeField] public PlayerSfx Sfx { get; private set; }
         [field: SerializeField] public CinemachineInputAxisController CameraInputController { get; private set; }
         [field: SerializeField, Space] public PlayerSetup Setup { get; private set; }
         
@@ -89,6 +91,7 @@ namespace Game.Scripts.Core.Character
             if (_currentInteractable == null)
                 return;
             
+            AnimationController.TriggerInteraction(_currentInteractable.Type);
             _currentInteractable.Interact();
         }
         

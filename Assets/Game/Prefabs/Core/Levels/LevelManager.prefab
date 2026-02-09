@@ -44,4 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08afa8ccd1004e58ab724805e5223850, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Core.Level.LevelManager
+  _setup: {fileID: 11400000, guid: 992f76eaa6bc39d41a65d17de0ff6da7, type: 2}
   _levelRoot: {fileID: 27035995961934222}

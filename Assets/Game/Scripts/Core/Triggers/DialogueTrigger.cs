@@ -1,6 +1,7 @@
 using Game.Scripts.Core.Character;
 using Game.Scripts.Utilities.Events;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Game.Scripts.Core.Triggers
 {
@@ -11,6 +12,8 @@ namespace Game.Scripts.Core.Triggers
         
         [SerializeField, Space] private bool _isOneShot;
 
+        [field: SerializeField] public UnityEvent OnDialogueFinish { get; private set; } = new UnityEvent();
+        
         private bool _wasInteracted;
 
         private void OnTriggerEnter(Collider other)
@@ -21,7 +24,12 @@ namespace Game.Scripts.Core.Triggers
             if (!other.TryGetComponent<Player>(out _))
                 return;
                 
-            G.EventBus.Publish(new StartDialogueRequestEvent { InkAsset = _inkFile, StartPath = _startPath});
+            G.EventBus.Publish(new StartDialogueRequestEvent
+            {
+                InkAsset = _inkFile,
+                StartPath = _startPath,
+                OnFinished = OnDialogueFinish
+            });
 
             if (!_isOneShot)
                 return;

@@ -17,8 +17,6 @@ namespace Game.Scripts.Core.Cameras
         {
             _inactivePriority = settings.InactivePriority;
             _activePriority = settings.ActivePriority;
-            
-            Debug.Log("Camera Manager initialized");
         }
 
         public void SetBrain(CinemachineBrain brain)

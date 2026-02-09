@@ -9,6 +9,7 @@ namespace Game.Scripts.Utilities.MonoDebugs
     {
         [SerializeField] private InputActionReference _referenceA;
         [SerializeField] private InputActionReference _referenceB;
+        [SerializeField] private InputActionReference _referenceC;
         
         private void Update()
         {
@@ -20,6 +21,11 @@ namespace Game.Scripts.Utilities.MonoDebugs
             if (_referenceB.action.WasPerformedThisFrame())
             {
                 G.EventBus.Publish(LevelType.Level1);
+            }
+            
+            if (_referenceC.action.WasPerformedThisFrame())
+            {
+                G.EventBus.Publish(LevelType.Level2);
             }
         }
     }

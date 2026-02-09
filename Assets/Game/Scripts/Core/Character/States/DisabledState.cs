@@ -11,7 +11,10 @@ namespace Game.Scripts.Core.Character.States
 
         public override void Update()
         {
-            
+            if (G.Input.Game.Back.WasPerformedThisFrame())
+            {
+                G.UI.Screens.Menu.Toggle();
+            }
         }
     }
 }

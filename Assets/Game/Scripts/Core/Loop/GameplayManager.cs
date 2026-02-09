@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using Game.Scripts.Core.Character;
 using Game.Scripts.Core.Levels;
+using Game.Scripts.Core.Loop.Dialogues;
 using Game.Scripts.UI.Screens.Dialog;
 using Game.Scripts.Utilities.Events;
 using Unity.Cinemachine;
@@ -70,10 +71,12 @@ namespace Game.Scripts.Core.Loop
             _player = playerObject.GetComponent<Player>();
             _player.Initialize();
             
+            _player.Sfx.SetFootstepType(level.StepType);
             
             _questManager.StartQuest(level.QuestId);
             
             G.EventBus.Publish(new OnPlayerStateChangeRequest { NewState = PlayerState.Active });
+            G.UI.Screens.HUD.DynamicTooltip.HideFast();
             G.Save.CurrentLevelId = level.Type;
         }
     }

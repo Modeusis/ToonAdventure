@@ -46,3 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Utilities.MonoDebugs.LevelDebugger
   _referenceA: {fileID: -8973393523824647911, guid: 3d58d515f30d00b4eadb76d0fe01de0e, type: 3}
   _referenceB: {fileID: -8111800929101564490, guid: 3d58d515f30d00b4eadb76d0fe01de0e, type: 3}
+  _referenceC: {fileID: -4200343517198809160, guid: 3d58d515f30d00b4eadb76d0fe01de0e, type: 3}
