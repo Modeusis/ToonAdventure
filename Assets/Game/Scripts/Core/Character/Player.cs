@@ -16,7 +16,8 @@ namespace Game.Scripts.Core.Character
     {
         [field: SerializeField, Space] public PlayerAnimationController AnimationController { get; private set; }
         [field: SerializeField] public PlayerSfx Sfx { get; private set; }
-        [field: SerializeField] public CinemachineInputAxisController CameraInputController { get; private set; }
+        [field: SerializeField, Space] public CinemachineInputAxisController CameraInputController { get; private set; }
+        [field: SerializeField] public CinemachineCamera BaseCamera { get; private set; }
         [field: SerializeField, Space] public PlayerSetup Setup { get; private set; }
         
         [SerializeField, Space] private PlayerState _startState;
@@ -101,7 +102,8 @@ namespace Game.Scripts.Core.Character
             {
                 { PlayerState.Disabled, new DisabledState(this) },
                 { PlayerState.Active, new ActiveState(this) },
-                { PlayerState.Dialogue, new DialogueState(this) }
+                { PlayerState.Dialogue, new DialogueState(this) },
+                { PlayerState.Puzzle, new PuzzleState(this) }
             };
 
             _targetState = _startState;
@@ -110,7 +112,8 @@ namespace Game.Scripts.Core.Character
             {
                 new Transition<PlayerState>(PlayerState.Disabled, () => _targetState == PlayerState.Disabled),
                 new Transition<PlayerState>(PlayerState.Active, () => _targetState == PlayerState.Active),
-                new Transition<PlayerState>(PlayerState.Dialogue, () => _targetState == PlayerState.Dialogue)
+                new Transition<PlayerState>(PlayerState.Dialogue, () => _targetState == PlayerState.Dialogue),
+                new Transition<PlayerState>(PlayerState.Puzzle, () => _targetState == PlayerState.Puzzle)
             };
 
             _fsm = new FSM<PlayerState>(states, transitions, _targetState);

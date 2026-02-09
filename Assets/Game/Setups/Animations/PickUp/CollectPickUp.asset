@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CollectPickUp
   m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Setups.Animations.Vector3AnimationProperty
   <Duration>k__BackingField: 0.4
-  <Target>k__BackingField: {x: 0, y: 0, z: 0}
+  <Target>k__BackingField: {x: 0.1, y: 0.1, z: 0.1}
   <Curve>k__BackingField:
     serializedVersion: 2
     m_Curve:

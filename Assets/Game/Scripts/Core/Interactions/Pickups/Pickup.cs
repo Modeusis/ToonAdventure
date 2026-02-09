@@ -48,8 +48,8 @@ namespace Game.Scripts.Core.Interactions.Pickups
             _hideTween = null;
             
             _hideTween = _pickupTransform
-                .DOScale(_hideScaleProperty.Target, _hideScaleProperty.Duration)
-                .SetEase(_hideScaleProperty.Curve);
+                .DOScale(_hideScaleProperty.Value, _hideScaleProperty.Duration)
+                .SetEase(_hideScaleProperty.Ease);
             
             _isPickedUp = true;
         }

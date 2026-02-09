@@ -32,13 +32,13 @@ namespace Game.Scripts.Core.Interactions
         {
             if (_isOpenOnStart)
             {
-                _targetTransform.localRotation = Quaternion.Euler(0, _rotationOpenAnimation.Target, 0);
+                _targetTransform.localRotation = Quaternion.Euler(0, _rotationOpenAnimation.Value, 0);
                 _isOpen = true;
                 
                 return;
             }
             
-            _targetTransform.localRotation = Quaternion.Euler(0, _rotationCloseAnimation.Target, 0);
+            _targetTransform.localRotation = Quaternion.Euler(0, _rotationCloseAnimation.Value, 0);
             _isOpen = false;
         }
 
@@ -61,16 +61,16 @@ namespace Game.Scripts.Core.Interactions
 
             if (_isOpen)
             {
-                targetAngle = _rotationCloseAnimation.Target;
+                targetAngle = _rotationCloseAnimation.Value;
                 duration = _rotationCloseAnimation.Duration;
-                curve = _rotationCloseAnimation.Curve;
+                curve = _rotationCloseAnimation.Ease;
                 doorSound = SoundType.DoorClose;
             }
             else
             {
                 targetAngle = CalculateOpenAngle();
                 duration = _rotationOpenAnimation.Duration;
-                curve = _rotationOpenAnimation.Curve;
+                curve = _rotationOpenAnimation.Ease;
                 doorSound = SoundType.DoorOpen;
             }
             
@@ -89,7 +89,7 @@ namespace Game.Scripts.Core.Interactions
 
         private float CalculateOpenAngle()
         {
-            var baseAngle = Mathf.Abs(_rotationOpenAnimation.Target);
+            var baseAngle = Mathf.Abs(_rotationOpenAnimation.Value);
 
             if (_lastInteractor == null)
                 return baseAngle;

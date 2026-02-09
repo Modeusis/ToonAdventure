@@ -39,8 +39,8 @@ namespace Game.Scripts.UI.Controls
             KillTweens();
             
             _hoverTween = transform
-                .DOScale(_hoverProperty.Target, _hoverProperty.Duration)
-                .SetEase(_hoverProperty.Curve);
+                .DOScale(_hoverProperty.Value, _hoverProperty.Duration)
+                .SetEase(_hoverProperty.Ease);
         }
         
         public void OnPointerDown(PointerEventData eventData)
@@ -51,8 +51,8 @@ namespace Game.Scripts.UI.Controls
             KillTweens();
             
             _clickTween = transform
-                .DOScale(_clickProperty.Target, _clickProperty.Duration)
-                .SetEase(_clickProperty.Curve);
+                .DOScale(_clickProperty.Value, _clickProperty.Duration)
+                .SetEase(_clickProperty.Ease);
 
             G.Audio.PlaySfx(SoundType.UiClick);
             
@@ -67,8 +67,8 @@ namespace Game.Scripts.UI.Controls
             KillTweens();
             
             _hoverTween = transform
-                .DOScale(_hoverProperty.Target, _hoverProperty.Duration)
-                .SetEase(_hoverProperty.Curve);
+                .DOScale(_hoverProperty.Value, _hoverProperty.Duration)
+                .SetEase(_hoverProperty.Ease);
         }
 
         public void OnPointerExit(PointerEventData eventData)
@@ -79,8 +79,8 @@ namespace Game.Scripts.UI.Controls
             KillTweens();
 
             _idleTween = transform
-                .DOScale(_idleProperty.Target, _idleProperty.Duration)
-                .SetEase(_idleProperty.Curve);;
+                .DOScale(_idleProperty.Value, _idleProperty.Duration)
+                .SetEase(_idleProperty.Ease);;
         }
         
         public void SetActiveButton(bool isActive)
@@ -97,16 +97,16 @@ namespace Game.Scripts.UI.Controls
                 var idleSequence = DOTween.Sequence();
             
                 var idleScaleTween = transform
-                    .DOScale(_idleProperty.Target, _idleProperty.Duration)
-                    .SetEase(_idleProperty.Curve);
+                    .DOScale(_idleProperty.Value, _idleProperty.Duration)
+                    .SetEase(_idleProperty.Ease);
             
                 var idleImageFadeTween = _buttonImage
                     .DOFade(1f, _idleProperty.Duration)
-                    .SetEase(_idleProperty.Curve);
+                    .SetEase(_idleProperty.Ease);
             
                 var idleTextFadeTween = _buttonText
                     .DOFade(1f, _idleProperty.Duration)
-                    .SetEase(_idleProperty.Curve);
+                    .SetEase(_idleProperty.Ease);
             
                 idleSequence.Join(idleScaleTween);
                 idleSequence.Join(idleImageFadeTween);
@@ -124,16 +124,16 @@ namespace Game.Scripts.UI.Controls
             var disableSequence = DOTween.Sequence();
             
             var disableScaleTween = transform
-                .DOScale(_disableProperty.Target, _disableProperty.Duration)
-                .SetEase(_disableProperty.Curve);
+                .DOScale(_disableProperty.Value, _disableProperty.Duration)
+                .SetEase(_disableProperty.Ease);
             
             var disableImageFadeTween = _buttonImage
                 .DOFade(0.5f, _disableProperty.Duration)
-                .SetEase(_disableProperty.Curve);
+                .SetEase(_disableProperty.Ease);
             
             var disableTextFadeTween = _buttonText
                 .DOFade(0.5f, _disableProperty.Duration)
-                .SetEase(_disableProperty.Curve);
+                .SetEase(_disableProperty.Ease);
             
             disableSequence.Join(disableScaleTween);
             disableSequence.Join(disableImageFadeTween);

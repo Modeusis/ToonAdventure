@@ -23,11 +23,11 @@ namespace Game.Scripts.Utilities.Effects
             if (_canvasGroup == null) _canvasGroup = GetComponent<CanvasGroup>();
         }
 
-        public void FadeIn() => Play(_fadeSettings.Target);
+        public void FadeIn() => Play(_fadeSettings.Value);
 
         public void FadeOut() => Play(0f);
 
-        public void CutIn() => _canvasGroup.alpha = _fadeSettings.Target;
+        public void CutIn() => _canvasGroup.alpha = _fadeSettings.Value;
         public void CutOut() => _canvasGroup.alpha = 0f;
         
         public void Play(float targetAlpha)
@@ -35,7 +35,7 @@ namespace Game.Scripts.Utilities.Effects
             _activeTween?.Kill();
 
             _activeTween = _canvasGroup.DOFade(targetAlpha, _fadeSettings.Duration)
-                .SetEase(_fadeSettings.Curve)
+                .SetEase(_fadeSettings.Ease)
                 .SetLink(gameObject);
         }
 

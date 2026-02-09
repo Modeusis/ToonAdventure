@@ -28,8 +28,8 @@ namespace Game.Scripts.UI.Screens.HUD
             _showTween = null;
             
             _showTween = _tooltipTransform
-                .DOScale(_showScaleProperty.Target, _showScaleProperty.Duration)
-                .SetEase(_showScaleProperty.Curve);
+                .DOScale(_showScaleProperty.Value, _showScaleProperty.Duration)
+                .SetEase(_showScaleProperty.Ease);
             
             _fader.FadeIn();
             
@@ -47,8 +47,8 @@ namespace Game.Scripts.UI.Screens.HUD
             _showTween = null;
             
             _showTween = _tooltipTransform
-                .DOScale(_hideScaleProperty.Target, _hideScaleProperty.Duration)
-                .SetEase(_hideScaleProperty.Curve);
+                .DOScale(_hideScaleProperty.Value, _hideScaleProperty.Duration)
+                .SetEase(_hideScaleProperty.Ease);
             
             _isShowing = false;
         }
