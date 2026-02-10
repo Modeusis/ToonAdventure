@@ -2,41 +2,37 @@ namespace Game.Scripts.Core.Audio
 {
     public enum SoundType
     {
-        UiClick,
-        UiHover,
-        UiBack,
-        UiError,
-        PageChange,
-        PopUpOpen,
-        PopUpClose,
+        //UI
+        UiClick = 0,
         
-        TaskComplete,
-        LevelComplete,
+        //Task
+        TaskComplete = 35,
+        LevelComplete = 36,
         
-        ItemGrab,
-        ItemPlace,
-        ItemRotate,
+        //PickUp
+        ItemPickUp,
         
-        DoorOpen,
-        DoorClose,
-        DrawerOpen,
-        DrawerClose,
-        SwitchClick,
+        //Puzzle
+        PuzzleButtonPress = 50,
+        PuzzleButtonLight = 51,
+        PuzzleComplete = 52,
         
-        FridgeOpen,
-        WaterFlow,
+        //Doors
+        DoorOpen = 10,
+        DoorClose = 11,
+        FridgeOpen = 12,
+        FridgeClose = 13,
         
-        CurtainsSwish,
-        BedRustle,
+        //Steps
+        StepWood = 20,
+        StepTile = 21,
+        StepGrass = 22,
         
-        StepWood,
-        StepCarpet,
-        StepTile,
-        CharacterDialogue,
+        CharacterDialogue = 23,
         
-        DogBark,
-        DogPant,
-        DogWhine,
-        DogStep
+        //Dog
+        DogBark = 40,
+        DogWhine = 41,
+        DogStep = 42
     }
 }

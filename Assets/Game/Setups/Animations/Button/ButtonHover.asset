@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: ButtonHover
   m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Setups.Animations.Vector3AnimationProperty
   <Duration>k__BackingField: 0.4
-  <Target>k__BackingField: {x: 1.2, y: 1.2, z: 1.2}
-  <Curve>k__BackingField:
+  <Value>k__BackingField: {x: 1.2, y: 1.2, z: 1.2}
+  <Ease>k__BackingField:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
@@ -27,10 +27,10 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.27835566
-      value: 0.87180036
-      inSlope: 1.2182885
-      outSlope: 1.2182885
+      time: 0.20680724
+      value: 0.7098169
+      inSlope: 1.0905521
+      outSlope: 1.0905521
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334

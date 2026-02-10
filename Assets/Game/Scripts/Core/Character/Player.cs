@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using Game.Scripts.Core.Audio.SfxPlayers;
 using Game.Scripts.Core.Character.States;
 using Game.Scripts.Core.Interactions;
 using Game.Scripts.Setups.Core;
@@ -14,7 +15,9 @@ namespace Game.Scripts.Core.Character
     public class Player : MonoBehaviour
     {
         [field: SerializeField, Space] public PlayerAnimationController AnimationController { get; private set; }
-        [field: SerializeField] public CinemachineInputAxisController CameraInputController { get; private set; }
+        [field: SerializeField] public PlayerSfx Sfx { get; private set; }
+        [field: SerializeField, Space] public CinemachineInputAxisController CameraInputController { get; private set; }
+        [field: SerializeField] public CinemachineCamera BaseCamera { get; private set; }
         [field: SerializeField, Space] public PlayerSetup Setup { get; private set; }
         
         [SerializeField, Space] private PlayerState _startState;
@@ -50,6 +53,9 @@ namespace Game.Scripts.Core.Character
             
             InitializeFSM();
             
+            _targetState = _startState; 
+            _stateBeforePause = PlayerState.Active;
+            
             if (!G.IsReady)
                 return;
             
@@ -58,13 +64,14 @@ namespace Game.Scripts.Core.Character
             G.EventBus.Subscribe<OnPlayerStateChangeRequest>(OnPauseStateChangeRequested);
             G.EventBus.Subscribe<OnInteractionZoneEnterEvent>(OnInteractionZoneEnter);
             G.EventBus.Subscribe<OnInteractionZoneExitEvent>(OnInteractionZoneExit);
+            G.EventBus.Subscribe<OnPuzzleBeginEvent>(OnPuzzleBegin);
             
             _isInitialized = true;
         }
 
         private void OnDestroy()
         {
-            if (G.IsReady)
+            if (!G.IsReady)
                 return;
             
             G.EventBus.Unsubscribe<OnDialogueStateChangedEvent>(OnDialogueStateChanged);
@@ -72,6 +79,7 @@ namespace Game.Scripts.Core.Character
             G.EventBus.Unsubscribe<OnPlayerStateChangeRequest>(OnPauseStateChangeRequested);
             G.EventBus.Unsubscribe<OnInteractionZoneEnterEvent>(OnInteractionZoneEnter);
             G.EventBus.Unsubscribe<OnInteractionZoneExitEvent>(OnInteractionZoneExit);
+            G.EventBus.Unsubscribe<OnPuzzleBeginEvent>(OnPuzzleBegin);
         }
 
         private void Update()
@@ -89,6 +97,7 @@ namespace Game.Scripts.Core.Character
             if (_currentInteractable == null)
                 return;
             
+            AnimationController.TriggerInteraction(_currentInteractable.Type);
             _currentInteractable.Interact();
         }
         
@@ -98,7 +107,8 @@ namespace Game.Scripts.Core.Character
             {
                 { PlayerState.Disabled, new DisabledState(this) },
                 { PlayerState.Active, new ActiveState(this) },
-                { PlayerState.Dialogue, new DialogueState(this) }
+                { PlayerState.Dialogue, new DialogueState(this) },
+                { PlayerState.Puzzle, new PuzzleState(this) }
             };
 
             _targetState = _startState;
@@ -107,7 +117,8 @@ namespace Game.Scripts.Core.Character
             {
                 new Transition<PlayerState>(PlayerState.Disabled, () => _targetState == PlayerState.Disabled),
                 new Transition<PlayerState>(PlayerState.Active, () => _targetState == PlayerState.Active),
-                new Transition<PlayerState>(PlayerState.Dialogue, () => _targetState == PlayerState.Dialogue)
+                new Transition<PlayerState>(PlayerState.Dialogue, () => _targetState == PlayerState.Dialogue),
+                new Transition<PlayerState>(PlayerState.Puzzle, () => _targetState == PlayerState.Puzzle)
             };
 
             _fsm = new FSM<PlayerState>(states, transitions, _targetState);
@@ -155,6 +166,16 @@ namespace Game.Scripts.Core.Character
             {
                 G.EventBus.Publish(new OnPlayerStateChangeRequest { NewState = _stateBeforePause });
             }
+        }
+
+        private void OnPuzzleBegin(OnPuzzleBeginEvent eventData)
+        {
+            var playerTransform = eventData.PlayerTransform;
+            
+            transform.position = playerTransform.position;
+            transform.rotation = playerTransform.rotation;
+            
+            G.EventBus.Publish(new OnPlayerStateChangeRequest { NewState = PlayerState.Puzzle });
         }
     }
 }

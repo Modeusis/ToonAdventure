@@ -104,10 +104,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4800569342614321829, guid: e1bedc400ad7d0649b7890e926955de2, type: 3}
-      propertyPath: _characterDatabase
-      value: 
-      objectReference: {fileID: 11400000, guid: 3e64b26ab7daaea4fa8ef7c84b7bc6d3, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -254,10 +250,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelManager
       objectReference: {fileID: 0}
-    - target: {fileID: 8553368302631575981, guid: 8729a2645fd97e248b05bf2e2f80a70b, type: 3}
-      propertyPath: _setup
-      value: 
-      objectReference: {fileID: 11400000, guid: 4274658d32c016542af864210f1c2f7f, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

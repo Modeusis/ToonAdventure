@@ -4,6 +4,7 @@ namespace Game.Scripts.Core.Character
     {
         Disabled,
         Active,
-        Dialogue
+        Dialogue,
+        Puzzle
     }
 }

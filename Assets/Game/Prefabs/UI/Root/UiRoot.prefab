@@ -255,9 +255,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8938598738949473162}
     m_Modifications:
-    - target: {fileID: 591815608771246487, guid: c16738de4291c484f9e32c4cada7da9c, type: 3}
-      propertyPath: m_IsActive
-      value: 0
+    - target: {fileID: 484453144043390981, guid: c16738de4291c484f9e32c4cada7da9c, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3544243232454372823, guid: c16738de4291c484f9e32c4cada7da9c, type: 3}
       propertyPath: m_Pivot.x
@@ -337,6 +337,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3544243232454372823, guid: c16738de4291c484f9e32c4cada7da9c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4289516573343053570, guid: c16738de4291c484f9e32c4cada7da9c, type: 3}
+      propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5727450432126622956, guid: c16738de4291c484f9e32c4cada7da9c, type: 3}
@@ -460,13 +464,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: PopUps
       objectReference: {fileID: 0}
-    - target: {fileID: 6881261582430499113, guid: d8d3554d380f16c4ca3f981ab7e77116, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6882389775518473866, guid: d8d3554d380f16c4ca3f981ab7e77116, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -13,36 +13,36 @@ MonoBehaviour:
   m_Name: DoorClose
   m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Setups.Animations.FloatAnimationProperty
   <Duration>k__BackingField: 0.5
-  <Target>k__BackingField: 0
-  <Curve>k__BackingField:
+  <Value>k__BackingField: 0
+  <Ease>k__BackingField:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 1.9646993
-      outSlope: 1.9646993
-      tangentMode: 34
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.33333334
+      outWeight: 0
     - serializedVersion: 3
-      time: 0.35613573
-      value: 0.6996996
-      inSlope: 1.2155513
-      outSlope: 1.2155513
-      tangentMode: 34
+      time: 0.22733025
+      value: 0.6936616
+      inSlope: 1.4712195
+      outSlope: 1.4712195
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: -0.39441517
-      outSlope: -0.39441517
+      inSlope: -0.68965524
+      outSlope: -0.68965524
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.14091444
+      inWeight: 0.18124998
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2

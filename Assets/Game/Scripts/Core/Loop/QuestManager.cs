@@ -45,12 +45,8 @@ namespace Game.Scripts.Core.Loop
             if (!G.IsReady) 
                 return;
             
-            if (_activeQuest)
-            {
-                Destroy(_activeQuest);
-            }
-            
-            Destroy(_view);
+            if (_activeQuest) Destroy(_activeQuest);
+            if (_view) Destroy(_view.gameObject);
             
             G.EventBus.Unsubscribe<OnQuestProgressEvent>(OnQuestProgress);
         }

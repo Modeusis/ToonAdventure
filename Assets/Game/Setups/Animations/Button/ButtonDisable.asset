@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: ButtonDisable
   m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Setups.Animations.Vector3AnimationProperty
   <Duration>k__BackingField: 0.3
-  <Target>k__BackingField: {x: 0.9, y: 0.9, z: 0.9}
-  <Curve>k__BackingField:
+  <Value>k__BackingField: {x: 0.9, y: 0.9, z: 0.9}
+  <Ease>k__BackingField:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
@@ -27,14 +27,14 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.2957181
-      value: 0.733795
-      inSlope: 1.0085638
-      outSlope: 1.0085638
+      time: 0.25249046
+      value: 0.7108901
+      inSlope: 1.654084
+      outSlope: 1.654084
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.33333334
+      outWeight: 0.09421445
     - serializedVersion: 3
       time: 1
       value: 1

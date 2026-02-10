@@ -104,11 +104,21 @@ namespace Game.Scripts.Core.Audio
         
         public void PlaySfx(SoundType soundType)
         {
+            PlaySfxInternal(soundType, null);
+        }
+        
+        public void PlaySfx(SoundType soundType, Transform target)
+        {
+            PlaySfxInternal(soundType, target);
+        }
+        
+        private void PlaySfxInternal(SoundType soundType, Transform target)
+        {
             var effectProperty = _setup.Sfx.FirstOrDefault(sfx => sfx.Type == soundType);
 
             if (effectProperty == null)
             {
-                Debug.LogWarning($"[SimpleAudioService.PlaySfx] Property with sound type {soundType} not found");
+                Debug.LogWarning($"[AudioManager] Property with sound type {soundType} not found");
                 return;
             }
 
@@ -118,7 +128,10 @@ namespace Game.Scripts.Core.Audio
             var volume = _setup.VolumeSfx;
             
             sfxPlayer.OnReleased += ReleaseSfxPlayer;
-            sfxPlayer.Play(effectProperty.Clips.GetRandom(), volume, pitch);
+            
+            var spatialBlend = target ? 1.0f : 0.0f;
+
+            sfxPlayer.Play(effectProperty.Clips.GetRandom(), volume, pitch, false, spatialBlend, target);
         }
 
         public void PlayMusic(MusicType musicType)
@@ -150,9 +163,11 @@ namespace Game.Scripts.Core.Audio
         {
             if (_isMusicCurrentlyPlaying && _musicPlayer.isPlaying)
             {
-                bool fadeOutComplete = false;
+                var fadeOutComplete = false;
                 FadeMusic(0f, _setup.MusicFadeOutDuration, onComplete: () => fadeOutComplete = true);
+                
                 yield return new WaitUntil(() => fadeOutComplete);
+                
                 _musicPlayer.Stop();
             }
             
@@ -198,7 +213,7 @@ namespace Game.Scripts.Core.Audio
         {
             if (!_musicPlayer)
             {
-                Debug.LogWarning($"[SimpleAudioService.FadeMusic] Music player is not set");
+                Debug.LogWarning($"[AudioManager.FadeMusic] Music player is not set");
                 return;
             }
             

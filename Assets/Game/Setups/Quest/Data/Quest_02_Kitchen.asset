@@ -22,15 +22,15 @@ MonoBehaviour:
     <RequiredAmount>k__BackingField: 1
     <IsCompleted>k__BackingField: 0
     <CurrentAmount>k__BackingField: 0
-  - <Description>k__BackingField: "\u041D\u0430\u0439\u0442\u0438 \u0438\u0433\u0440\u0443\u0448\u0435\u0447\u043D\u044B\u0439
-      \u0440\u0443\u043B\u044C"
-    <TargetId>k__BackingField: toy_wheel
+  - <Description>k__BackingField: "\u0423\u0437\u043D\u0430\u0442\u044C \u0447\u0442\u043E
+      \u0432 \u0445\u043E\u043B\u043E\u0434\u0438\u043B\u044C\u043D\u0438\u043A\u0435"
+    <TargetId>k__BackingField: toy_cactus
     <RequiredAmount>k__BackingField: 1
     <IsCompleted>k__BackingField: 0
     <CurrentAmount>k__BackingField: 0
-  - <Description>k__BackingField: "\u0423\u0437\u043D\u0430\u0442\u044C \u0447\u0442\u043E
-      \u0432 \u0445\u043E\u043B\u043E\u0434\u0438\u043B\u044C\u043D\u0438\u043A\u0435"
-    <TargetId>k__BackingField: toy_bone
+  - <Description>k__BackingField: "\u041D\u0430\u0439\u0442\u0438 \u0441\u0432\u0437\u044F\u043A\u0443
+      \u043A\u043B\u044E\u0447\u0435\u0439"
+    <TargetId>k__BackingField: toy_keys
     <RequiredAmount>k__BackingField: 1
     <IsCompleted>k__BackingField: 0
     <CurrentAmount>k__BackingField: 0
