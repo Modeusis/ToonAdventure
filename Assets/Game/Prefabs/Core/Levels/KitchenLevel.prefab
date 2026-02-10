@@ -15392,6 +15392,34 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: -0.040625453
       objectReference: {fileID: 0}
+    - target: {fileID: 4163283315214848744, guid: fe38d82fcf5db604094b173394fb1d57, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7393717
+      objectReference: {fileID: 0}
+    - target: {fileID: 4163283315214848744, guid: fe38d82fcf5db604094b173394fb1d57, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.10518839
+      objectReference: {fileID: 0}
+    - target: {fileID: 4163283315214848744, guid: fe38d82fcf5db604094b173394fb1d57, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.6575597
+      objectReference: {fileID: 0}
+    - target: {fileID: 4163283315214848744, guid: fe38d82fcf5db604094b173394fb1d57, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.09939937
+      objectReference: {fileID: 0}
+    - target: {fileID: 4163283315214848744, guid: fe38d82fcf5db604094b173394fb1d57, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -1.422
+      objectReference: {fileID: 0}
+    - target: {fileID: 4163283315214848744, guid: fe38d82fcf5db604094b173394fb1d57, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -83.504
+      objectReference: {fileID: 0}
+    - target: {fileID: 4163283315214848744, guid: fe38d82fcf5db604094b173394fb1d57, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 16.583
+      objectReference: {fileID: 0}
     - target: {fileID: 4198866564857336399, guid: fe38d82fcf5db604094b173394fb1d57, type: 3}
       propertyPath: m_Name
       value: KeyPickUp
