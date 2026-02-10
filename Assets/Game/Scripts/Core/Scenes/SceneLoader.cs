@@ -38,13 +38,13 @@ namespace Game.Scripts.Core.Scenes
             
             G.UI.Screens.HUD.Hide();
             
-            G.UI.Screens.Menu.ShowBackground();
-            G.UI.Screens.Menu.Open();
-            
             await UniTask.Delay(TimeSpan.FromSeconds(_loadDelay));
             
             await G.Loader.LoadSceneAsync(Addresses.BOOT_SCENE_KEY);
             await G.Loader.LoadSceneAsync(Addresses.MAIN_MENU_SCENE_KEY);
+            
+            G.UI.Screens.Menu.ShowBackground();
+            G.UI.Screens.Menu.Open();
             
             G.Audio.PlayMusic(MusicType.Menu);
             G.UI.Loading.Hide();

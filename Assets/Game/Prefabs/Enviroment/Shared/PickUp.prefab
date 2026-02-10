@@ -47,7 +47,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8545df2b9743452692e1011c4c0d0023, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Core.Interactions.Pickups.Pickup
-  _interactionZone: {fileID: 2419120381139913076}
   _pickupTransform: {fileID: 3781194486573188101}
   _hideScaleProperty: {fileID: 11400000, guid: 3a5e23ff62e467a48a757af744a22b2b, type: 2}
 --- !u!1 &4553791193073065663
@@ -238,7 +237,20 @@ MonoBehaviour:
       m_Calls: []
   <OnInteractionProceed>k__BackingField:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4958064327808923362}
+        m_TargetAssemblyTypeName: Game.Scripts.Core.Interactions.Pickups.Pickup,
+          Assembly-CSharp
+        m_MethodName: PickupObject
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6919103852616068586
 GameObject:
   m_ObjectHideFlags: 0

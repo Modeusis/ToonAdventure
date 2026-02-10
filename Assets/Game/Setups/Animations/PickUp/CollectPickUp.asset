@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: CollectPickUp
   m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Setups.Animations.Vector3AnimationProperty
   <Duration>k__BackingField: 0.4
-  <Target>k__BackingField: {x: 0.1, y: 0.1, z: 0.1}
-  <Curve>k__BackingField:
+  <Value>k__BackingField: {x: 0, y: 0, z: 0}
+  <Ease>k__BackingField:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
@@ -27,22 +27,22 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.26401
-      value: 0.67101794
-      inSlope: 1.1903685
-      outSlope: 1.1903685
+      time: 0.15291914
+      value: 0.55967087
+      inSlope: 1.6706632
+      outSlope: 1.6706632
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
-      value: 1.0011902
-      inSlope: 0
-      outSlope: 0
+      value: 1
+      inSlope: 0.0971429
+      outSlope: 0.0971429
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.28121462
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2

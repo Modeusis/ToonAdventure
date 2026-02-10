@@ -53,6 +53,9 @@ namespace Game.Scripts.Core.Character
             
             InitializeFSM();
             
+            _targetState = _startState; 
+            _stateBeforePause = PlayerState.Active;
+            
             if (!G.IsReady)
                 return;
             
@@ -61,13 +64,14 @@ namespace Game.Scripts.Core.Character
             G.EventBus.Subscribe<OnPlayerStateChangeRequest>(OnPauseStateChangeRequested);
             G.EventBus.Subscribe<OnInteractionZoneEnterEvent>(OnInteractionZoneEnter);
             G.EventBus.Subscribe<OnInteractionZoneExitEvent>(OnInteractionZoneExit);
+            G.EventBus.Subscribe<OnPuzzleBeginEvent>(OnPuzzleBegin);
             
             _isInitialized = true;
         }
 
         private void OnDestroy()
         {
-            if (G.IsReady)
+            if (!G.IsReady)
                 return;
             
             G.EventBus.Unsubscribe<OnDialogueStateChangedEvent>(OnDialogueStateChanged);
@@ -75,6 +79,7 @@ namespace Game.Scripts.Core.Character
             G.EventBus.Unsubscribe<OnPlayerStateChangeRequest>(OnPauseStateChangeRequested);
             G.EventBus.Unsubscribe<OnInteractionZoneEnterEvent>(OnInteractionZoneEnter);
             G.EventBus.Unsubscribe<OnInteractionZoneExitEvent>(OnInteractionZoneExit);
+            G.EventBus.Unsubscribe<OnPuzzleBeginEvent>(OnPuzzleBegin);
         }
 
         private void Update()
@@ -161,6 +166,16 @@ namespace Game.Scripts.Core.Character
             {
                 G.EventBus.Publish(new OnPlayerStateChangeRequest { NewState = _stateBeforePause });
             }
+        }
+
+        private void OnPuzzleBegin(OnPuzzleBeginEvent eventData)
+        {
+            var playerTransform = eventData.PlayerTransform;
+            
+            transform.position = playerTransform.position;
+            transform.rotation = playerTransform.rotation;
+            
+            G.EventBus.Publish(new OnPlayerStateChangeRequest { NewState = PlayerState.Puzzle });
         }
     }
 }

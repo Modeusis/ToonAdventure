@@ -92,13 +92,13 @@ namespace Game.Scripts.Core.Interactions
             enabled = false;
         }
 
-        private void ShowTooltip()
+        protected void ShowTooltip()
         {
             var inputBinding = G.Input.Game.Interact.GetBindingDisplayString();
             G.UI.Screens.HUD.DynamicTooltip.Show($"{inputBinding} - {InteractionTag}");
         }
 
-        private void Hide()
+        protected void Hide()
         {
             G.UI.Screens.HUD.DynamicTooltip.Hide();
         }

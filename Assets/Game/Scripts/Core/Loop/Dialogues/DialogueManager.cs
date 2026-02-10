@@ -142,7 +142,7 @@ namespace Game.Scripts.Core.Loop.Dialogues
             
             var callback = _currentCallback;
             _currentCallback = null;
-            callback.Invoke();
+            callback?.Invoke();
         }
 
         private void Continue()

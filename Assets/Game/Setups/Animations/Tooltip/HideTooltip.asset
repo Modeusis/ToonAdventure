@@ -13,31 +13,31 @@ MonoBehaviour:
   m_Name: HideTooltip
   m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Setups.Animations.Vector3AnimationProperty
   <Duration>k__BackingField: 0.4
-  <Target>k__BackingField: {x: 0, y: 0, z: 0}
-  <Curve>k__BackingField:
+  <Value>k__BackingField: {x: 0.1, y: 0.1, z: 0.1}
+  <Ease>k__BackingField:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 2
-      outSlope: 2
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.26401
-      value: 0.67101794
-      inSlope: 1.1903685
-      outSlope: 1.1903685
+      time: 0.4585218
+      value: 0.27876535
+      inSlope: 1.0260266
+      outSlope: 1.0260266
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
-      value: 1.0011902
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0

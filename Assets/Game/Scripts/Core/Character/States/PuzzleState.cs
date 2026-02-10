@@ -46,18 +46,27 @@ namespace Game.Scripts.Core.Character.States
                 hit.collider.TryGetComponent(out newClickable);
             }
 
-            if (_currentClickable != newClickable)
+            if (_currentClickable == newClickable)
+                return;
+            
+            _currentClickable?.OnEndHover();
+            _currentClickable = newClickable;
+            _currentClickable?.OnBeginHover();
+
+            if (_currentClickable != null)
             {
-                _currentClickable?.OnEndHover();
-                _currentClickable = newClickable;
-                _currentClickable?.OnBeginHover();
+                ShowTooltip();
+                return;
             }
+            
+            Hide();
         }
 
         private void HandleInput()
         {
             if (G.Input.Game.Back.WasPressedThisFrame())
             {
+                G.EventBus.Publish(new OnPuzzleStopEvent());
                 G.EventBus.Publish(new OnPlayerStateChangeRequest { NewState = PlayerState.Active });
                 return;
             }
@@ -66,6 +75,17 @@ namespace Game.Scripts.Core.Character.States
             {
                 _currentClickable?.OnClick();
             }
+        }
+
+        private void ShowTooltip()
+        {
+            var inputBinding = G.Input.Game.Interact.GetBindingDisplayString();
+            G.UI.Screens.HUD.DynamicTooltip.Show($"{inputBinding} - кликнуть на кнопку");
+        }
+        
+        private void Hide()
+        {
+            G.UI.Screens.HUD.DynamicTooltip.Hide();
         }
     }
 }

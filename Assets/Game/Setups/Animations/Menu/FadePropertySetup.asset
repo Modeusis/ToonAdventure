@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: FadePropertySetup
   m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Setups.Animations.FloatAnimationProperty
   <Duration>k__BackingField: 0.4
-  <Target>k__BackingField: 1
-  <Curve>k__BackingField:
+  <Value>k__BackingField: 1
+  <Ease>k__BackingField:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
@@ -26,6 +26,15 @@ MonoBehaviour:
       weightedMode: 0
       inWeight: 0
       outWeight: 0
+    - serializedVersion: 3
+      time: 0.34685233
+      value: 0.8321449
+      inSlope: 0.8479619
+      outSlope: 0.8479619
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
       value: 1

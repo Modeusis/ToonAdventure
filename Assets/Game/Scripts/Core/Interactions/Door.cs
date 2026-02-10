@@ -2,6 +2,7 @@ using DG.Tweening;
 using Game.Scripts.Core.Audio;
 using Game.Scripts.Setups.Animations;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Game.Scripts.Core.Interactions
 {
@@ -13,6 +14,11 @@ namespace Game.Scripts.Core.Interactions
         [SerializeField] private FloatAnimationProperty _rotationCloseAnimation;
         
         [SerializeField, Space] private bool _isOpenOnStart;
+        [SerializeField] private bool _isAlwaysOpenFromPlayerView = true;
+        [SerializeField] private bool _isNormalizingAngle = true;
+        
+        [SerializeField, Space] private SoundType _openSound = SoundType.DoorOpen;
+        [SerializeField] private SoundType _closeSound = SoundType.DoorClose;
         
         private Collider _collider;
         
@@ -64,14 +70,14 @@ namespace Game.Scripts.Core.Interactions
                 targetAngle = _rotationCloseAnimation.Value;
                 duration = _rotationCloseAnimation.Duration;
                 curve = _rotationCloseAnimation.Ease;
-                doorSound = SoundType.DoorClose;
+                doorSound = _closeSound;
             }
             else
             {
                 targetAngle = CalculateOpenAngle();
                 duration = _rotationOpenAnimation.Duration;
                 curve = _rotationOpenAnimation.Ease;
-                doorSound = SoundType.DoorOpen;
+                doorSound = _openSound;
             }
             
             _openTween = _targetTransform
@@ -89,9 +95,14 @@ namespace Game.Scripts.Core.Interactions
 
         private float CalculateOpenAngle()
         {
-            var baseAngle = Mathf.Abs(_rotationOpenAnimation.Value);
+            var baseAngle = _rotationOpenAnimation.Value;
 
-            if (_lastInteractor == null)
+            if (_isNormalizingAngle)
+            {
+                baseAngle = Mathf.Abs(baseAngle);
+            }
+
+            if (_lastInteractor == null || !_isAlwaysOpenFromPlayerView)
                 return baseAngle;
 
             var directionToInteractor = _lastInteractor.position - _targetTransform.position;

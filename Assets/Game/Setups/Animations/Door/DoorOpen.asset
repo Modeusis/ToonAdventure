@@ -13,36 +13,36 @@ MonoBehaviour:
   m_Name: DoorOpen
   m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Setups.Animations.FloatAnimationProperty
   <Duration>k__BackingField: 0.4
-  <Target>k__BackingField: 90
-  <Curve>k__BackingField:
+  <Value>k__BackingField: 100
+  <Ease>k__BackingField:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 2
-      outSlope: 2
+      inSlope: 0.32185957
+      outSlope: 0.32185957
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.67008394
     - serializedVersion: 3
-      time: 0.23454416
-      value: 0.83598185
-      inSlope: 3.0409153
-      outSlope: 3.0409153
+      time: 0.21141629
+      value: 0.55178714
+      inSlope: 2.114974
+      outSlope: 2.114974
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.1842837
+      inWeight: 0.2116659
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: -0.11451412
-      outSlope: -0.11451412
+      inSlope: -0.23214282
+      outSlope: -0.23214282
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.13360122
+      inWeight: 0.25361922
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2

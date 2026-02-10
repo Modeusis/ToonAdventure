@@ -23,16 +23,19 @@ namespace Game.Scripts.Core.Npc.Adam
         [field: SerializeField] public InteractableObject Interactable { get; private set; }
 
         [Header("Patrol Settings")]
-        [SerializeField] private Transform _transformA;
-        [SerializeField] private Transform _transformB;
-        [SerializeField] private float _waitAtPoint = 2f;
+        [SerializeField] private Transform _pointATarget;
+        [SerializeField] private Transform _pointALook;
+        [SerializeField] private Transform _pointBTarget;
+        [SerializeField] private Transform _pointBLook;
+        [SerializeField] private float _waitAtPointA = 3f;
+        [SerializeField] private float _waitAtPointB = 3f;
 
         [Header("State Settings")]
         public AdamState CurrentState = AdamState.StartState;
         
-        [SerializeField, Space] private Dialogue _dialogStart;
-        [SerializeField] private Dialogue _dialogOneToy;
-        [SerializeField] private Dialogue _dialogTwoToys;
+        [field: SerializeField, Space] public Dialogue DialogStart { get; private set; }
+        [field: SerializeField] public Dialogue DialogOneToy { get; private set; }
+        [field: SerializeField] public Dialogue DialogTwoToys { get; private set; }
 
         private CancellationTokenSource _patrolCts;
         private bool _isInteracting;
@@ -83,13 +86,17 @@ namespace Game.Scripts.Core.Npc.Adam
             {
                 while (!token.IsCancellationRequested)
                 {
-                    await MoveToAsync(_transformA.position, token);
-                    
-                    await MoveToAsync(_transformB.position, token);
-                    
+                    await MoveToAsync(_pointATarget.position, token);
+                    Navigator.SetLookTarget(_pointALook);
+                    await UniTask.Delay(TimeSpan.FromSeconds(_waitAtPointA), cancellationToken: token);
                     Animator.PlayAction();
-                    
-                    await UniTask.Delay(TimeSpan.FromSeconds(_waitAtPoint), cancellationToken: token);
+                    await UniTask.Delay(TimeSpan.FromSeconds(_waitAtPointA), cancellationToken: token);
+                    await MoveToAsync(_pointBTarget.position, token);
+                    Navigator.SetLookTarget(_pointBLook);
+                    await UniTask.Delay(TimeSpan.FromSeconds(_waitAtPointB), cancellationToken: token);
+                    Animator.PlayAction();
+                    await UniTask.Delay(TimeSpan.FromSeconds(_waitAtPointB), cancellationToken: token);
+                    Navigator.SetLookTarget(_pointALook);
                 }
             }
             catch (OperationCanceledException)
@@ -142,18 +149,18 @@ namespace Game.Scripts.Core.Npc.Adam
 
         private void PlayDialogByState()
         {
-            var dialogToPlay = _dialogStart;
+            var dialogToPlay = DialogStart;
 
             switch (CurrentState)
             {
                 case AdamState.StartState:
-                    dialogToPlay = _dialogStart;
+                    dialogToPlay = DialogStart;
                     break;
                 case AdamState.OneToyFound:
-                    dialogToPlay = _dialogOneToy;
+                    dialogToPlay = DialogOneToy;
                     break;
                 case AdamState.TwoToysFound:
-                    dialogToPlay = _dialogTwoToys;
+                    dialogToPlay = DialogTwoToys;
                     break;
             }
 

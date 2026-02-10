@@ -13,45 +13,36 @@ MonoBehaviour:
   m_Name: ShowTooltip
   m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Setups.Animations.Vector3AnimationProperty
   <Duration>k__BackingField: 0.4
-  <Target>k__BackingField: {x: 1, y: 1, z: 1}
-  <Curve>k__BackingField:
+  <Value>k__BackingField: {x: 1.2, y: 1.2, z: 1.2}
+  <Ease>k__BackingField:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0.29448155
-      outSlope: 0.29448155
+      inSlope: 2
+      outSlope: 2
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.8467231
+      outWeight: 0
     - serializedVersion: 3
-      time: 0.20893921
-      value: 0.37243667
-      inSlope: 4.188889
-      outSlope: 4.188889
+      time: 0.26740792
+      value: 0.70404357
+      inSlope: 1.4966321
+      outSlope: 1.4966321
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.45009547
-      value: 0.889186
-      inSlope: 0.78126687
-      outSlope: 0.78126687
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.11003989
-      outWeight: 0.18155247
-    - serializedVersion: 3
-      time: 1.0020752
+      time: 1
       value: 1
-      inSlope: -0.6313162
-      outSlope: -0.6313162
+      inSlope: -0.43076876
+      outSlope: -0.43076876
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.21828884
+      inWeight: 0.18484595
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2

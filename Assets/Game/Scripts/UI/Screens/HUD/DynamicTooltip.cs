@@ -23,6 +23,9 @@ namespace Game.Scripts.UI.Screens.HUD
         public void Show(string text)
         {
             _text.text = text;
+         
+            if (_isShowing)
+                return;
             
             _showTween?.Kill();
             _showTween = null;

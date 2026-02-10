@@ -256,31 +256,31 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1467812953507862415, guid: 8fadf67633452644a84961e8a00690cc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 4.2701445
       objectReference: {fileID: 0}
     - target: {fileID: 1467812953507862415, guid: 8fadf67633452644a84961e8a00690cc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 2.2044086
       objectReference: {fileID: 0}
     - target: {fileID: 1467812953507862415, guid: 8fadf67633452644a84961e8a00690cc, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 10.191199
       objectReference: {fileID: 0}
     - target: {fileID: 1467812953507862415, guid: 8fadf67633452644a84961e8a00690cc, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: -0.93443334
       objectReference: {fileID: 0}
     - target: {fileID: 1467812953507862415, guid: 8fadf67633452644a84961e8a00690cc, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0.16237548
       objectReference: {fileID: 0}
     - target: {fileID: 1467812953507862415, guid: 8fadf67633452644a84961e8a00690cc, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.31228337
       objectReference: {fileID: 0}
     - target: {fileID: 1467812953507862415, guid: 8fadf67633452644a84961e8a00690cc, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: 0.054292493
       objectReference: {fileID: 0}
     - target: {fileID: 1467812953507862415, guid: 8fadf67633452644a84961e8a00690cc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -297,6 +297,14 @@ PrefabInstance:
     - target: {fileID: 8626096292878736092, guid: 8fadf67633452644a84961e8a00690cc, type: 3}
       propertyPath: m_Name
       value: Main Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 9050930348225849191, guid: 8fadf67633452644a84961e8a00690cc, type: 3}
+      propertyPath: field of view
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 9050930348225849191, guid: 8fadf67633452644a84961e8a00690cc, type: 3}
+      propertyPath: far clip plane
+      value: 1000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

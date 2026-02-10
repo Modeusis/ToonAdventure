@@ -9,13 +9,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4033583295864980642, guid: 84239d21e4c94a2429ff1d8e4d5c0b54, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+    - target: {fileID: 4033583295864980642, guid: 84239d21e4c94a2429ff1d8e4d5c0b54, type: 3}
       propertyPath: m_Name
       value: KeyPickUp
       objectReference: {fileID: 0}
     - target: {fileID: 4958064327808923362, guid: 84239d21e4c94a2429ff1d8e4d5c0b54, type: 3}
       propertyPath: _pickupTransform
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 7417776723207037373}
     - target: {fileID: 5647602627115342665, guid: 84239d21e4c94a2429ff1d8e4d5c0b54, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -101,6 +105,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 4620834047301025586}
   m_SourcePrefab: {fileID: 100100000, guid: 84239d21e4c94a2429ff1d8e4d5c0b54, type: 3}
+--- !u!4 &7417776723207037373 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7732197767644706640, guid: 84239d21e4c94a2429ff1d8e4d5c0b54, type: 3}
+  m_PrefabInstance: {fileID: 990638295235778285}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7906891633887214343 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6919103852616068586, guid: 84239d21e4c94a2429ff1d8e4d5c0b54, type: 3}

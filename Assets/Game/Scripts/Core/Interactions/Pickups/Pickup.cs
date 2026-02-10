@@ -4,16 +4,17 @@ using Game.Scripts.Core.Audio;
 using Game.Scripts.Setups.Animations;
 using Game.Scripts.Utilities.Events;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Game.Scripts.Core.Interactions.Pickups
 {
     public class Pickup : MonoBehaviour
     {
-        [SerializeField, Space] private InteractableObject _interactionZone;
         [SerializeField] private Transform _pickupTransform;
-        //TODO добавить эффект подбора
         
         [SerializeField, Space] private Vector3AnimationProperty _hideScaleProperty;
+
+        [field: SerializeField, Space] public UnityEvent OnPickup { get; private set;  } = new UnityEvent();
 
         private Collider _collider;
         
@@ -22,17 +23,15 @@ namespace Game.Scripts.Core.Interactions.Pickups
         
         private void Awake()
         {
-            _interactionZone.OnInteractionProceed.AddListener(PickupObject);
-            
             _collider = GetComponent<Collider>();
         }
 
         private void OnDestroy()
         {
-            _interactionZone.OnInteractionProceed.RemoveListener(PickupObject);
+            OnPickup?.RemoveAllListeners();
         }
 
-        private void PickupObject()
+        public void PickupObject()
         {
             if (_isPickedUp)
                 return;
@@ -50,6 +49,8 @@ namespace Game.Scripts.Core.Interactions.Pickups
             _hideTween = _pickupTransform
                 .DOScale(_hideScaleProperty.Value, _hideScaleProperty.Duration)
                 .SetEase(_hideScaleProperty.Ease);
+            
+            OnPickup?.Invoke();
             
             _isPickedUp = true;
         }

@@ -360,6 +360,7 @@ GameObject:
   - component: {fileID: 8774920096661051591}
   - component: {fileID: 331094477821179639}
   - component: {fileID: 6986444223255316666}
+  - component: {fileID: 1273090637529566671}
   m_Layer: 0
   m_Name: Adam
   m_TagString: Untagged
@@ -519,16 +520,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00abb3c034f74a7b98668a079928aeaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Core.Npc.Adam.AdamKitchen
-  _navigator: {fileID: 8511383423625309453}
-  _animator: {fileID: 8774920096661051591}
-  _interactable: {fileID: 6811679384093877715}
-  _transformA: {fileID: 0}
-  _transformB: {fileID: 0}
-  _waitAtPoint: 2
+  <Navigator>k__BackingField: {fileID: 8511383423625309453}
+  <Animator>k__BackingField: {fileID: 8774920096661051591}
+  <Interactable>k__BackingField: {fileID: 6811679384093877715}
+  _pointATarget: {fileID: 0}
+  _pointALook: {fileID: 0}
+  _pointBTarget: {fileID: 0}
+  _pointBLook: {fileID: 0}
+  _waitAtPointA: 3
+  _waitAtPointB: 3
   CurrentState: 0
-  _dialogIdStart: level2_adam_dialogue
-  _dialogIdOneToy: level2_adam_dialogue_onetoy
-  _dialogIdTwoToys: level2_adam_dialogue_twotay
+  <DialogStart>k__BackingField:
+    _inkFile: {fileID: 4900000, guid: 0503da430b1963d4680ab69d6dd63df5, type: 3}
+    _startPath: level2_adam_dialogue
+    _isOneShot: 0
+    <OnDialogueFinish>k__BackingField:
+      m_PersistentCalls:
+        m_Calls: []
+  <DialogOneToy>k__BackingField:
+    _inkFile: {fileID: 4900000, guid: 0503da430b1963d4680ab69d6dd63df5, type: 3}
+    _startPath: level2_adam_dialogue_onetoy
+    _isOneShot: 0
+    <OnDialogueFinish>k__BackingField:
+      m_PersistentCalls:
+        m_Calls: []
+  <DialogTwoToys>k__BackingField:
+    _inkFile: {fileID: 4900000, guid: 0503da430b1963d4680ab69d6dd63df5, type: 3}
+    _startPath: level2_adam_dialogue_twotoy
+    _isOneShot: 0
+    <OnDialogueFinish>k__BackingField:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!114 &1273090637529566671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2042048374121049620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9c62fd817714733a70b8797698876c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Core.Audio.SfxPlayers.PlayerSfx
+  _stepSoundType: 21
 --- !u!1 &2302184349652269221
 GameObject:
   m_ObjectHideFlags: 0
@@ -1343,11 +1378,11 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.1441383, y: 2.99352, z: 1.7308264}
+  m_Size: {x: 2.65, y: 2.99352, z: 2.4}
   m_Center: {x: 0.01088047, y: 0.9967598, z: -0.15996885}
 --- !u!114 &6811679384093877715
 MonoBehaviour:

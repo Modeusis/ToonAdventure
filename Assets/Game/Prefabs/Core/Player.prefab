@@ -145,8 +145,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineCamera
   Priority:
-    Enabled: 0
-    m_Value: 0
+    Enabled: 1
+    m_Value: 20
   OutputChannel: 1
   StandbyUpdate: 2
   m_StreamingVersion: 20241001
@@ -713,6 +713,7 @@ MonoBehaviour:
   <AnimationController>k__BackingField: {fileID: 2850045268090866442}
   <Sfx>k__BackingField: {fileID: 7701176146068149109}
   <CameraInputController>k__BackingField: {fileID: 8147074038678194515}
+  <BaseCamera>k__BackingField: {fileID: 0}
   <Setup>k__BackingField: {fileID: 11400000, guid: e4537903b9879014cad3287fac9ab859, type: 2}
   _startState: 0
 --- !u!114 &2850045268090866442
@@ -740,6 +741,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9c62fd817714733a70b8797698876c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Core.Audio.SfxPlayers.PlayerSfx
+  _stepSoundType: 20
 --- !u!1 &3280864377551481394
 GameObject:
   m_ObjectHideFlags: 0

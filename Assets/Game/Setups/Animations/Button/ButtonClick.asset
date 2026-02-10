@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 522aa0b16e244d58ace470f4532c6161, type: 3}
   m_Name: ButtonClick
   m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Setups.Animations.Vector3AnimationProperty
-  <Duration>k__BackingField: 0.3
-  <Target>k__BackingField: {x: 0.8, y: 0.8, z: 0.8}
-  <Curve>k__BackingField:
+  <Duration>k__BackingField: 0.2
+  <Value>k__BackingField: {x: 0.7, y: 0.7, z: 0.7}
+  <Ease>k__BackingField:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
@@ -27,22 +27,22 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.37391618
-      value: 0.8567818
-      inSlope: 0.6847721
-      outSlope: 0.6847721
+      time: 0.2506295
+      value: 0.8386042
+      inSlope: 1.3395061
+      outSlope: 1.3395061
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0.03926291
-      outSlope: 0.03926291
+      time: 1.0020752
+      value: 1.0013199
+      inSlope: -0.5704361
+      outSlope: -0.5704361
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.28333336
+      inWeight: 0.2040183
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2

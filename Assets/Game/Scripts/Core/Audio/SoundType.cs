@@ -13,9 +13,9 @@ namespace Game.Scripts.Core.Audio
         ItemPickUp,
         
         //Puzzle
-        PuzzleButtonPress,
-        PuzzleButtonLight,
-        PuzzleComplete,
+        PuzzleButtonPress = 50,
+        PuzzleButtonLight = 51,
+        PuzzleComplete = 52,
         
         //Doors
         DoorOpen = 10,

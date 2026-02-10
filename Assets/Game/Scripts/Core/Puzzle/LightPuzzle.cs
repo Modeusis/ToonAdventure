@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using Game.Scripts.Core.Audio;
 using Game.Scripts.Core.Character;
 using Game.Scripts.Utilities.Events;
 using Unity.Cinemachine;
@@ -13,12 +14,21 @@ namespace Game.Scripts.Core.Puzzle
     public class LightPuzzle : MonoBehaviour
     {
         [SerializeField] private CinemachineCamera _puzzleCamera;
+        [SerializeField] private Transform _playerPosition;
         [SerializeField] private Renderer[] _lights;
         
-        [Header("Materials")]
-        [SerializeField] private Material _offMaterial;
-        [SerializeField] private Material _onMaterial;
-        [SerializeField] private Material _errorMaterial;
+        [Header("Emission Settings")]
+        [Tooltip("Цвет выключенной лампочки (обычно черный)")]
+        [ColorUsage(false, true)]
+        [SerializeField] private Color _offColor = Color.black;
+        
+        [Tooltip("Цвет включенной лампочки")]
+        [ColorUsage(false, true)] 
+        [SerializeField] private Color _onColor = Color.green;
+        
+        [Tooltip("Цвет ошибки")]
+        [ColorUsage(false, true)] 
+        [SerializeField] private Color _errorColor = Color.red;
         
         [Header("Settings")]
         [SerializeField] private float _flashDuration = 0.5f;
@@ -33,7 +43,9 @@ namespace Game.Scripts.Core.Puzzle
 
         private void Start()
         {
+            _puzzleCamera.enabled = false;
             _puzzleCamera.Priority = 0;
+            
             ResetLights();
         }
 
@@ -44,10 +56,10 @@ namespace Game.Scripts.Core.Puzzle
 
         public void BeginPuzzle()
         {
-            G.EventBus.Publish(new OnPuzzleBeginEvent());
-            G.EventBus.Publish(new OnPlayerStateChangeRequest { NewState = PlayerState.Puzzle });
+            G.EventBus.Publish(new OnPuzzleBeginEvent { PlayerTransform = _playerPosition });
             
-            _puzzleCamera.Priority = 20;
+            _puzzleCamera.enabled = true;
+            _puzzleCamera.Priority = 30;
             
             _puzzleCts?.Cancel();
             _puzzleCts = new CancellationTokenSource();
@@ -63,6 +75,7 @@ namespace Game.Scripts.Core.Puzzle
             _puzzleCts = null;
             
             _isInputActive = false;
+            _puzzleCamera.enabled = false;
             _puzzleCamera.Priority = 0;
             ResetLights();
         }
@@ -143,34 +156,49 @@ namespace Game.Scripts.Core.Puzzle
         {
             if (index < 0 || index >= _lights.Length) return;
 
-            _lights[index].material = _onMaterial;
+            SetEmission(index, _onColor);
+            G.Audio.PlaySfx(SoundType.PuzzleButtonLight);
             await UniTask.Delay(TimeSpan.FromSeconds(duration), cancellationToken: token);
-            _lights[index].material = _offMaterial;
+            SetEmission(index, _offColor);
         }
         
         private async UniTask ShowErrorAsync(CancellationToken token)
         {
             for (int i = 0; i < 3; i++)
             {
-                foreach (var l in _lights) l.material = _errorMaterial;
+                for (int j = 0; j < _lights.Length; j++) 
+                    SetEmission(j, _errorColor);
+                
                 await UniTask.Delay(200, cancellationToken: token);
-                foreach (var l in _lights) l.material = _offMaterial;
+                
+                for (int j = 0; j < _lights.Length; j++) 
+                    SetEmission(j, _offColor);
+                
                 await UniTask.Delay(200, cancellationToken: token);
             }
         }
 
         private void ResetLights()
         {
-            foreach (var l in _lights)
+            for (int i = 0; i < _lights.Length; i++)
             {
-                if(l) l.material = _offMaterial;
+                SetEmission(i, _offColor);
             }
+        }
+        
+        private void SetEmission(int index, Color color)
+        {
+            if (index < 0 || index >= _lights.Length || _lights[index] == null) return;
+            
+            _lights[index].material.EnableKeyword("_EMISSION");
+            _lights[index].material.SetColor("_EmissionColor", color);
         }
 
         private void CompletePuzzle()
         {
             G.EventBus.Publish(new OnPuzzleSolvedEvent());
             G.EventBus.Publish(new OnPlayerStateChangeRequest { NewState = PlayerState.Active });
+            G.Audio.PlaySfx(SoundType.PuzzleComplete);
             StopPuzzle();
         }
     }
