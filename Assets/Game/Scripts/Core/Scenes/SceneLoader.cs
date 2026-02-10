@@ -51,5 +51,24 @@ namespace Game.Scripts.Core.Scenes
 
             G.Cursor.Unlock();
         }
+
+        public async UniTask LoadCutscene()
+        {
+            G.UI.Loading.Show("Шарль и лео идут домой...");
+            
+            G.UI.Screens.HUD.Hide();
+            G.UI.Screens.Menu.HideBackground();
+            G.UI.Screens.Menu.Close();
+            
+            await UniTask.Delay(TimeSpan.FromSeconds(_loadDelay));
+            
+            await G.Loader.LoadSceneAsync(Addresses.BOOT_SCENE_KEY);
+            await G.Loader.LoadSceneAsync(Addresses.CUTSCENE_SCENE_KEY);
+            
+            G.Audio.PlayMusic(MusicType.Level1);
+            G.UI.Loading.Hide();
+
+            G.Cursor.Lock();
+        }
     }
 }

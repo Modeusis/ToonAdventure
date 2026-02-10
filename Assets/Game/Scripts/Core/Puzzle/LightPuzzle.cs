@@ -43,8 +43,8 @@ namespace Game.Scripts.Core.Puzzle
 
         private void Start()
         {
-            _puzzleCamera.enabled = false;
             _puzzleCamera.Priority = 0;
+            _puzzleCamera.gameObject.SetActive(false);
             
             ResetLights();
         }
@@ -58,7 +58,7 @@ namespace Game.Scripts.Core.Puzzle
         {
             G.EventBus.Publish(new OnPuzzleBeginEvent { PlayerTransform = _playerPosition });
             
-            _puzzleCamera.enabled = true;
+            _puzzleCamera.gameObject.SetActive(true);
             _puzzleCamera.Priority = 30;
             
             _puzzleCts?.Cancel();
@@ -75,8 +75,10 @@ namespace Game.Scripts.Core.Puzzle
             _puzzleCts = null;
             
             _isInputActive = false;
-            _puzzleCamera.enabled = false;
+            
             _puzzleCamera.Priority = 0;
+            _puzzleCamera.gameObject.SetActive(false);
+            
             ResetLights();
         }
 

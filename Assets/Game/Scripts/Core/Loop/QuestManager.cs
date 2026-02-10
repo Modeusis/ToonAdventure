@@ -97,7 +97,7 @@ namespace Game.Scripts.Core.Loop
                     step.CurrentAmount = step.RequiredAmount;
                     step.IsCompleted = true;
                     
-                    G.EventBus.Publish(new OnQuestStepCompletedEvent { StepDescription = step.Description });
+                    G.EventBus.Publish(new OnQuestStepCompletedEvent { TargetId = step.TargetId, StepDescription = step.Description });
                     
                     Debug.Log($"[QuestManager.StartQuest] Completed quest step: {step.Description}");
                 }

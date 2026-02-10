@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0421\u044D\u043C\u043F\u043B \u0442\u0435\u043A\u0441\u0442"
+  m_text: "\u0421\u044D\u043C\u043F\u043B \u0442\u0435\u043A\u0441\u0442\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4784f31a96d98e44fbd5b7f3f26d0132, type: 2}
   m_sharedMaterial: {fileID: 7646166329475134078, guid: 4784f31a96d98e44fbd5b7f3f26d0132, type: 2}
@@ -225,9 +225,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc6ff84b588c4e9280bb0406d74f4f37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.UI.Buttons.MenuButton
-  _onClick:
-    m_PersistentCalls:
-      m_Calls: []
   _buttonImage: {fileID: 2454874266387370681}
   _buttonText: {fileID: 4310166892154751311}
   _hoverProperty: {fileID: 11400000, guid: a4965689013644547bacaedfaf87eaa1, type: 2}

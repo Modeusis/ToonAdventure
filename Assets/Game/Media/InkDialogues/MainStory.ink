@@ -42,7 +42,7 @@ VAR level3_toys_found = 0
 
 === level1_leo_runaway ===
 #speaker:charlie
-(Мысли) Надо догнать лео, и узнать зачем он убежал.
+(Мысли) Надо догнать Лео, и узнать зачем он убежал.
 -> END
 
 === level1_leo_near_balcony ===
@@ -77,7 +77,7 @@ VAR level3_toys_found = 0
 
 === level1_blocked_balcony ===
 #speaker:charlie
-(Мысли) На балконе, точно что-то не так, но мне нужно найти лео
+(Мысли) На балконе, точно что-то не так, но мне нужно найти Лео
 -> END
 
 // ============================================================
@@ -100,7 +100,7 @@ VAR level3_toys_found = 0
 #speaker:charlie
 Закрыт.
 #speaker:charlie
-Кто повесил эти кнопки на мой холодильник? Хм, нужно поговорить с адамом
+Кто повесил эти кнопки на мой холодильник? Хм, нужно поговорить с Адамом
 -> END
 
 === level2_giant_vegetable ===
@@ -162,14 +162,10 @@ VAR level3_toys_found = 0
 #speaker:charlie
 Так ключ от улицы, странно видеть его здесь...
 #speaker:charlie
-Может быть лео убежал туда. Решено идем на улицу!
+Может быть Лео убежал туда. Решено идем на улицу!
 #speaker:charlie
 Если правильно помню, дверь выхода рядом с кухней.
 -> END
-
-// ============================================================
-// ЛОКАЦИЯ 3: УЧАСТОК У ДОМА (ОПУШКА)
-// ============================================================
 
 // ============================================================
 // ЛОКАЦИЯ 3: УЧАСТОК У ДОМА (ОПУШКА)
@@ -211,9 +207,15 @@ VAR level3_toys_found = 0
 Ты не мог бы подсказать, куда он дел вещи?
 #speaker:maksim
 Конечно. Спрашивай, я засёк телеметрию его маршрута.
-
 // Переход в "хаб" вопросов
 -> level3_maksim_hub
+
+=== level3_maksim_base ===
+#speaker:maksim
+Привет, ты хотел что-то узнать?
+// Переход в "хаб" вопросов
+-> level3_maksim_hub
+
 
 === level3_maksim_hub ===
 // Здесь игрок выбирает вопросы. Опция исчезает после выбора (помечена как visited).
@@ -275,26 +277,43 @@ VAR level3_toys_found = 0
 
 // --- ПОСЛЕДУЮЩИЕ СОБЫТИЯ (Остаются без изменений или с минимальными правками) ---
 
+=== level3_toy_tree_dig ===
+#speaker:charlie
+Так тут у корней какой-то странный бугорок.
+-> END
+
 === level3_toy_tree ===
-~ level3_toys_found = level3_toys_found + 1
 #speaker:charlie
 Ага! Макс был прав про корни.
 #speaker:charlie
 Плюшевый бублик застрял прямо здесь.
--> check_leo_missing
+-> END
+
+=== level3_toy_tree_collected ===
+#speaker:charlie
+Яма...
+#speaker:charlie
+У дерева...
+#speaker:charlie
+Яма у дерева.
+#speaker:charlie
+Ну что за идилия, пора двигать дальше.
+-> END
 
 === level3_toy_rock ===
-~ level3_toys_found = level3_toys_found + 1
 #speaker:charlie
 Вот и колокольчик. Лежал прямо на вершине камня.
 #speaker:charlie
 Лео действительно возомнил себя скалолазом.
--> check_leo_missing
+-> END
 
-=== check_leo_missing ===
-{ level3_toys_found == 2:
-    -> level3_monologue_leo_missing
-}
+=== level3_monologue_maks_missing ===
+#speaker:charlie
+А куда Макс делся?
+#speaker:charlie
+(оглядывается)
+#speaker:charlie
+Ну ладно, пойду поищу Лео на грибной долине.
 -> END
 
 === level3_monologue_leo_missing ===
@@ -309,22 +328,42 @@ VAR level3_toys_found = 0
 -> END
 
 === level3_mushrooms_finish ===
-#speaker:charlie
+# speaker: charlie
 Лео? Мальчик, ты здесь?
-#speaker:leo
+# speaker: leo
 ВУФ! ВУФ!
-#speaker:charlie
-Вот ты где! Ты напугал мен...
-#speaker:storytelller
-Шарль вышел на поляну и замер.
-#speaker:maksim
+# speaker: charlie
+Вот ты где! Ты меня напугал.
+# speaker: charlie
+Пойдем домой, Адам наверное уже с ума сходит.
+# speaker: leo
+(Радостно виляет хвостом)
+-> END
+
+=== cutscene_surprise ===
+# cutscene: Intro
+# speaker: storytelller
+Шарль и Лео вернулись на кухню, не подозревая, что их ждет.
+
+# cutscene: Surprise
+# speaker: maksim
 СЮРПРИЗ!
-#speaker:adam
+# speaker: adam
 С возвращением домой, чемпион! Торт уже порезан!
-#speaker:charlie
+
+# cutscene: CharlieReaction
+# speaker: charlie
 Ребята... Вы все это устроили?
-#speaker:leo
-(Радостно виляет хвостом с мячиком в зубах)
-#speaker:charlie
-(Смеется) Ладно, Лео. Игрушки твои. Но торт — мой!
+# speaker: charlie
+Адам, ты даже духовку выключил ради этого?
+
+# cutscene: LeoHappy
+# speaker: leo
+ВУФ! (Лео прыгает вокруг торта)
+
+# cutscene: Outro
+# speaker: storytelller
+В этот вечер Шарль понял, что даже самый быстрый гонщик нуждается в пит-стопе.
+# speaker: storytelller
+А лучший приз — это не кубки, а те, кто ждет тебя на финише.
 -> END

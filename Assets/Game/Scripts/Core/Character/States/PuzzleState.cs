@@ -16,6 +16,7 @@ namespace Game.Scripts.Core.Character.States
         {
             _camera = Camera.main;
             _animator.SetSpeed(0);
+            
             G.Cursor.Unlock();
         }
 
@@ -32,8 +33,6 @@ namespace Game.Scripts.Core.Character.States
                 _currentClickable.OnEndHover();
                 _currentClickable = null;
             }
-            
-            G.Cursor.Lock();
         }
 
         private void HandleRaycast()

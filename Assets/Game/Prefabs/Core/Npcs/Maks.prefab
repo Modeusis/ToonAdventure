@@ -617,10 +617,11 @@ GameObject:
   - component: {fileID: 1127521669470541656}
   - component: {fileID: 3029444470181070899}
   - component: {fileID: 39081885169411801}
+  - component: {fileID: 7017863966307056901}
   m_Layer: 0
   m_Name: Maks
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -712,7 +713,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Core.NPC.NpcAnimationController
   _speedParameterName: Speed
-  _actionParameterName: Interaction
+  _actionParameterName: Victory
   _animationSmoothTime: 0.1
 --- !u!136 &3029444470181070899
 CapsuleCollider:
@@ -764,6 +765,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7017863966307056901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4578039787934225731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9c62fd817714733a70b8797698876c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Core.Audio.SfxPlayers.PlayerSfx
+  _stepSoundType: 20
 --- !u!1 &4676441626293864061
 GameObject:
   m_ObjectHideFlags: 0
@@ -837,6 +851,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4165076646259213852}
   - component: {fileID: 4240088636449522401}
+  - component: {fileID: 5211453624536485326}
   m_Layer: 0
   m_Name: Interactable
   m_TagString: Untagged
@@ -874,12 +889,59 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 2.3419397, y: 2.5592108, z: 2.5129194}
   m_Center: {x: -0.012953401, y: 1.2406297, z: 0.08808088}
+--- !u!114 &5211453624536485326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6099598743670819405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37ecbe82fbdd4580987d6dba623d79ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Core.NPC.Maks.MaksYard
+  _isOneShot: 0
+  <InteractionTag>k__BackingField: "\u043F\u043E\u0433\u043E\u0432\u043E\u0440\u0438\u0442\u044C"
+  <Type>k__BackingField: 1
+  <OnInteractionZoneEnter>k__BackingField:
+    m_PersistentCalls:
+      m_Calls: []
+  <OnInteractionZoneExit>k__BackingField:
+    m_PersistentCalls:
+      m_Calls: []
+  <OnInteractionProceed>k__BackingField:
+    m_PersistentCalls:
+      m_Calls: []
+  _initialState: 0
+  _stateConfigs:
+  - State: 0
+    InteractionTagOverride: "\u043F\u043E\u0433\u043E\u0432\u043E\u0440\u0438\u0442\u044C
+      \u0441 \u043C\u0430\u043A\u0441\u043E\u043C"
+    OnInteract:
+      m_PersistentCalls:
+        m_Calls: []
+  - State: 1
+    InteractionTagOverride: "\u0441\u043F\u0440\u043E\u0441\u0438\u0442\u044C \u043C\u0430\u043A\u0441\u0430"
+    OnInteract:
+      m_PersistentCalls:
+        m_Calls: []
+  - State: 2
+    InteractionTagOverride: "\u044D\u044D\u044D \u0442\u044B \u043A\u0443\u0434\u0430"
+    OnInteract:
+      m_PersistentCalls:
+        m_Calls: []
+  OnStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  <Navigator>k__BackingField: {fileID: 1349557821525389603}
+  <AnimationController>k__BackingField: {fileID: 1127521669470541656}
 --- !u!1 &6123009682538159202
 GameObject:
   m_ObjectHideFlags: 0

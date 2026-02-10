@@ -16,6 +16,8 @@ namespace Game.Scripts.Core.Character.States
             ResetKinematics();
             
             _cameraController.enabled = true;
+            
+            G.Cursor.Lock();
         }
 
         public override void Update()

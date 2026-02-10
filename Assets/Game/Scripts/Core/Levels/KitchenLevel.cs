@@ -138,6 +138,8 @@ namespace Game.Scripts.Core.Levels
                 TargetId = _fridgeToyName, 
                 Amount = 1 
             });
+
+            _adamNpc.CurrentState++;
             
             _fridgeInteractable.SetState(FridgeState.PickUpCollected);
             _cafeteriaDoorBlocker.Unlock();
@@ -155,6 +157,8 @@ namespace Game.Scripts.Core.Levels
                 Amount = 1 
             });
                 
+            _adamNpc.CurrentState++;
+            
             _exitDoorBlocker.Unlock();
             _finishedMonologue.StartDialogue();
         }

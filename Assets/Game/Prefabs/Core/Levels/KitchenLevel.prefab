@@ -15464,6 +15464,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 5292258956892921871, guid: fe38d82fcf5db604094b173394fb1d57, type: 3}
+      propertyPath: _pickupTransform
+      value: 
+      objectReference: {fileID: 9004698677404738351}
     - target: {fileID: 7417776723207037373, guid: fe38d82fcf5db604094b173394fb1d57, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.14
@@ -15528,6 +15532,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2af1fda0eeb24ecb8141e9cefe411f73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Core.Interactions.InteractableObject
+--- !u!4 &9004698677404738351 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4163283315214848744, guid: fe38d82fcf5db604094b173394fb1d57, type: 3}
+  m_PrefabInstance: {fileID: 4986023140285133255}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5703921565000314886
 PrefabInstance:
   m_ObjectHideFlags: 0
