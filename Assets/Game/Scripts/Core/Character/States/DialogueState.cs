@@ -9,6 +9,7 @@ namespace Game.Scripts.Core.Character.States
         public override void Enter()
         {
             _animator.SetSpeed(0);
+            G.Cursor.Unlock();
         }
 
         public override void Update()

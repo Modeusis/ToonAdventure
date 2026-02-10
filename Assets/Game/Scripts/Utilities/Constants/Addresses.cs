@@ -13,5 +13,6 @@ namespace Game.Scripts.Utilities.Constants
         public const string BOOT_SCENE_KEY = "Boot";
         public const string MAIN_MENU_SCENE_KEY = "MainMenu";
         public const string GAMEPLAY_SCENE_KEY = "Gameplay";
+        public const string CUTSCENE_SCENE_KEY = "Cutscene";
     }
 }

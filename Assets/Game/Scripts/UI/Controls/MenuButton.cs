@@ -156,6 +156,8 @@ namespace Game.Scripts.UI.Controls
 
         private void OnDestroy()
         {
+            KillTweens();
+            
             OnClick?.RemoveAllListeners();
         }
     }

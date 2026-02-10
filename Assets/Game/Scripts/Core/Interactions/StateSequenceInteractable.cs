@@ -47,10 +47,11 @@ namespace Game.Scripts.Core.Interactions
             Hide();
         }
         
-        public void SetState(TState newState, bool notify = true)
+        public void SetState(TState newState, bool notify = true, bool showNewTag = true)
         {
             CurrentState = newState;
-            UpdateInteractionTag();
+            
+            UpdateInteractionTag(showNewTag);
 
             if (notify)
             {
@@ -66,7 +67,7 @@ namespace Game.Scripts.Core.Interactions
             }
         }
         
-        private void UpdateInteractionTag()
+        private void UpdateInteractionTag(bool showNewTag = true)
         {
             if (!_configMap.TryGetValue(CurrentState, out var config))
                 return;
@@ -75,6 +76,10 @@ namespace Game.Scripts.Core.Interactions
                 return;
             
             InteractionTag = config.InteractionTagOverride;
+            
+            if (!showNewTag)
+                return;
+            
             ShowTooltip();
         }
 

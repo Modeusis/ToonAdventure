@@ -13,6 +13,7 @@ namespace Game.Scripts.Utilities.Events
     
     public struct OnQuestStepCompletedEvent
     {
+        public string TargetId;
         public string StepDescription;
     }
 }

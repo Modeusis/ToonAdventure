@@ -23,9 +23,7 @@ namespace Game.Scripts.Core.NPC
         public Vector3 Velocity => _agent.velocity;
         
         public bool IsMoving => !_isStopped; 
-
-        public float RemainingDistance => _agent.pathPending ? float.PositiveInfinity : _agent.remainingDistance;
-        public float StoppingDistance => _setup.StoppingDistance;
+        
 
         private void Awake()
         {
@@ -91,6 +89,11 @@ namespace Game.Scripts.Core.NPC
         public void SetLookTarget(Transform target)
         {
             _lookTarget = target;
+        }
+        
+        public void ClearLookTarget()
+        {
+            _lookTarget = null;
         }
 
         private void HandleMovement()
