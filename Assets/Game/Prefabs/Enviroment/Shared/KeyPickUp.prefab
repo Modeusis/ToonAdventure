@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2419120381139913076, guid: 84239d21e4c94a2429ff1d8e4d5c0b54, type: 3}
+      propertyPath: <InteractionTag>k__BackingField
+      value: "\u043F\u043E\u0434\u043D\u044F\u0442\u044C \u0441\u0432\u044F\u0437\u043A\u0443"
+      objectReference: {fileID: 0}
     - target: {fileID: 4033583295864980642, guid: 84239d21e4c94a2429ff1d8e4d5c0b54, type: 3}
       propertyPath: m_Icon
       value: 

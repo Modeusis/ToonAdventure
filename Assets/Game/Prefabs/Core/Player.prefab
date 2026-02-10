@@ -626,6 +626,7 @@ GameObject:
   - component: {fileID: 2349298719917319277}
   - component: {fileID: 2850045268090866442}
   - component: {fileID: 7701176146068149109}
+  - component: {fileID: 2145155977341254712}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -742,6 +743,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Core.Audio.SfxPlayers.PlayerSfx
   _stepSoundType: 20
+--- !u!81 &2145155977341254712
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2940128687426814254}
+  m_Enabled: 1
 --- !u!1 &3280864377551481394
 GameObject:
   m_ObjectHideFlags: 0

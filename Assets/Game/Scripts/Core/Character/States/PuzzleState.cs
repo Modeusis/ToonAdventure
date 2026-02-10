@@ -79,7 +79,7 @@ namespace Game.Scripts.Core.Character.States
 
         private void ShowTooltip()
         {
-            var inputBinding = G.Input.Game.Interact.GetBindingDisplayString();
+            var inputBinding = G.Input.Game.Click.GetBindingDisplayString();
             G.UI.Screens.HUD.DynamicTooltip.Show($"{inputBinding} - кликнуть на кнопку");
         }
         

@@ -211,6 +211,7 @@ GameObject:
   - component: {fileID: 1811695900040417275}
   - component: {fileID: 3353972567848239198}
   - component: {fileID: 679835796952265876}
+  - component: {fileID: 1160560471897020013}
   m_Layer: 0
   m_Name: Firdge
   m_TagString: Untagged
@@ -295,6 +296,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &1160560471897020013
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1328490963391255873}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.0000014, y: 2.5, z: 1.5000012}
+  m_Center: {x: 4.440892e-15, y: 1.25, z: -0.25000024}
 --- !u!1 &2066263926828185963
 GameObject:
   m_ObjectHideFlags: 0
@@ -743,24 +765,23 @@ MonoBehaviour:
   _initialState: 0
   _stateConfigs:
   - State: 0
-    InteractionTagOverride: "\u041E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C
+    InteractionTagOverride: "\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C
       \u0445\u043E\u043B\u043E\u0434\u0438\u043B\u044C\u043D\u0438\u043A"
     OnInteract:
       m_PersistentCalls:
         m_Calls: []
   - State: 1
-    InteractionTagOverride: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u0445\u043E\u043B\u043E\u0434\u0438\u043B\u044C\u043D\u0438\u043A"
+    InteractionTagOverride: "\u043E\u0442\u043A\u0440\u044B\u0442\u044C \u0445\u043E\u043B\u043E\u0434\u0438\u043B\u044C\u043D\u0438\u043A"
     OnInteract:
       m_PersistentCalls:
         m_Calls: []
   - State: 2
-    InteractionTagOverride: "\u0412\u0437\u044F\u0442\u044C \u0438\u0433\u0440\u0443\u0448\u043A\u0443"
+    InteractionTagOverride: "\u0432\u0437\u044F\u0442\u044C \u0438\u0433\u0440\u0443\u0448\u043A\u0443"
     OnInteract:
       m_PersistentCalls:
         m_Calls: []
   - State: 3
-    InteractionTagOverride: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C/\u0437\u0430\u043A\u0440\u044B\u0442\u044C
-      \u0445\u043E\u043B\u043E\u0434\u0438\u043B\u044C\u043D\u0438\u043A"
+    InteractionTagOverride: "\u043E\u0442\u043A\u0440\u044B\u0442\u044C \u0445\u043E\u043B\u043E\u0434\u0438\u043B\u044C\u043D\u0438\u043A"
     OnInteract:
       m_PersistentCalls:
         m_Calls: []

@@ -488,6 +488,59 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1742142291526434352
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5157960497641550354}
+  - component: {fileID: 7574289852339950800}
+  m_Layer: 0
+  m_Name: BalconyBlocker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5157960497641550354
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1742142291526434352}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 929350544505627571}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!65 &7574289852339950800
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1742142291526434352}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.73025054, y: 1.1091844, z: 0.78852063}
+  m_Center: {x: 0.044517413, y: 0.054591965, z: -0.012061571}
 --- !u!1 &1846785006357793487
 GameObject:
   m_ObjectHideFlags: 0
@@ -1530,6 +1583,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 929350544505627571}
   - {fileID: 5783337597122647459}
   - {fileID: 7642361023936247146}
   - {fileID: 6667406931959004816}
@@ -2237,6 +2291,100 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &7137939723914714403
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 929350544505627571}
+  - component: {fileID: 7995154477419305307}
+  - component: {fileID: 4002673673912789062}
+  m_Layer: 0
+  m_Name: BalconyBlockedTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &929350544505627571
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7137939723914714403}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.7976423, z: -0, w: 0.6031309}
+  m_LocalPosition: {x: -28.91, y: -1.0278801, z: -29.91}
+  m_LocalScale: {x: 1.6006601, y: 3.24571, z: 5.6913595}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5157960497641550354}
+  m_Father: {fileID: 6710769242131580060}
+  m_LocalEulerAnglesHint: {x: 0, y: 105.811, z: 0}
+--- !u!65 &7995154477419305307
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7137939723914714403}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.9162565, y: 1.1091844, z: 1.0274667}
+  m_Center: {x: 0.29728517, y: 0.054591972, z: 0.004505623}
+--- !u!114 &4002673673912789062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7137939723914714403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6b2ddf42c7f4c7ab25ae594b49288f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Core.Triggers.LockedTrigger
+  _dialogueOnLocked:
+    _inkFile: {fileID: 4900000, guid: 0503da430b1963d4680ab69d6dd63df5, type: 3}
+    _startPath: level1_blocked_balcony
+    _isOneShot: 0
+    <OnDialogueFinish>k__BackingField:
+      m_PersistentCalls:
+        m_Calls: []
+  _isLocked: 1
+  _isOneShot: 1
+  <OnUnlock>k__BackingField:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1742142291526434352}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  <OnEnter>k__BackingField:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7717348656425196643
 GameObject:
   m_ObjectHideFlags: 0
