@@ -16,6 +16,12 @@ namespace Game.Scripts.Utilities.Events
         public string StartPath;
         public UnityEvent OnFinished;
     }
+
+    public struct OnTagResievedEvent
+    {
+        public string Key;
+        public string Value;
+    }
     
     public struct ContinueDialogueRequestEvent { }
 }

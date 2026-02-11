@@ -80,12 +80,15 @@ namespace Game.Scripts.Core
             
             var isLoadingScene = currentSceneName == SceneNames.BOOT
                                   || currentSceneName == SceneNames.MAIN_MENU
-                                  || currentSceneName == SceneNames.GAMEPLAY;
+                                  || currentSceneName == SceneNames.GAMEPLAY
+                                  || currentSceneName == SceneNames.CUTSCENE;
 
             _isStandardStart = isLoadingScene;
 #endif
             if (_isStandardStart)
             {
+                Debug.Log("[G] Loading game standard start");
+                
                 await _loader.LoadSceneAsync(Addresses.BOOT_SCENE_KEY);
                 await _loader.LoadSceneAsync(Addresses.MAIN_MENU_SCENE_KEY);
             }

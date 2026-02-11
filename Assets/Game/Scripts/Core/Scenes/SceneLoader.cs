@@ -68,7 +68,7 @@ namespace Game.Scripts.Core.Scenes
             G.Audio.PlayMusic(MusicType.Level1);
             G.UI.Loading.Hide();
 
-            G.Cursor.Lock();
+            G.Cursor.Unlock();
         }
     }
 }

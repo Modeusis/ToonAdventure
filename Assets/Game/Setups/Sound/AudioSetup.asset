@@ -107,6 +107,18 @@ MonoBehaviour:
   - _audioType: 13
     _audioClips:
     - {fileID: 8300000, guid: 857b7bb56387aa64bb7e5c510a74d0ab, type: 3}
+  - _audioType: 61
+    _audioClips:
+    - {fileID: 8300000, guid: dc4c9cfcbb463774a99f6b54d08d22dd, type: 3}
+  - _audioType: 62
+    _audioClips:
+    - {fileID: 8300000, guid: 10055fa26cc7e2d40bc901a2ebfc8c2e, type: 3}
+  - _audioType: 63
+    _audioClips:
+    - {fileID: 8300000, guid: 633b4975448b4974697bf1b2e5bd9a17, type: 3}
+  - _audioType: 40
+    _audioClips:
+    - {fileID: 8300000, guid: 9b0e0b76bced68a419acb3ebdf99773e, type: 3}
   _musicProperties:
   - _audioType: 1
     _audioClips:

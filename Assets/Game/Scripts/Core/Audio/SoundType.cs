@@ -33,6 +33,13 @@ namespace Game.Scripts.Core.Audio
         //Dog
         DogBark = 40,
         DogWhine = 41,
-        DogStep = 42
+        DogStep = 42,
+        
+        //Cutscene
+        CutsceneNone = 60,
+        CutsceneIntro = 61,
+        CutsceneSurprise = 62,
+        CutsceneCharlieReaction = 63,
+        LeoHappy = 64
     }
 }
