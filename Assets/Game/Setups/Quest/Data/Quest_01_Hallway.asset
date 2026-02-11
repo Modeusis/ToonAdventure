@@ -18,7 +18,7 @@ MonoBehaviour:
   _steps:
   - <Description>k__BackingField: "\u0412\u044B\u044F\u0441\u043D\u0438\u0442\u044C,
       \u0447\u0442\u043E \u0441\u043B\u0443\u0447\u0438\u043B\u043E\u0441\u044C \u0443
-      \u043B\u0435\u043E"
+      \u041B\u0435\u043E"
     <TargetId>k__BackingField: talk_leo
     <RequiredAmount>k__BackingField: 1
     <IsCompleted>k__BackingField: 0

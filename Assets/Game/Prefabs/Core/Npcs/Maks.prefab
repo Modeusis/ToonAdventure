@@ -923,12 +923,12 @@ MonoBehaviour:
   _stateConfigs:
   - State: 0
     InteractionTagOverride: "\u043F\u043E\u0433\u043E\u0432\u043E\u0440\u0438\u0442\u044C
-      \u0441 \u043C\u0430\u043A\u0441\u043E\u043C"
+      \u0441 \u041C\u0430\u043A\u0441\u043E\u043C"
     OnInteract:
       m_PersistentCalls:
         m_Calls: []
   - State: 1
-    InteractionTagOverride: "\u0441\u043F\u0440\u043E\u0441\u0438\u0442\u044C \u043C\u0430\u043A\u0441\u0430"
+    InteractionTagOverride: "\u0441\u043F\u0440\u043E\u0441\u0438\u0442\u044C \u041C\u0430\u043A\u0441\u0430"
     OnInteract:
       m_PersistentCalls:
         m_Calls: []
