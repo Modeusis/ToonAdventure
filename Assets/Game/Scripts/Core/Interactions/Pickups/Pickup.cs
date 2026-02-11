@@ -5,15 +5,21 @@ using Game.Scripts.Setups.Animations;
 using Game.Scripts.Utilities.Events;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 namespace Game.Scripts.Core.Interactions.Pickups
 {
     public class Pickup : MonoBehaviour
     {
+        [Header("General")]
         [SerializeField] private Transform _pickupTransform;
         
         [SerializeField, Space] private Vector3AnimationProperty _hideScaleProperty;
-
+        
+        [Header("Effects")]
+        [SerializeField, Space] private ParticleSystem _pickupEffect;
+        [SerializeField] private bool _isPlayingPickupEffect = true;
+        
         [field: SerializeField, Space] public UnityEvent OnPickup { get; private set;  } = new UnityEvent();
 
         private Collider _collider;
@@ -24,6 +30,11 @@ namespace Game.Scripts.Core.Interactions.Pickups
         private void Awake()
         {
             _collider = GetComponent<Collider>();
+        }
+
+        private void Start()
+        {
+            _pickupEffect.Stop();
         }
 
         private void OnDestroy()
@@ -37,7 +48,12 @@ namespace Game.Scripts.Core.Interactions.Pickups
                 return;
             
             G.Audio.PlaySfx(SoundType.ItemPickUp);
-
+            
+            if (_isPlayingPickupEffect)
+            {
+                _pickupEffect.Play();
+            }
+            
             if (_collider)
             {
                 _collider.enabled = false;

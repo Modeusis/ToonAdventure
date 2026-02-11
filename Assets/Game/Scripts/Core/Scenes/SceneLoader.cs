@@ -54,7 +54,7 @@ namespace Game.Scripts.Core.Scenes
 
         public async UniTask LoadCutscene()
         {
-            G.UI.Loading.Show("Шарль и лео идут домой...");
+            G.UI.Loading.Show("Леклер и Лео идут домой...");
             
             G.UI.Screens.HUD.Hide();
             G.UI.Screens.Menu.HideBackground();

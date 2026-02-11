@@ -59,6 +59,7 @@ namespace Game.Scripts.Core.Levels
         {
             G.EventBus.Subscribe<OnQuestCompletedEvent>(OnQuestCompleted);
             G.EventBus.Subscribe<OnPuzzleSolvedEvent>(OnPuzzleSolved);
+            G.EventBus.Subscribe<OnPuzzleStopEvent>(StopFridgePuzzle);
             
             _adamNpc.DialogStart.OnDialogueFinish.AddListener(ActivateFridge);
             _fridgeMonologue.OnDialogueFinish.AddListener(StartFridgePuzzle);
@@ -77,6 +78,7 @@ namespace Game.Scripts.Core.Levels
         {
             G.EventBus.Unsubscribe<OnQuestCompletedEvent>(OnQuestCompleted);
             G.EventBus.Unsubscribe<OnPuzzleSolvedEvent>(OnPuzzleSolved);
+            G.EventBus.Unsubscribe<OnPuzzleStopEvent>(StopFridgePuzzle);
 
             _adamNpc.DialogStart.OnDialogueFinish.RemoveListener(ActivateFridge);
             _fridgeMonologue.OnDialogueFinish.RemoveListener(StartFridgePuzzle);
@@ -101,6 +103,11 @@ namespace Game.Scripts.Core.Levels
         private void StartFridgePuzzle()
         {
             _fridgePuzzle.BeginPuzzle();
+        }
+        
+        private void StopFridgePuzzle(OnPuzzleStopEvent eventData)
+        {
+            _fridgePuzzle.StopPuzzle();
         }
 
         private void OnPuzzleSolved(OnPuzzleSolvedEvent eventData)

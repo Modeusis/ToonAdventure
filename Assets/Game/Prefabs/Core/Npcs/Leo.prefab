@@ -879,7 +879,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Core.Interactions.InteractableObject
   _isOneShot: 0
   <InteractionTag>k__BackingField: "\u043F\u043E\u0433\u043E\u0432\u043E\u0440\u0438\u0442\u044C
-    \u0441 \u043B\u0435\u043E"
+    \u0441 \u041B\u0435\u043E"
   <Type>k__BackingField: 0
   <OnInteractionZoneEnter>k__BackingField:
     m_PersistentCalls:

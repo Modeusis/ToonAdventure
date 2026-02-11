@@ -32,6 +32,7 @@ Transform:
   m_Children:
   - {fileID: 3781194486573188101}
   - {fileID: 1106949140840604056}
+  - {fileID: 5321281495571718319}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4958064327808923362
@@ -48,6 +49,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Core.Interactions.Pickups.Pickup
   _pickupTransform: {fileID: 3781194486573188101}
   _hideScaleProperty: {fileID: 11400000, guid: 3a5e23ff62e467a48a757af744a22b2b, type: 2}
+  _pickupEffect: {fileID: 5321281495571718289}
+  _pickupGlow: {fileID: 0}
+  _isGlowingOnStart: 0
+  _isPlayingPickupEffect: 1
   <OnPickup>k__BackingField:
     m_PersistentCalls:
       m_Calls: []
@@ -78,13 +83,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4553791193073065663}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.47874686, y: -0.23187375, z: -0.009355215, w: 0.84672815}
-  m_LocalPosition: {x: -0.013251248, y: 0.025813611, z: 0.038287554}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5647602627115342665}
-  m_LocalEulerAnglesHint: {x: -54.595, y: -41.476, z: 20.847}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &276509373102246816
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -253,3 +258,106 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!1001 &3487109772633053295
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5647602627115342665}
+    m_Modifications:
+    - target: {fileID: 3096051239679259079, guid: 1f61e89dd8b49e148b07556a3a13f28f, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4077434153767840873, guid: 1f61e89dd8b49e148b07556a3a13f28f, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4218550677005678463, guid: 1f61e89dd8b49e148b07556a3a13f28f, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4317077836563233687, guid: 1f61e89dd8b49e148b07556a3a13f28f, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4955925660939126461, guid: 1f61e89dd8b49e148b07556a3a13f28f, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5595010364606615787, guid: 1f61e89dd8b49e148b07556a3a13f28f, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8771972552251130939, guid: 1f61e89dd8b49e148b07556a3a13f28f, type: 3}
+      propertyPath: m_Intensity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8771972552311404736, guid: 1f61e89dd8b49e148b07556a3a13f28f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8771972552311404736, guid: 1f61e89dd8b49e148b07556a3a13f28f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8771972552311404736, guid: 1f61e89dd8b49e148b07556a3a13f28f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8771972552311404736, guid: 1f61e89dd8b49e148b07556a3a13f28f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8771972552311404736, guid: 1f61e89dd8b49e148b07556a3a13f28f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8771972552311404736, guid: 1f61e89dd8b49e148b07556a3a13f28f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8771972552311404736, guid: 1f61e89dd8b49e148b07556a3a13f28f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8771972552311404736, guid: 1f61e89dd8b49e148b07556a3a13f28f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8771972552311404736, guid: 1f61e89dd8b49e148b07556a3a13f28f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8771972552311404736, guid: 1f61e89dd8b49e148b07556a3a13f28f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8771972552311404737, guid: 1f61e89dd8b49e148b07556a3a13f28f, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8771972552311404798, guid: 1f61e89dd8b49e148b07556a3a13f28f, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8771972552311404799, guid: 1f61e89dd8b49e148b07556a3a13f28f, type: 3}
+      propertyPath: m_Name
+      value: PickUpEffect
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1f61e89dd8b49e148b07556a3a13f28f, type: 3}
+--- !u!198 &5321281495571718289 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8771972552311404798, guid: 1f61e89dd8b49e148b07556a3a13f28f, type: 3}
+  m_PrefabInstance: {fileID: 3487109772633053295}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5321281495571718319 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8771972552311404736, guid: 1f61e89dd8b49e148b07556a3a13f28f, type: 3}
+  m_PrefabInstance: {fileID: 3487109772633053295}
+  m_PrefabAsset: {fileID: 0}

@@ -45,7 +45,6 @@ namespace Game.Scripts.UI.PopUps
 
         private void ToMainMenu()
         {
-            G.Save.CurrentLevelId = LevelType.Tutorial;
             G.Scenes.LoadMain().Forget();
             
             Hide();
@@ -53,7 +52,6 @@ namespace Game.Scripts.UI.PopUps
 
         private void ExitGame()
         {
-            G.Save.CurrentLevelId = LevelType.Tutorial;
             Application.Quit();
             
 #if UNITY_EDITOR

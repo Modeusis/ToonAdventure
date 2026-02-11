@@ -162,6 +162,7 @@ namespace Game.Scripts.Core.Cutscene
         private void OnCutsceneFinish()
         {
             _isPlaying = false;
+            G.EventBus.Publish(new ContinueDialogueRequestEvent());
             G.UI.PopUp.Final.Show();
         }
     }

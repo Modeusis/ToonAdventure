@@ -23,6 +23,7 @@ namespace Game.Scripts.Core.Levels
         [Header("Tree Area")]
         [SerializeField] private TreeInteractable _treeInteractable;
         [SerializeField] private LockedTrigger _treeLocker;
+        [SerializeField] private ParticleSystem _digEffect;
         
         [SerializeField, Space] private Pickup _treePickupPrefab;
         [SerializeField] private Transform _treePickupSpawnPoint;
@@ -165,6 +166,8 @@ namespace Game.Scripts.Core.Levels
         private void OnTreeFirstInteraction()
         {
             _treeToyFirstDialogue.OnDialogueFinish.RemoveListener(OnTreeFirstInteraction);
+            
+            _digEffect?.Play();
             
             _treePickup = Instantiate(_treePickupPrefab, _treePickupSpawnPoint.position, _treePickupSpawnPoint.rotation);
             _treeInteractable.SetState(TreeState.DigOut);

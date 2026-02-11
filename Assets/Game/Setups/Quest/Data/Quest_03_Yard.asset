@@ -16,7 +16,7 @@ MonoBehaviour:
   <Title>k__BackingField: "\u041F\u043E\u0438\u0441\u043A\u0438 \u041B\u0435\u043E"
   _steps:
   - <Description>k__BackingField: "\u041F\u043E\u0433\u043E\u0432\u043E\u0440\u0438\u0442\u044C
-      \u0441 \u043C\u0430\u043A\u0441\u043E\u043C"
+      \u0441 \u041C\u0430\u043A\u0441\u043E\u043C"
     <TargetId>k__BackingField: talk_maks
     <RequiredAmount>k__BackingField: 1
     <IsCompleted>k__BackingField: 0
