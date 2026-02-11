@@ -207,8 +207,10 @@ namespace Game.Scripts.Core.Loop.Dialogues
                 if (key == SPEAKER_TAG) 
                 {
                     characterId = value;
-                    break;
+                    continue;
                 }
+                
+                G.EventBus.Publish(new OnTagResievedEvent { Key = key, Value = value });
             }
             
             if (!string.IsNullOrEmpty(characterId) && _characterDatabase != null)
