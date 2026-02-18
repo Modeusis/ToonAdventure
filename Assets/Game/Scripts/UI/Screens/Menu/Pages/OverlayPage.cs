@@ -29,7 +29,7 @@ namespace Game.Scripts.UI.Screens.Menu.Pages
 
         private void ShowConfirmToMain()
         {
-            G.UI.PopUp.Confirmation.Show("Уровень начнется заново, все равно выйти", ToMainMenu);
+            G.UI.PopUp.Confirmation.Show("Уровень начнется заново, все равно выйти?", ToMainMenu);
         }
         
         private void ToMainMenu()

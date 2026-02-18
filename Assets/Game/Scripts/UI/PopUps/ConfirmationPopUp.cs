@@ -34,8 +34,8 @@ namespace Game.Scripts.UI.PopUps
             string message, 
             Action onConfirm, 
             Action onClose = null,
-            string confirmText = "Confirm", 
-            string closeText = "Cancel")
+            string confirmText = "Да", 
+            string closeText = "Нет")
         {
             _messageText.text = message;
             
